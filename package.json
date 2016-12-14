@@ -1,0 +1,19 @@
+{
+  "name": "reapps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "reapps.js",
+  "author": "Aori Nevo",
+  "license": "ISC",
+  "dependencies": {
+    "cli-spinners": "^1.0.0",
+    "fs": "0.0.1-security",
+    "ora": "^0.3.0",
+    "prompt": "^1.0.0",
+    "request": "^2.79.0",
+    "shelljs": "^0.7.5",
+    "simple-ssh": "^0.9.0",
+    "winston": "^2.3.0",
+    "yargs": "^6.5.0"
+  }
+}

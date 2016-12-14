@@ -1,0 +1,20 @@
+{
+  "username": "u060014",
+  "branch": "16S",
+  "brand": "BCOM",
+  "envName": "qa14codebloomingdales",  
+  "domainPrefix": "aori",
+  "paths": {
+    "shellRc": "/Users/u060014/.zshrc",
+    "tmp": "/tmp",
+    "bloomiesCommonUi": "/Users/U060014/Repositories/BloomiesCommonUI/",
+    "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets/",
+    "navApp": "/Users/u060014/Repositories/NavApp/",
+    "shopApp": "/Users/u060014/Repositories/ShopNServe/"
+  },  
+  "libPaths": {
+    "javaHome": "'JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
+    "mavenHome": "'MAVEN_HOME=/usr/local/Cellar/maven/3.3.9/libexec'",
+    "mavenOpts": "'-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'"
+  }
+}
