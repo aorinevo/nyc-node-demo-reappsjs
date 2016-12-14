@@ -20,7 +20,7 @@ How to alias a command:  Your shell is mostly likely either using bash or zsh.  
 
 In either case, replace the path in the above command with the path that points to the location of the reapps.js file on your local machine.
 
-## Basic UserAgent
+## Basic Use
 * Clone NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
 * Update system variables JAVA_HOME, MAVEN_OPTS, MAVEN_HOME, etc...
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos in (1).
