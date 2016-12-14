@@ -10,12 +10,12 @@ How to alias a command:  Your shell is mostly likely either using bash or zsh.  
 * bash
   - Open ~/.bashrc file.
   - Add the following
-    - alias reapps="node /Users/u060014/Repositories/bloomies-ui/Reapps/reapps.js "
+    - alias reapps="node /Users/u060014/Repositories/bloomies-ui/bloomies-ui-reapps/reapps.js "
   - In your terminal, run "source ~/.bashrc"
 * zsh
   - Open ~/.zshrc file.
   - Add the following
-    - alias reapps="node /Users/u060014/Repositories/bloomies-ui/Reapps/reapps.js "
+    - alias reapps="node /Users/u060014/Repositories/bloomies-ui/bloomies-ui-reapps/reapps.js "
   - In your terminal, run "source ~/.zshrc"
 
 In either case, replace the path in the above command with the path that points to the location of the reapps.js file on your local machine.
