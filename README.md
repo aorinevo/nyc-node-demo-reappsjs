@@ -1,7 +1,7 @@
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * In bloomies-ui-reapps/ run 'npm install'.
-* Update reapps-properties.json with the full path to your NavApp (ShopApp) repo.
+* Update reapps-properties.json with the path to your NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.
 * Optional: Set alias "reapps" for command "node reapps.js".
 * That's it!
