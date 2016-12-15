@@ -4,6 +4,8 @@ var request = require('request'),
     prompt = require('prompt'),
     shell = require('shelljs'),
     proxy = require('./proxy.js'),
+    serverCrt = require('./server.crt.js'),
+    serverKey = require('./server.key.js'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
     fs = require('fs'),
@@ -349,8 +351,8 @@ function actionHandler( action ){
       break;
     case 'initM2':
       if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
-        shell.mkdir('~/.m2');
-        shell.cp('./settings.xml', '~/.m2');
+        shell.mkdir(process.env.HOME + '/.m2');
+        shell.cp('./settings.xml', process.env.HOME + '/.m2');
       } else {
         winston.log( 'info', '~/.m2 directory already exists.');
       }
@@ -414,8 +416,9 @@ function actionHandler( action ){
       actionHandler( 'initCertAndKey' );   
       break;
     case 'initCertAndKey':
+      shell.exec('sudo mkdir /etc/apache2/cert');
       if( !fs.existsSync('/etc/apache2/cert/server.crt') ){
-        fs.writeFile( './server.crt', proxy, 'utf8', function (err) {
+        fs.writeFile( './server.crt', serverCrt, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
            winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );           
@@ -427,7 +430,7 @@ function actionHandler( action ){
       }
       
       if( !fs.existsSync('/etc/apache2/cert/server.key') ){
-        fs.writeFile( './server.key', proxy, 'utf8', function (err) {
+        fs.writeFile( './server.key', serverKey, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.key /etc/apache2/cert/server.key');
            winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );           

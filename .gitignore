@@ -1,2 +1,4 @@
 node_modules
 proxy.conf
+server.crt
+server.key
