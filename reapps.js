@@ -239,13 +239,12 @@ function updateAppProperty( pathToProps, propertiesList ){
           winston.log('error', err);
           reject( err );
         }
-        var result,
+        var result = data,
             message = "";
          propertiesList.forEach(function( property ){
-           result = data.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
+           result = result.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
            message += 'Updated ' + property.name + ' to '+ property.value + ' in\n ' + pathToProps + '\n';
          });
-
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
@@ -416,7 +415,6 @@ function actionHandler( action ){
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
-      //setSystemVariables();
       break;
     case 'initShopAppEnv':
       return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
@@ -431,12 +429,12 @@ function actionHandler( action ){
       break;
     case 'initEnvs':
       actionHandler( 'initNavAppEnv' );
-      actionHandler( 'initShopAppEnv');
+      actionHandler( 'initShopAppEnv' );
       break;
     case 'initBox':
       actionHandler( 'initM2' );
       actionHandler( 'initEnvs' );
-      //actionHandler( 'initShell' );
+      actionHandler( 'initShell' );
       actionHandler( 'initProxy' );
       actionHandler( 'initCertAndKey' );
       break;
