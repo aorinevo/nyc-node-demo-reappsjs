@@ -1,6 +1,22 @@
 ## Introduction
 Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-up process. Checkout the Basic Usage section for an example use case.
 
+### What does it actually do?
+
+* In NavApp
+  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, lcache_enabled, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and ocal_killswitch_overwrite_in_dev_mode_enabled
+  - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
+  - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
+* In ShopApp
+  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and ocal_killswitch_overwrite_in_dev_mode_enabled
+  - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
+  - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
+* In Apache
+  - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, it is created).
+  - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
+* In home directory
+  - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
+
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * In bloomies-ui-reapps/ run 'npm install'.
