@@ -2,6 +2,8 @@ var request = require('request'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
+    shell = require('shelljs'),
+    proxy = require('./proxy.js'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
     fs = require('fs'),
@@ -110,7 +112,7 @@ function getGceIp(){
   }); 
 }
 
-function setSystemVariables(){
+function initShell(){
   fs.readFile( props.paths.shellRc, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
@@ -345,6 +347,14 @@ function actionHandler( action ){
     case 'listEnvs': 
       return listEnvs( responseBody );
       break;
+    case 'initM2':
+      if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
+        shell.mkdir('~/.m2');
+        shell.cp('./settings.xml', '~/.m2');
+      } else {
+        winston.log( 'info', '~/.m2 directory already exists.');
+      }
+      break;
     case 'updateSdpHost': 
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
@@ -370,6 +380,7 @@ function actionHandler( action ){
       return setShopAppDomainPrefix( shopAppConfigProperties );
       break;
     case 'initNavAppEnv':
+      actionHandler( 'initM2' );
       return actionHandler( 'setNavAppDomainPrefix' ).then(function( result ){
           return actionHandler( 'updateNavAppPomXml' );
         }).then(function( result){
@@ -382,6 +393,7 @@ function actionHandler( action ){
       //setSystemVariables();        
       break; 
     case 'initShopAppEnv':
+      actionHandler( 'initM2' );
       return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
         return actionHandler( 'updateShopAppPomXml' );
       }).then(function( result){
@@ -391,15 +403,32 @@ function actionHandler( action ){
       }).then( function( result ){
           return actionHandler( 'updateShopAppSdpHost' );
         });
-      //setSystemVariables();        
       break;   
     case 'initEnvs': 
-      actionHandler( 'initNavAppEnv')
-      actionHandler( 'initShopAppEnv');    
-      //setSystemVariables();        
-      break;  
-    case 'setSystemVariables':
-      setSystemVariables();
+      actionHandler( 'initNavAppEnv' );
+      actionHandler( 'initShopAppEnv');           
+      break;
+    case 'initBox':
+      actionHandler( 'initM2' );
+      actionHandler( 'initEnvs' );
+      actionHandler( 'initShell' );
+      actionHandler( 'initProxy' );    
+      break;
+    case 'initProxy':
+      if( !fs.existsSync('/etc/apache2/other/proxy.conf') ){
+        fs.writeFile( './proxy.conf', proxy, 'utf8', function (err) {
+           if (err) return console.log(err);
+           shell.exec('sudo cp ./proxy.conf /etc/apache2/other/proxy.conf');
+           winston.log( 'info', 'proxy.conf file created in /etc/apache2/other/' );           
+           winston.log( 'info', 'restarting apache');
+           shell.exec('sudo apachectl restart');
+        });
+      } else {
+        winston.log( 'info', '/etc/apache2/other/proxy.conf already exists.');
+      }    
+      break;
+    case 'initShell':
+      initShell();
       break;
     case 'getGceIp':
       getGceIp();
