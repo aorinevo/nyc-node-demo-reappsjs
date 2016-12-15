@@ -380,7 +380,6 @@ function actionHandler( action ){
       return setShopAppDomainPrefix( shopAppConfigProperties );
       break;
     case 'initNavAppEnv':
-      actionHandler( 'initM2' );
       return actionHandler( 'setNavAppDomainPrefix' ).then(function( result ){
           return actionHandler( 'updateNavAppPomXml' );
         }).then(function( result){
@@ -393,7 +392,6 @@ function actionHandler( action ){
       //setSystemVariables();        
       break; 
     case 'initShopAppEnv':
-      actionHandler( 'initM2' );
       return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
         return actionHandler( 'updateShopAppPomXml' );
       }).then(function( result){

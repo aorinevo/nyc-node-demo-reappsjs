@@ -30,6 +30,41 @@ In either case, replace the path in the above command with the path that points 
 * run "maven jetty:run -o" in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
 
 ## API
+* Initialize everything!
+  - API: reapps --action=initBox
+  - Description: runs the following actions
+    - initM2
+    - initEnvs
+    - initShell
+    - initProxy
+* Initialize .m2 directory
+  - API: reapps --action=initM2
+  - Description: Creates a ~/.m2 directory that contains ./settings.xml.
+* Initialize environments
+  - API: reapps --action=initEnvs
+  - Description: runs the following actions
+    - initNavAppEnv
+    - initShopAppEnv
+* Initialize NavApp 
+  - API: reapps --action=initNavAppEnv
+  - Description: Updates navapp-config.properties from reapps-properties.json and runs the following actions
+    - setNavAppDomainPrefix
+    - updateNavAppPomXml
+    - updateNavAppWebXml
+    - updateNavAppSdpHost
+* Initialize ShopApp
+  - API: reapps --action=initShopAppEnv
+  - Description: Updates environment.properties from reapps-properties.json and runs the following actions
+    - setNavAppDomainPrefix
+    - updateNavAppPomXml
+    - updateNavAppWebXml
+    - updateNavAppSdpHost   
+* Set navapp-config.properties domain prefix
+  - API: reapps --action=setDomainPrefix
+  - Description: Add domain prefix to url for ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, and HOST. 
+* Set ShopApp environment.properties domain prefix
+  - API: reapps --action=setDomainPrefix
+  - Description: Add domain prefix to url for ASSETS_HOST, SECURE_HOST, and HOST.       
 * Get a list of environments
   - API: reapps --action=listEnvs
   - Description: Logs a list of environments to the terminal.
@@ -39,12 +74,17 @@ In either case, replace the path in the above command with the path that points 
 * Get IP for a GCE
   - reapps --action=getGceIp
   - Description: Logs the environment SDP_HOST IP to the terminal.
-* Update SDP_HOST
+* Update SDP_HOST on both NavApp and ShopApp
   - API: reapps --action=updateSdpHost
-  - Description: Updates the SDP_HOST value in NavApp and ShopApp properties file.
-* Set domain prefix
-  - API: reapps --action=setDomainPrefix
-  - Description:  on ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, and HOST.
+  - Description: runs the following actions
+    - updateNavAppSdpHost
+    - updateShopAppSdpHost
+* Update SDP_HOST on NavApp
+  - API: reapps --action=updateNavAppSdpHost
+  - Description: Updates SDP_HOST property in navapp-config.properties
+* Update SDP_HOST on ShopApp
+  - API: reapps --action=updateShopAppSdpHost
+  - Description: Updates SDP_HOST property in environment.properties  
 * Initialize NavApp and ShopApp property files
   - API: reapps --action=initEnvs
   - Description: Bundles actions setDomainPrefix and updateSdpHost.
