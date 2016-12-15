@@ -363,14 +363,14 @@ function actionHandler( action ){
       break;
     case 'updateNavAppSdpHost': 
       if( SDP_HOST ){
-        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST}] );
+        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST + ":85"}] );
       } else {
         winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
     case 'updateShopAppSdpHost': 
       if( SDP_HOST ){
-        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST}] );
+        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST + ":85"}] );
       } else {
         winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
       }
