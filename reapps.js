@@ -151,6 +151,7 @@ function initShell(){
 
     fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
        if (err) return console.log(err);
+       shell.exec('source ' + props.paths.shellRc);
     });
   });
 }
