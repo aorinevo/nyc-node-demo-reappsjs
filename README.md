@@ -33,10 +33,10 @@ In either case, replace the path in the above command with the path that points 
 * Initialize everything!
   - API: reapps --action=initBox
   - Description: runs the following actions
-    + initM2
-    + initEnvs
-    + initShell
-    + initProxy
+      + initM2
+      + initEnvs
+      + initShell
+      + initProxy
 * Initialize .m2 directory
   - API: reapps --action=initM2
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
