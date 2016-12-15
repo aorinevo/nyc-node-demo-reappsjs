@@ -13,7 +13,8 @@ var request = require('request'),
     shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",    
     navAppPom,
     shopAppPom,
-    defaultAjaxErrorMessage = 'POST request failed.  Make sure the you are on the VPN and try again.';
+    SDP_HOST,
+    responseBody;
 
 winston.cli();
 
@@ -48,13 +49,13 @@ requestOptions = {
 }
 
 function startAjaxCall( options ){
-  spinner.text = 'POST request';
+  spinner.text = 'Connecting to Reapps...';
   spinner.start();
   return new Promise(function(resolve, reject){  
     request( options, function(err, res, body){ 
       spinner.stop();
       if(err){
-        reject( err );
+        reject( new Error( 'Connection to Reapps failed!  Check that you are connected to the internet and on the VPN') );
       } else {
         resolve( body );
       }
@@ -202,22 +203,26 @@ function setShopAppDomainPrefix( pathToProps ){
   });
 }
 
-function updateAppProperty( pathToProps, property, value ){   
-  var regex = new RegExp('^'+property +'.+', "gm"); 
+function updateAppProperty( pathToProps, propertiesList ){     
   return new Promise(function(resolve, reject){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
           winston.log('error', err);
           reject( err );
         }
-        var result = data.replace(regex, property + "=" + value);
+        var result,
+            message = "";
+         propertiesList.forEach(function( property ){
+           result = data.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
+           message += 'Updated ' + property.name + ' to '+ property.value + ' in\n ' + pathToProps + '\n';
+         });
               
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
             reject( err ); 
            }
-           winston.log('info', 'Updated ' + property + ' to '+ value + ' in\n ' + pathToProps);
+           winston.log('info', message);
            resolve( result );
         });
       });
@@ -335,49 +340,28 @@ function updateShopAppPomXml(){
 function actionHandler( action ){
   switch ( action ) {
     case 'getIp':
-      startAjaxCall( requestOptions ).then( function( body ){
-        getIp( body );
-      });  
+      return SDP_HOST;
       break;
     case 'listEnvs': 
-      startAjaxCall( requestOptions ).then( function( body ){
-        listEnvs( body );
-      });  
+      return listEnvs( responseBody );
       break;
     case 'updateSdpHost': 
-      startAjaxCall( requestOptions ).then( function( body ){
-        if( props.paths.navApp ){
-          updateSdpHost(getIp( body ), navAppConfigProperties );
-        } else {
-          winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
-        }
-        if( props.paths.shopApp ){
-          updateSdpHost(getIp( body ), shopAppConfigProperties );
-        } else {
-          winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
-        }
-      });        
+      actionHandler( 'updateNavAppSdpHost');
+      actionHandler( 'updateShopAppSdpHost');
       break;
     case 'updateNavAppSdpHost': 
-      startAjaxCall( requestOptions ).then( function( body ){
-        if( props.paths.navApp ){
-          return updateSdpHost(getIp( body ), navAppConfigProperties );
-        } else {
-          winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
-        }
-      });        
-      break; 
+      if( SDP_HOST ){
+        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST}] );
+      } else {
+        winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
+      }
+      break;
     case 'updateShopAppSdpHost': 
-      startAjaxCall( requestOptions ).then( function( body ){
-        if( props.paths.shopApp ){
-          return updateSdpHost(getIp( body ), shopAppConfigProperties );
-        } else {
-          winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
-        }
-      });        
-      break;                
-    case 'setDomainPrefix':  
-      return setDomainPrefix();
+      if( SDP_HOST ){
+        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST}] );
+      } else {
+        winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
+      }
       break;
     case 'setNavAppDomainPrefix':  
       return setNavAppDomainPrefix( navAppConfigProperties );
@@ -391,15 +375,7 @@ function actionHandler( action ){
         }).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
-          return updateAppProperty(navAppConfigProperties, 'lcache_enabled', false);
-        }).then(function( result ){
-          return updateAppProperty(navAppConfigProperties, 'zookeeper_enabled', false);
-        }).then(function( result ){
-          return updateAppProperty(navAppConfigProperties, 'zookeeper_killswitch_framework_enabled', true);
-        }).then(function( result ){
-          return updateAppProperty(navAppConfigProperties, 'zookeeper_local_storage_enabled', true);
-        }).then(function( result ){
-          return updateAppProperty(navAppConfigProperties, 'local_killswitch_overwrite_in_dev_mode_enabled', false);
+          return updateAppProperty( navAppConfigProperties, props.navAppProperties );
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
@@ -411,22 +387,15 @@ function actionHandler( action ){
       }).then(function( result){
         return actionHandler( 'updateShopAppWebXml' );
       }).then(function( result ){
-        return updateAppProperty(shopAppConfigProperties, 'zookeeper_enabled', false);
-      }).then(function( result ){
-        return updateAppProperty(shopAppConfigProperties, 'zookeeper_killswitch_framework_enabled', true);
-      }).then(function( result ){
-        return updateAppProperty(shopAppConfigProperties, 'zookeeper_local_storage_enabled', true);
-      }).then(function( result ){
-        return updateAppProperty(shopAppConfigProperties, 'local_killswitch_overwrite_in_dev_mode_enabled', false);
+        return updateAppProperty( shopAppConfigProperties, props.shopAppProperties );
       }).then( function( result ){
           return actionHandler( 'updateShopAppSdpHost' );
         });
       //setSystemVariables();        
       break;   
     case 'initEnvs': 
-      return actionHandler( 'initNavAppEnv').then(function( result){
-          return actionHandler( 'initShopAppEnv');    
-        });
+      actionHandler( 'initNavAppEnv')
+      actionHandler( 'initShopAppEnv');    
       //setSystemVariables();        
       break;  
     case 'setSystemVariables':
@@ -468,4 +437,10 @@ function actionHandler( action ){
   }
 }
 
-actionHandler( argv.action );
+startAjaxCall( requestOptions ).catch(function( reason ){
+  winston.log( 'error', reason.message );
+}).then( function( body ){
+  responseBody = body,
+  SDP_HOST = getIp(body);
+  return actionHandler( argv.action );
+});
