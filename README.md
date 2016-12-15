@@ -33,7 +33,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - Java
   - Maven
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos in (1).
-* With "reapps" aliased (see above - How to alias a command), run "reapps --action=initBox" from anywhere in the command line. You'll need to obtain admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service).
+* First time run, use command "node reapps --action=initBox". after which you can run script without typing node.  For example, you'll be able to run the same command as "reapps --action=initBox". You'll need to obtain admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service).
 * run "maven clean install" from BloomiesCommonUI root
 * run "maven clean install --Dmaven.test.skip=true" in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run "maven jetty:run -o" in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
