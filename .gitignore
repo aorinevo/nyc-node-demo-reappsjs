@@ -2,3 +2,4 @@ node_modules
 proxy.conf
 server.crt
 server.key
+reapps-properties.json
