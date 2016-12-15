@@ -4,11 +4,11 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
 ### What does it actually do?
 
 * In NavApp
-  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, lcache_enabled, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and ocal_killswitch_overwrite_in_dev_mode_enabled
+  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, lcache_enabled, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In ShopApp
-  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and ocal_killswitch_overwrite_in_dev_mode_enabled
+  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In Apache
