@@ -14,7 +14,7 @@ var request = require('request'),
     spinner = ora(cliSpinners.dots),
     requestOptions,
     navAppConfigProperties = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties",
-    shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",    
+    shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",
     navAppPom,
     shopAppPom,
     SDP_HOST,
@@ -55,8 +55,8 @@ requestOptions = {
 function startAjaxCall( options ){
   spinner.text = 'Connecting to Reapps...';
   spinner.start();
-  return new Promise(function(resolve, reject){  
-    request( options, function(err, res, body){ 
+  return new Promise(function(resolve, reject){
+    request( options, function(err, res, body){
       spinner.stop();
       if(err){
         reject( new Error( 'Connection to Reapps failed!  Check that you are connected to the internet and on the VPN') );
@@ -73,22 +73,22 @@ function listEnvs( body ){
   });
   winston.log('info', 'List of Environments for '+ props.branch+' '+props.brand);
   console.log(environments);
-  
+
   return environments;
 }
 
 function getIp( body ){
-  var environment = body.envDetails.filter(function( element ){    
+  var environment = body.envDetails.filter(function( element ){
     return element.envName == props.envName;
   });
-  
+
   if( environment.length == 0 ){
     winston.log('error', 'Environment name '+ props.envName + ' is not in the list of '+ props.branch +' environments.');
     return false;
   } else {
     var ip = environment[0].jenkinsEnvMgmtBOs[0].environmentDetails.f5vip;
     winston.log('info', 'SDP_HOST='+ip);
-    return ip;  
+    return ip;
   }
 }
 
@@ -110,8 +110,8 @@ function getGceIp(){
         out: function(stdout) {
           winston.log('info', 'GCE '+ props.envName + ': ' + stdout.trim());
         }
-    }).exec('exit').start();       
-  }); 
+    }).exec('exit').start();
+  });
 }
 
 function initShell(){
@@ -119,15 +119,15 @@ function initShell(){
     if (err) {
       return console.log(err);
     }
-    
+
     var result = data.replace(/^export JAVA_HOME=.+/gm, 'export JAVA_HOME='+ props.libPaths.javaHome)
                      .replace(/^export MAVEN_HOME=.+/gm, 'export MAVEN_HOME='+ props.libPaths.mavenHome)
                      .replace(/^export MAVEN_OPTS=.+/gm, 'export MAVEN_OPTS='+ props.libPaths.mavenOpts);
-                     
+
     if( data.indexOf("export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH")== -1){
       result = result + "export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH\n";
     }
-    
+
     if( data.indexOf("export M2_OPTS=$MAVEN_OPTS")== -1){
       result = result + "export M2_OPTS=$MAVEN_OPTS\n";
     }
@@ -138,15 +138,15 @@ function initShell(){
   });
 }
 
-function updateSdpHost( sdpHost, pathToProps ){  
+function updateSdpHost( sdpHost, pathToProps ){
   return new Promise(function(resolve, reject){
-    fs.readFile( pathToProps, 'utf8', function (err,data) {        
+    fs.readFile( pathToProps, 'utf8', function (err,data) {
       if (err) {
         winston.log('error', err);
         reject( err );
       }
       var result = data.replace(/^SDP_HOST=http:\/\/.+/gm, 'SDP_HOST=http://'+ sdpHost + ':85');
-          
+
       fs.writeFile(pathToProps, result, 'utf8', function (err) {
          if (err){
            winston.log('error', err);
@@ -156,10 +156,10 @@ function updateSdpHost( sdpHost, pathToProps ){
          resolve( sdpHost );
       });
     });
-  });  
+  });
 }
 
-function setNavAppDomainPrefix( pathToProps ){    
+function setNavAppDomainPrefix( pathToProps ){
   return new Promise(function(resolve, reject){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
@@ -171,11 +171,11 @@ function setNavAppDomainPrefix( pathToProps ){
                          .replace(/^ASSETS_SECURE_HOST.+/gm, 'ASSETS_SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com')
                          .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
                          .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-              
+
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
-            reject( err ); 
+            reject( err );
            }
            winston.log('info', 'Set domain prefix on ASSETS_HOST, COMMON_ASSETS_HOST, ASSETS_SECURE_HOST, HOST, and SECURE_HOST in NavApp\n ' + pathToProps);
            resolve( result );
@@ -184,21 +184,21 @@ function setNavAppDomainPrefix( pathToProps ){
   });
 }
 
-function setShopAppDomainPrefix( pathToProps ){    
+function setShopAppDomainPrefix( pathToProps ){
   return new Promise(function(resolve, reject){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
           winston.log('error', err);
           reject( err );
         }
-        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')                         
+        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
                          .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
                          .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-              
+
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
-            reject( err ); 
+            reject( err );
            }
            winston.log('info', 'Set domain prefix on ASSETS_HOST, HOST, and SECURE_HOST in ShopApp\n ' + pathToProps);
            resolve( result );
@@ -207,7 +207,7 @@ function setShopAppDomainPrefix( pathToProps ){
   });
 }
 
-function updateAppProperty( pathToProps, propertiesList ){     
+function updateAppProperty( pathToProps, propertiesList ){
   return new Promise(function(resolve, reject){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
@@ -220,11 +220,11 @@ function updateAppProperty( pathToProps, propertiesList ){
            result = data.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
            message += 'Updated ' + property.name + ' to '+ property.value + ' in\n ' + pathToProps + '\n';
          });
-              
+
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
-            reject( err ); 
+            reject( err );
            }
            winston.log('info', message);
            resolve( result );
@@ -240,7 +240,7 @@ function updateNavAppPomXml(){
                  <com.bloomies.webapp.BloomiesAssets.location>'+ props.paths.bloomiesAssets +'bloomies.war</com.bloomies.webapp.BloomiesAssets.location>',
       pathToProps = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/pom.xml",
       result;
-    
+
     return new Promise(function( resolve, reject ){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
@@ -248,19 +248,19 @@ function updateNavAppPomXml(){
           reject( err );
         }
         var result = data;
-        
+
         if( result.indexOf( expectedBloomiesUIAssetsLocation ) == -1 ){
           result = result.replace("<com.bloomies.webapp.BloomiesCommonUI.location>${basedir}/target/commonui</com.bloomies.webapp.BloomiesCommonUI.location>", expectedBloomiesUIAssetsLocation );
         }
-        
+
         if( result.indexOf( expectedSelectChannelConnector ) == -1 ){
           result = result.replace("<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\">", expectedSelectChannelConnector );
         }
-        
+
         if( result.indexOf( expectedSslSocketConnector ) == -1 ){
           result = result.replace("<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\">", expectedSslSocketConnector );
         }
-        
+
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
           if (err) {
             winston.log('error', err);
@@ -284,7 +284,7 @@ function updateWebXml( pathToWebXml ){
               </init-param>\n\
               <load-on-startup>0</load-on-startup>\n\
           </servlet>";
-  
+
   return new Promise(function( resolve, reject ){
     var result;
     fs.readFile( pathToWebXml, 'utf8', function (err,data) {
@@ -293,11 +293,11 @@ function updateWebXml( pathToWebXml ){
         reject( err );
       }
       result = data;
-      
+
       if( result.indexOf( expectedDefaultServlet ) == -1 ){
         result = result.replace("</web-app>", expectedDefaultServlet + "\n </web-app>");
       }
-      
+
       fs.writeFile( pathToWebXml, result, 'utf8', function (err) {
         if (err) {
           winston.log('error', err);
@@ -316,7 +316,7 @@ function updateShopAppPomXml(){
                 <com.bloomies.webapp.BloomiesAssets.location>'+ props.paths.bloomiesAssets +'bloomies.war</com.bloomies.webapp.BloomiesAssets.location>',
       pathToProps = props.paths.shopApp + "BCOM/BloomiesShopNServe/pom.xml",
       result;
-    
+
     return new Promise(function( resolve, reject ){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
         if (err) {
@@ -324,11 +324,11 @@ function updateShopAppPomXml(){
           reject( err );
         }
         var result = data;
-        
+
         if( result.indexOf( expectedBloomiesUIAssetsLocation ) == -1 ){
           result = result.replace("</com.macys.buildtools.maven.plugin.version>", expectedBloomiesUIAssetsLocation );
         }
-        
+
         fs.writeFile( pathToProps, result, 'utf8', function (err) {
           if (err) {
             winston.log('error', err);
@@ -346,7 +346,7 @@ function actionHandler( action ){
     case 'getIp':
       return SDP_HOST;
       break;
-    case 'listEnvs': 
+    case 'listEnvs':
       return listEnvs( responseBody );
       break;
     case 'initM2':
@@ -357,28 +357,28 @@ function actionHandler( action ){
         winston.log( 'info', '~/.m2 directory already exists.');
       }
       break;
-    case 'updateSdpHost': 
+    case 'updateSdpHost':
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
       break;
-    case 'updateNavAppSdpHost': 
+    case 'updateNavAppSdpHost':
       if( SDP_HOST ){
-        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST + ":85"}] );
+        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
       } else {
         winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppSdpHost': 
+    case 'updateShopAppSdpHost':
       if( SDP_HOST ){
-        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": SDP_HOST + ":85"}] );
+        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
       } else {
         winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
       }
       break;
-    case 'setNavAppDomainPrefix':  
+    case 'setNavAppDomainPrefix':
       return setNavAppDomainPrefix( navAppConfigProperties );
-      break;   
-    case 'setShopAppDomainPrefix':  
+      break;
+    case 'setShopAppDomainPrefix':
       return setShopAppDomainPrefix( shopAppConfigProperties );
       break;
     case 'initNavAppEnv':
@@ -391,8 +391,8 @@ function actionHandler( action ){
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
-      //setSystemVariables();        
-      break; 
+      //setSystemVariables();
+      break;
     case 'initShopAppEnv':
       return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
         return actionHandler( 'updateShopAppPomXml' );
@@ -403,17 +403,17 @@ function actionHandler( action ){
       }).then( function( result ){
           return actionHandler( 'updateShopAppSdpHost' );
         });
-      break;   
-    case 'initEnvs': 
+      break;
+    case 'initEnvs':
       actionHandler( 'initNavAppEnv' );
-      actionHandler( 'initShopAppEnv');           
+      actionHandler( 'initShopAppEnv');
       break;
     case 'initBox':
       actionHandler( 'initM2' );
       actionHandler( 'initEnvs' );
-      actionHandler( 'initShell' );
+      //actionHandler( 'initShell' );
       actionHandler( 'initProxy' );
-      actionHandler( 'initCertAndKey' );   
+      actionHandler( 'initCertAndKey' );
       break;
     case 'initCertAndKey':
       shell.exec('sudo mkdir /etc/apache2/cert');
@@ -421,38 +421,38 @@ function actionHandler( action ){
         fs.writeFile( './server.crt', serverCrt, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
-           winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );           
+           winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
            winston.log( 'info', 'restarting apache');
            shell.exec('sudo apachectl restart');
         });
       } else {
         winston.log( 'info', '/etc/apache2/cert/server.crt already exists.');
       }
-      
+
       if( !fs.existsSync('/etc/apache2/cert/server.key') ){
         fs.writeFile( './server.key', serverKey, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.key /etc/apache2/cert/server.key');
-           winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );           
+           winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );
            winston.log( 'info', 'restarting apache');
            shell.exec('sudo apachectl restart');
         });
       } else {
         winston.log( 'info', '/etc/apache2/cert/server.key already exists.');
-      }                
+      }
       break;
     case 'initProxy':
       if( !fs.existsSync('/etc/apache2/other/proxy.conf') ){
         fs.writeFile( './proxy.conf', proxy, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./proxy.conf /etc/apache2/other/proxy.conf');
-           winston.log( 'info', 'proxy.conf file created in /etc/apache2/other/' );           
+           winston.log( 'info', 'proxy.conf file created in /etc/apache2/other/' );
            winston.log( 'info', 'restarting apache');
            shell.exec('sudo apachectl restart');
         });
       } else {
         winston.log( 'info', '/etc/apache2/other/proxy.conf already exists.');
-      }    
+      }
       break;
     case 'initShell':
       initShell();
@@ -465,7 +465,7 @@ function actionHandler( action ){
         return updateNavAppPomXml();
       } else {
         winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
-      }    
+      }
       break;
     case 'updateShopAppPomXml':
       if( props.paths.shopApp ){
@@ -473,23 +473,23 @@ function actionHandler( action ){
       } else {
         winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
-      break; 
+      break;
     case 'updateNavAppWebXml':
       if( props.paths.navApp ){
         return updateWebXml( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml");
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
-      break; 
+      break;
     case 'updateShopAppWebXml':
       if( props.paths.shopApp ){
         return updateWebXml( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
         winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
-      break;                
+      break;
     default:
-      winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');    
+      winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');
   }
 }
 
