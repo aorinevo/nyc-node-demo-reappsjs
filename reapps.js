@@ -123,13 +123,30 @@ function initShell(){
     var result = data.replace(/^export JAVA_HOME=.+/gm, 'export JAVA_HOME='+ props.libPaths.javaHome)
                      .replace(/^export MAVEN_HOME=.+/gm, 'export MAVEN_HOME='+ props.libPaths.mavenHome)
                      .replace(/^export MAVEN_OPTS=.+/gm, 'export MAVEN_OPTS='+ props.libPaths.mavenOpts);
-
+                     
+    result = result + "\n";
+    if( data.indexOf("JAVA_HOME")== -1){
+     result = result + 'export JAVA_HOME='+ props.libPaths.javaHome + '\n';
+    }
+    
+    if( data.indexOf("MAVEN_HOME")== -1){
+     result = result + 'export MAVEN_HOME='+ props.libPaths.mavenHome + '\n';
+    }   
+    
+    if( data.indexOf("MAVEN_OPTS")== -1){
+     result = result + 'export MAVEN_OPTS='+ props.libPaths.mavenOpts + '\n';
+    }        
+  
+    if( data.indexOf("export M2_OPTS=$MAVEN_OPTS")== -1){
+      result = result + "export M2_OPTS=$MAVEN_OPTS\n";
+    }
+    
     if( data.indexOf("export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH")== -1){
       result = result + "export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH\n";
     }
-
-    if( data.indexOf("export M2_OPTS=$MAVEN_OPTS")== -1){
-      result = result + "export M2_OPTS=$MAVEN_OPTS\n";
+    
+    if( data.indexOf("alias reapps=")== -1){
+      result = result + 'alias reapps="node '+ props.paths["bloomies-ui-reapps"] +'reapps.js "';
     }
 
     fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
