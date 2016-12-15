@@ -16,28 +16,15 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
   - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
 * In home directory
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
+* In shell
+  - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, M2_OPTS, and alias to reapps.
 
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * In bloomies-ui-reapps/ run 'npm install'.
-* Update reapps-properties.json with the path to your NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
+* Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.
-* Optional: Set alias "reapps" for command "node reapps.js".
 * That's it!
-
-How to alias a command:  Your shell is mostly likely either using bash or zsh.  Depending on your shell, do the following:
-* bash
-  - Open ~/.bashrc file.
-  - Add the following
-     - alias reapps="node /Users/u060014/Repositories/bloomies-ui/bloomies-ui-reapps/reapps.js "
-  - In your terminal, run "source ~/.bashrc"
-* zsh
-  - Open ~/.zshrc file.
-  - Add the following
-     - alias reapps="node /Users/u060014/Repositories/bloomies-ui/bloomies-ui-reapps/reapps.js "
-  - In your terminal, run "source ~/.zshrc"
-
-In either case, replace the path in the above command with the path that points to the location of the reapps.js file on your local machine.
 
 ## Basic Usage
 * Clone and/or checkout bloomies-ui-reapps (this repo), NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
