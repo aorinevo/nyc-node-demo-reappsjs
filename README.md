@@ -16,8 +16,9 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
   - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
 * In home directory
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
-* In shell
-  - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, M2_OPTS, and alias to reapps.
+* In shell (bash/zshrc)
+  - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
+  - Adds alias reapps.
 
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
@@ -36,6 +37,8 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * run "maven clean install" from BloomiesCommonUI root
 * run "maven clean install --Dmaven.test.skip=true" in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run "maven jetty:run -o" in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
+
+Note: Typically, reapps --action=initBox will be run only once after which developers can use other API calls to make changes to their environments (i.e. reapps --action=updateSdpHost).
 
 ## API
 * Initialize everything!
