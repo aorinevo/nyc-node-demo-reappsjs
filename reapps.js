@@ -119,40 +119,47 @@ function initShell(){
     if (err) {
       return console.log(err);
     }
+    var result,
+        newLines = "";
+    
+    result = data.replace(/^export JAVA_HOME=.+/gm, 'export JAVA_HOME='+ props.libPaths.javaHome)
+                 .replace(/^export MAVEN_HOME=.+/gm, 'export MAVEN_HOME='+ props.libPaths.mavenHome)
+                 .replace(/^export MAVEN_OPTS=.+/gm, 'export MAVEN_OPTS='+ props.libPaths.mavenOpts);
 
-    var result = data.replace(/^export JAVA_HOME=.+/gm, 'export JAVA_HOME='+ props.libPaths.javaHome)
-                     .replace(/^export MAVEN_HOME=.+/gm, 'export MAVEN_HOME='+ props.libPaths.mavenHome)
-                     .replace(/^export MAVEN_OPTS=.+/gm, 'export MAVEN_OPTS='+ props.libPaths.mavenOpts);
-                     
-    result = result + "\n";
     if( data.indexOf("JAVA_HOME")== -1){
-     result = result + 'export JAVA_HOME='+ props.libPaths.javaHome + '\n';
+     newLines = newLines + 'export JAVA_HOME='+ props.libPaths.javaHome + '\n';
     }
     
     if( data.indexOf("MAVEN_HOME")== -1){
-     result = result + 'export MAVEN_HOME='+ props.libPaths.mavenHome + '\n';
+     newLines = newLines + 'export MAVEN_HOME='+ props.libPaths.mavenHome + '\n';
     }   
     
     if( data.indexOf("MAVEN_OPTS")== -1){
-     result = result + 'export MAVEN_OPTS='+ props.libPaths.mavenOpts + '\n';
+     newLines = newLines + 'export MAVEN_OPTS='+ props.libPaths.mavenOpts + '\n';
     }        
   
     if( data.indexOf("export M2_OPTS=$MAVEN_OPTS")== -1){
-      result = result + "export M2_OPTS=$MAVEN_OPTS\n";
+      newLines = newLines + "export M2_OPTS=$MAVEN_OPTS\n";
     }
     
     if( data.indexOf("export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH")== -1){
-      result = result + "export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH\n";
+      newLines = newLines + "export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH\n";
     }
     
     if( data.indexOf("alias reapps=")== -1){
-      result = result + 'alias reapps="node '+ props.paths["bloomies-ui-reapps"] +'reapps.js "';
+      newLines = newLines + 'alias reapps="node '+ props.paths["bloomies-ui-reapps"] +'reapps.js "';
     }
 
-    fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
-       if (err) return console.log(err);
-       shell.exec('source ' + props.paths.shellRc);
-    });
+    if( newLines || data != result ){
+      if( newLines ){
+        result = newLines + "\n" + result;
+      }
+      fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
+         if (err) return console.log(err);
+         console.log('source ' + props.paths.shellRc);
+         shell.exec('source ' + props.paths.shellRc);
+      });
+    }
   });
 }
 
