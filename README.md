@@ -20,11 +20,13 @@ How to alias a command:  Your shell is mostly likely either using bash or zsh.  
 
 In either case, replace the path in the above command with the path that points to the location of the reapps.js file on your local machine.
 
-## Basic Use
+## Basic Usage
 * Clone NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
-* Update system variables JAVA_HOME, MAVEN_OPTS, MAVEN_HOME, etc...
+* Install dependencies
+  - Java
+  - Maven
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos in (1).
-* With "reapps" aliased (see above - How to alias a command), run "reapps --action=initEnvs" from anywhere in the command line.
+* With "reapps" aliased (see above - How to alias a command), run "reapps --action=initBox" from anywhere in the command line.
 * run "maven clean install" from BloomiesCommonUI root
 * run "maven clean install --Dmaven.test.skip=true" in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run "maven jetty:run -o" in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
