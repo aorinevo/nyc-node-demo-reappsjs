@@ -1,3 +1,6 @@
+## Introduction
+Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-up process. Checkout the Basic Usage section for an example use case.
+
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * In bloomies-ui-reapps/ run 'npm install'.
@@ -21,12 +24,12 @@ How to alias a command:  Your shell is mostly likely either using bash or zsh.  
 In either case, replace the path in the above command with the path that points to the location of the reapps.js file on your local machine.
 
 ## Basic Usage
-* Clone NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
+* Clone and/or checkout bloomies-ui-reapps (this repo), NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
 * Install dependencies
   - Java
   - Maven
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos in (1).
-* With "reapps" aliased (see above - How to alias a command), run "reapps --action=initBox" from anywhere in the command line.
+* With "reapps" aliased (see above - How to alias a command), run "reapps --action=initBox" from anywhere in the command line. You'll need to obtain admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service).
 * run "maven clean install" from BloomiesCommonUI root
 * run "maven clean install --Dmaven.test.skip=true" in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run "maven jetty:run -o" in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
