@@ -127,8 +127,8 @@ ProxyPass /registry https://${props.domainPrefix}.bloomingdales.fds.com:9443/reg
 ProxyPass /accountweb https://${props.domainPrefix}.bloomingdales.fds.com:9443/accountweb
 
 #Assets
-ProxyPass /web20 http://${props.domainPrefix}.bloomingdales.fds.com:9876/web20
 ProxyPass /web20 http://${props.domainPrefix}.bloomingdales.fds.com:2202/web20
+ProxyPass /web20 http://${props.domainPrefix}.bloomingdales.fds.com:9876/web20
 ProxyPass /img http://${props.domainPrefix}.bloomingdales.fds.com:9876/img
 ProxyPass /css http://${props.domainPrefix}.bloomingdales.fds.com:9876/css
 ProxyPass /javascript http://${props.domainPrefix}.bloomingdales.fds.com:9876/javascript

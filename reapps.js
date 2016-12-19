@@ -257,6 +257,31 @@ function updateAppProperty( pathToProps, propertiesList ){
   });
 }
 
+function updateTmp( pathToTmp, killSwitchList ){
+  return new Promise(function(resolve, reject){
+      fs.readFile( pathToProps, 'utf8', function (err,data) {
+        if (err) {
+          winston.log('error', err);
+          reject( err );
+        }
+        var result = data,
+            message = "";
+         propertiesList.forEach(function( property ){
+           result = result.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
+           message += 'Updated ' + property.name + ' to '+ property.value + ' in\n ' + pathToProps + '\n';
+         });
+        fs.writeFile( pathToProps, result, 'utf8', function (err) {
+           if (err){
+            winston.log('error', err);
+            reject( err );
+           }
+           winston.log('info', message);
+           resolve( result );
+        });
+      });
+  });
+}
+
 function updateNavAppPomXml(){
   var expectedSelectChannelConnector = "<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedSslSocketConnector = "<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
@@ -495,6 +520,11 @@ function actionHandler( action ){
         return updateShopAppPomXml();
       } else {
         winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
+      }
+      break;
+    case 'updateNavAppTmp':
+      if( props.paths.tmp){
+        updateTmp();
       }
       break;
     case 'updateNavAppWebXml':

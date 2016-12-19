@@ -7,9 +7,10 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
 | ShopApp         | Complete |
 | secure-m        | None     |
 | bashrc/zshrc    | Partial  |
-| Update Proxy    | Complete |
+| Update Proxy    | Partial  |
 | Host file       | None     |
 | Bloomies Assets | None     |
+| tmp             | None     |
 
 ### What does it actually do?
 
