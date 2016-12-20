@@ -1,5 +1,5 @@
 ## Introduction
-Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
+Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
@@ -42,7 +42,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * That's it!
 
 ## Basic Usage
-* Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), and BloomiesAssets (svn).
+* Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m), and BloomiesAssets (svn).
 * Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
   - Java (brew install java)
   - Maven (brew install maven)
