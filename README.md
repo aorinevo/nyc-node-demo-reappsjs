@@ -1,5 +1,5 @@
 ## Introduction
-Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-up process. Checkout the Basic Usage section for an example use case.
+Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
@@ -45,7 +45,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - Java (brew install java)
   - Maven (brew install maven)
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos in (1).
-* First time run, use command `node reapps --action=initBox`. after which you can run script without typing node.  For example, you'll be able to run the same command as `reapps --action=initBox`. You'll need to obtain admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service).
+* When running for the first time, use command `node reapps --action=initBox` after you can execute a reapps action with `reapps --action=[actionName]`.  For example, you'll be able to run the same command as `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
 * run `mvn clean install` from BloomiesCommonUI root
 * run `mvn clean install --Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
@@ -111,6 +111,9 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 * Initialize NavApp and ShopApp property files
   - API: `reapps --action=initEnvs`
   - Description: Bundles actions setDomainPrefix and updateSdpHost.
+* Update apache2 hosts file
+  - API: `reapps --action=initHosts`
+  - Description: Updates apache2 hosts file. 
 * Options:
   - The following options override default properties in reapps-properties.json:
      - --branch overrides the branch property

@@ -462,6 +462,7 @@ function actionHandler( action ){
       actionHandler( 'initEnvs' );
       actionHandler( 'initShell' );
       actionHandler( 'initProxy' );
+      actionHandler( 'initHosts' );
       actionHandler( 'initCertAndKey' );
       break;
     case 'initCertAndKey':
