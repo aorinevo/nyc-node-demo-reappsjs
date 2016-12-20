@@ -45,7 +45,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - Java (brew install java)
   - Maven (brew install maven)
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and the binaries for java and maven.
-* When running for the first time, from the bloomies-ui-reapps directory run `node reapps --action=initBox` after you can execute a reapps action with `reapps --action=[actionName]`.  For example, you'll be able to run the same command as `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
+* Users just starting out with reapps should run `node reapps --action=initBox`, after which commands can be executed from anywhere on the command line without prefixing the command with node.  For example, you'll be able to run the same command as `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
 * run `mvn clean install` from BloomiesCommonUI root
 * run `mvn clean install --Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
