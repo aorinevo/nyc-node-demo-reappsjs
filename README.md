@@ -14,20 +14,21 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
 
 ### What does it actually do?
 
-* In NavApp
+* In NavApp:
   - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, lcache_enabled, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
-* In ShopApp
+* In ShopApp:
   - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
-* In Apache
+* In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, it is created).
   - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
-* In home directory
+  - Updates hosts file.  
+* In home directory:
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
-* In shell (bash/zshrc)
+* In shell (bash/zshrc):
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
   - Adds alias reapps.
 
