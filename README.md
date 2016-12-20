@@ -5,10 +5,10 @@ Reapps.js is a custom NPM module that automates parts of the NavApp/ShopApp set-
 |-----------------|----------|
 | NavApp          | Complete |
 | ShopApp         | Complete |
-| secure-m        | None     |
+| secure-m        | Complete |
 | bashrc/zshrc    | Partial  |
-| Update Proxy    | Partial  |
-| Host file       | None     |
+| Update Proxy    | Complete |
+| Host file       | Complete |
 | Bloomies Assets | None     |
 | tmp             | None     |
 
@@ -47,13 +47,6 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * First time run, use command `node reapps --action=initBox`. after which you can run script without typing node.  For example, you'll be able to run the same command as `reapps --action=initBox`. You'll need to obtain admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service).
 * run `mvn clean install` from BloomiesCommonUI root
 * run `mvn clean install --Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
-* edit /etc/hosts file and add the following entries:
-  - `127.0.0.1        aori.bloomingdales.fds.com`
-  - `127.0.0.1        www.aori.bloomingdales.fds.com`
-  - `127.0.0.1        www1.aori.bloomingdales.fds.com`
-  - `127.0.0.1        local.secure-m.qa1codebloomingdales.fds.com`
-  - `...`
-  - `127.0.0.1        local.secure-m.qa18codebloomingdales.fds.com`  
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
 
 Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other API calls to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
