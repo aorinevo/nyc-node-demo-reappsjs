@@ -59,6 +59,7 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
        - initM2
        - initEnvs
        - initShell
+       - initHosts
        - initProxy
 * Initialize .m2 directory
   - API: `reapps --action=initM2`
