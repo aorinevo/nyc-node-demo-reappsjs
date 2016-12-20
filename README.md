@@ -40,7 +40,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * That's it!
 
 ## Basic Usage
-* Clone and/or checkout bloomies-ui-reapps (that's this repo!), NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets.
+* Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), and BloomiesAssets (svn).
 * Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
   - Java (brew install java)
   - Maven (brew install maven)
