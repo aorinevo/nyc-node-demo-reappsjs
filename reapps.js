@@ -2,6 +2,7 @@ var request = require('request'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
+    hosts = require( './hosts.js'),
     shell = require('shelljs'),
     proxy = require('./proxy.js'),
     serverCrt = require('./server.crt.js'),
@@ -490,20 +491,13 @@ function actionHandler( action ){
       }
       break;
     case 'initProxy':
-      if( !fs.existsSync('/etc/apache2/other/proxy.conf') ){
-        fs.writeFile( './proxy.conf', proxy, 'utf8', function (err) {
-           if (err) return console.log(err);
-           shell.exec('sudo cp ./proxy.conf /etc/apache2/other/proxy.conf');
-           winston.log( 'info', 'proxy.conf file created in /etc/apache2/other/' );
-           winston.log( 'info', 'restarting apache');
-           shell.exec('sudo apachectl restart');
-        });
-      } else {
-        winston.log( 'info', '/etc/apache2/other/proxy.conf already exists.');
-      }
+      proxy.update( props.domainPrefix );
       break;
     case 'initShell':
       initShell();
+      break;
+    case 'initHosts':
+      hosts.update('/etc/hosts');
       break;
     case 'getGceIp':
       getGceIp();
