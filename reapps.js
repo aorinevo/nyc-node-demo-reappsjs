@@ -3,6 +3,7 @@ var request = require('request'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
     hosts = require( './hosts.js'),
+    bloomiesAssets = require( './bloomies-assets.js' ),
     shell = require('shelljs'),
     proxy = require('./proxy.js'),
     serverCrt = require('./server.crt.js'),
@@ -456,6 +457,7 @@ function actionHandler( action ){
     case 'initEnvs':
       actionHandler( 'initNavAppEnv' );
       actionHandler( 'initShopAppEnv' );
+      actionHandler( 'initBloomiesAssets' );
       break;
     case 'initBox':
       actionHandler( 'initM2' );
@@ -499,6 +501,9 @@ function actionHandler( action ){
       break;
     case 'initHosts':
       hosts.update('/etc/hosts');
+      break;
+    case 'initBloomiesAssets':
+      bloomiesAssets.update( props.username, props.paths.bloomiesAssets);
       break;
     case 'getGceIp':
       getGceIp();
