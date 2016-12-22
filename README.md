@@ -94,6 +94,12 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 * Get a list of environments
   - API: `reapps --action=listEnvs`
   - Description: Logs a list of environments to the terminal.
+* Initialize proxy.conf
+  - API: `reapps --action=initProxy`
+  - Description: Initializes apache proxy file.
+* Initialize httpd-ssl.conf
+  - API: `reapps --action=initHttpdSsl`
+  - Description: Initializes apache httpd-ssl file.
 * Get IP for a qa environment
   - API: `reapps --action=getIp`
   - Description: Logs the GCE SDP_HOST IP to the terminal.
