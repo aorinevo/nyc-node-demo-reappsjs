@@ -27,7 +27,8 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
 * In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, it is created).
   - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
-  - Updates hosts file.  
+  - Updates hosts file. 
+  - Updates httpd-ssl in /etc/apache2/extra. 
 * In home directory:
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
