@@ -8,6 +8,7 @@ var request = require('request'),
     proxy = require('./proxy.js'),
     serverCrt = require('./server.crt.js'),
     serverKey = require('./server.key.js'),
+    httpdSsl = require('./httpd-ssl.js'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
     fs = require('fs'),
@@ -459,6 +460,9 @@ function actionHandler( action ){
       actionHandler( 'initShopAppEnv' );
       actionHandler( 'initBloomiesAssets' );
       break;
+    case 'initHttpdSsl':
+      httpdSsl.update();
+      break;
     case 'initBox':
       actionHandler( 'initM2' );
       actionHandler( 'initEnvs' );
@@ -474,8 +478,8 @@ function actionHandler( action ){
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
            winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
-           winston.log( 'info', 'restarting apache');
            shell.exec('sudo apachectl restart');
+           winston.log( 'info', 'restarted apache');
         });
       } else {
         winston.log( 'info', '/etc/apache2/cert/server.crt already exists.');
@@ -485,13 +489,21 @@ function actionHandler( action ){
         fs.writeFile( './server.key', serverKey, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.key /etc/apache2/cert/server.key');
-           winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );
-           winston.log( 'info', 'restarting apache');
+           winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );           
            shell.exec('sudo apachectl restart');
+           winston.log( 'info', 'restarted apache');
         });
       } else {
         winston.log( 'info', '/etc/apache2/cert/server.key already exists.');
       }
+      
+      fs.writeFile( '/etc/apache2/extra/httpd-ssl.conf', serverCrt, 'utf8', function (err) {
+         if (err) return console.log(err);
+         shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
+         winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
+         winston.log( 'info', 'restarting apache');
+         shell.exec('sudo apachectl restart');
+      });    
       break;
     case 'initProxy':
       proxy.update( props.domainPrefix );

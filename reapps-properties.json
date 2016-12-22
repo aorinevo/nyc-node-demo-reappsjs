@@ -12,7 +12,7 @@
     "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets/",
     "navApp": "/Users/u060014/Repositories/NavApp/",
     "shopApp": "/Users/u060014/Repositories/ShopNServe/"
-  },  
+  },
   "libPaths": {
     "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
     "mavenHome": "'/usr/local/Cellar/maven/3.3.9/libexec'",
