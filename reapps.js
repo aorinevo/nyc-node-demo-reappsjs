@@ -468,6 +468,7 @@ function actionHandler( action ){
       actionHandler( 'initEnvs' );
       actionHandler( 'initShell' );
       actionHandler( 'initProxy' );
+      actionHandler( 'initHttpdSsl' );
       actionHandler( 'initHosts' );
       actionHandler( 'initCertAndKey' );
       break;
@@ -495,15 +496,7 @@ function actionHandler( action ){
         });
       } else {
         winston.log( 'info', '/etc/apache2/cert/server.key already exists.');
-      }
-      
-      fs.writeFile( '/etc/apache2/extra/httpd-ssl.conf', serverCrt, 'utf8', function (err) {
-         if (err) return console.log(err);
-         shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
-         winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
-         winston.log( 'info', 'restarting apache');
-         shell.exec('sudo apachectl restart');
-      });    
+      }    
       break;
     case 'initProxy':
       proxy.update( props.domainPrefix );
