@@ -19,7 +19,7 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In ShopApp:
-  - Updates navapp-config.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
+  - Updates environment.properties SDP_HOST, ASSETS_HOST, SECURE_HOST, zookeeper_enabled, zookeeper_killswitch_framework_enabled, zookeeper_local_storage_enabled, and local_killswitch_overwrite_in_dev_mode_enabled
   - Updates pom.xml with paths to BloomiesCommonUI and BloomiesAssets
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In BloomiesAssets:
