@@ -556,7 +556,6 @@ startAjaxCall( requestOptions ).catch(function( reason ){
 }).then( function( body ){
   responseBody = body,
   SDP_HOST = getIp(body);
-  console.log('test: ', argv);
   return actionHandler( argv.action );
 }).catch(function( reason ){
   winston.log( 'error', reason.message );
