@@ -217,12 +217,12 @@ SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
 #   mixture between C and Perl.  See the mod_ssl documentation
 #   for more details.
 #<Location />
-#SSLRequire (    %{SSL_CIPHER} !~ m/^(EXP|NULL)/ \
-#            and %{SSL_CLIENT_S_DN_O} eq "Snake Oil, Ltd." \
-#            and %{SSL_CLIENT_S_DN_OU} in {"Staff", "CA", "Dev"} \
-#            and %{TIME_WDAY} >= 1 and %{TIME_WDAY} <= 5 \
-#            and %{TIME_HOUR} >= 8 and %{TIME_HOUR} <= 20       ) \
-#           or %{REMOTE_ADDR} =~ m/^192\.76\.162\.[0-9]+$/
+#SSLRequire (    %{SSL_CIPHER} !~ m/^(EXP|NULL)/ \\
+#            and %{SSL_CLIENT_S_DN_O} eq "Snake Oil, Ltd." \\
+#            and %{SSL_CLIENT_S_DN_OU} in {"Staff", "CA", "Dev"} \\
+#            and %{TIME_WDAY} >= 1 and %{TIME_WDAY} <= 5 \\
+#            and %{TIME_HOUR} >= 8 and %{TIME_HOUR} <= 20       ) \\
+#           or %{REMOTE_ADDR} =~ m/^192\\.76\\.162\\.[0-9]+$/
 #</Location>
 
 #   SSL Engine Options:
@@ -253,7 +253,7 @@ SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
 #     This enables optimized SSL connection renegotiation handling when SSL
 #     directives are used in per-directory context. 
 #SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
-<FilesMatch "\.(cgi|shtml|phtml|php)$">
+<FilesMatch "\\.(cgi|shtml|phtml|php)$">
     SSLOptions +StdEnvVars
 </FilesMatch>
 <Directory "/Library/WebServer/CGI-Executables">
@@ -284,15 +284,15 @@ SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
 #   Similarly, one has to force some clients to use HTTP/1.0 to workaround
 #   their broken HTTP/1.1 implementation. Use variables "downgrade-1.0" and
 #   "force-response-1.0" for this.
-BrowserMatch "MSIE [2-5]" \
-         nokeepalive ssl-unclean-shutdown \
+BrowserMatch "MSIE [2-5]" \\
+         nokeepalive ssl-unclean-shutdown \\
          downgrade-1.0 force-response-1.0
 
 #   Per-Server Logging:
 #   The home of a custom SSL log file. Use this when you want a
 #   compact non-error SSL logfile on a virtual host basis.
-CustomLog "/private/var/log/apache2/ssl_request_log" \
-          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+CustomLog "/private/var/log/apache2/ssl_request_log" \\
+          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \\"%r\\" %b"
 
 </VirtualHost>                                  
 `;
