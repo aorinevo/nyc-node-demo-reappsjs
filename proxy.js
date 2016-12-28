@@ -199,7 +199,7 @@ ProxyPassReverse / http://${domainPrefix}.bloomingdales.fds.com:2202/
 
 function updateProxyFile( domainPrefix ){
   if( !fs.existsSync('/etc/apache2/other/proxy.conf') || argv.force ){
-    fs.writeFile( './proxy.conf', compileTemplate( ), 'utf8', function (err) {
+    fs.writeFile( './proxy.conf', compileTemplate( domainPrefix ), 'utf8', function (err) {
        if (err) return console.log(err);
        shell.exec('sudo cp ./proxy.conf /etc/apache2/other/proxy.conf');
        winston.log( 'info', 'proxy.conf file created in /etc/apache2/other/' );       
