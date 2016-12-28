@@ -1,5 +1,6 @@
 var fs = require('fs'),
     winston = require( 'winston'),
+    argv = require('yargs').argv,
     shell = require('shelljs');
 
 function compileTemplate( domainPrefix ){ 

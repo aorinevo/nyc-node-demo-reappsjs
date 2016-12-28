@@ -25,15 +25,15 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
 * In BloomiesAssets:
   - Updates pom.xml with paths to macysCSS, macysJS, and macysTemplates.
 * In Apache:
-  - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, it is created).
-  - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, it replaces the content with the compiled proxy.js template).
+  - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
+  - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, reapps.js replaces its contents with the contents of the compiled proxy.js template).
   - Updates hosts file. 
   - Updates httpd-ssl in /etc/apache2/extra. 
 * In home directory:
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
-  - Adds alias reapps.
+  - Adds reapps.js alias.
 
 ## Installation
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.

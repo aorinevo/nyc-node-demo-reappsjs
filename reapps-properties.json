@@ -11,7 +11,8 @@
     "bloomiesCommonUi": "/Users/U060014/Repositories/BloomiesCommonUI/",
     "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets/",
     "navApp": "/Users/u060014/Repositories/NavApp/",
-    "shopApp": "/Users/u060014/Repositories/ShopNServe/"
+    "shopApp": "/Users/u060014/Repositories/ShopNServe/",
+    "authWeb": ""
   },
   "libPaths": {
     "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
