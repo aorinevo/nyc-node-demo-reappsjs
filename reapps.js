@@ -1,4 +1,5 @@
 var request = require('request'),
+    Table = require('cli-table'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
@@ -71,13 +72,29 @@ function startAjaxCall( options ){
 }
 
 function listEnvs( body ){
-  var environments = body.envDetails.map(function(element){
-    return element.envName;
-  });
   winston.log('info', 'List of Environments for '+ props.branch+' '+props.brand);
-  console.log(environments);
+  
+  var table = new Table({
+    chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+           , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+           , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+           , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+  });
+   
+  table.push(
+      ['Site', 'backDoorUrl', 'Type', 'State', 'Completion Date']
+  );
+  
+  body.envDetails.forEach(function(element){
+    let jenkinsEnvMgmtBOs = element.jenkinsEnvMgmtBOs[0];
+    table.push( 
+      [element.envName, jenkinsEnvMgmtBOs.backDoorUrl, jenkinsEnvMgmtBOs.envType, jenkinsEnvMgmtBOs.envStatus, jenkinsEnvMgmtBOs.completedTime]
+    );
+  });
+   
+  winston.log('info', "\n" + table.toString());
 
-  return environments;
+  return table;
 }
 
 function getIp( body ){
