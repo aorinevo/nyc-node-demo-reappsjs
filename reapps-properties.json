@@ -1,8 +1,8 @@
 {
   "username": "u060014",
-  "branch": "16T",
+  "branch": "17A",
   "brand": "BCOM",
-  "envName": "qa8codebloomingdales",  
+  "envName": "qa14codebloomingdales",
   "domainPrefix": "aori",
   "paths": {
     "shellRc": "/Users/u060014/.zshrc",
@@ -20,16 +20,43 @@
     "mavenOpts": "'-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'"
   },
   "navAppProperties": [
-    {"name":"lcache_enabled", "value": false},
-    {"name":"zookeeper_enabled", "value": false},
-    {"name":"zookeeper_killswitch_framework_enabled", "value": true},
-    {"name":"zookeeper_local_storage_enabled", "value": true},
-    {"name":"local_killswitch_overwrite_in_dev_mode_enabled", "value": false}    
+    {
+      "name": "lcache_enabled",
+      "value": false
+    },
+    {
+      "name": "zookeeper_enabled",
+      "value": false
+    },
+    {
+      "name": "zookeeper_killswitch_framework_enabled",
+      "value": true
+    },
+    {
+      "name": "zookeeper_local_storage_enabled",
+      "value": true
+    },
+    {
+      "name": "local_killswitch_overwrite_in_dev_mode_enabled",
+      "value": false
+    }
   ],
   "shopAppProperties": [
-    {"name":"zookeeper_enabled", "value": false},
-    {"name":"zookeeper_killswitch_framework_enabled", "value": true},
-    {"name":"zookeeper_local_storage_enabled", "value": true},
-    {"name":"local_killswitch_overwrite_in_dev_mode_enabled", "value": false} 
+    {
+      "name": "zookeeper_enabled",
+      "value": false
+    },
+    {
+      "name": "zookeeper_killswitch_framework_enabled",
+      "value": true
+    },
+    {
+      "name": "zookeeper_local_storage_enabled",
+      "value": true
+    },
+    {
+      "name": "local_killswitch_overwrite_in_dev_mode_enabled",
+      "value": false
+    }
   ]
 }

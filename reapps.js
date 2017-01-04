@@ -1,5 +1,6 @@
 var request = require('request'),
     Table = require('cli-table'),
+    jsonfile = require('jsonfile'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
@@ -22,7 +23,8 @@ var request = require('request'),
     navAppPom,
     shopAppPom,
     SDP_HOST,
-    responseBody;
+    responseBody,
+    options = [];
 
 winston.cli();
 
@@ -31,18 +33,22 @@ winston.cli();
 // }
 
 if( argv.brand ){
+  options.push('brand: ' + argv.brand);
   props.brand = argv.brand;
 }
 
 if( argv.envName ){
+  options.push('envName: ' + argv.envName);
   props.envName = argv.envName;
 }
 
 if( argv.branch ){
+  options.push('branch: ' + argv.branch);
   props.branch = argv.branch;
 }
 
 if( argv.domainPrefix ){
+  options.push('domainPrefix: ' + argv.domainPrefix);
   props.domainPrefix = argv.domainPrefix;
 }
 
@@ -573,6 +579,15 @@ startAjaxCall( requestOptions ).catch(function( reason ){
 }).then( function( body ){
   responseBody = body,
   SDP_HOST = getIp(body);
+  if( argv.save ){
+    jsonfile.writeFile('./reapps-properties.json', props, {spaces: 2}, function (err) {    
+      if( err ){
+        winston.log('error', error.message);
+      } else {
+        winston.log('info', 'saved options to reapps-properties.json \n' + options)
+      }
+    });
+  }  
   return actionHandler( argv.action );
 }).catch(function( reason ){
   winston.log( 'error', reason.message );
