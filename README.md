@@ -131,6 +131,9 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
      - --brand overrides the brand property
      - --envName overrides the envName property
      - --domainPrefix overrides the domainPrefix property
+  - To save properties passed as options to reapps-properties.json file, use the options flag --save.     
   - Example usage:
      - `reapps --action=getIp --envName=qa6codebloomingdales`
      - Description: The command will override the default value of envName property in reapps-properties.json file with the value of the option --envName.  The command will log the IP address for qa6, provided that this is a qa environment name assigned to the branch and brand.
+     - `reapps --action=listEnvs --save --branch=17A`
+     - Description: The command will generate a list of environments for branch 17A and save the branch value to reapps-properties.json.
