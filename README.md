@@ -121,10 +121,10 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
   - Description: Updates SDP_HOST property in environment.properties
 * Add kill switches to killswitch.properties file for NavApp
   - API: `reapps --action=updateNavAppTmp --killSwitchList=test,test2`
-  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist.
+  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist. Every item in the killSwitchList will be set to true.
 * Add kill switches to killswitch.properties file for ShopApp
   - API: `reapps --action=updateShopAppTmp --killSwitchList=test,test2`
-  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist.  
+  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist. Every item in the killSwitchList will be set to true.
 * Initialize NavApp and ShopApp property files
   - API: `reapps --action=initEnvs`
   - Description: Bundles actions setDomainPrefix and updateSdpHost.
