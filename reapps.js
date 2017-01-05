@@ -283,25 +283,26 @@ function updateAppProperty( pathToProps, propertiesList ){
   });
 }
 
-function updateTmp( pathToTmp, killSwitchList ){
+function updateTmp( pathToFile, killSwitchList ){
   return new Promise(function(resolve, reject){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
+      fs.readFile( pathToFile, 'utf8', function (err,data) {
         if (err) {
           winston.log('error', err);
           reject( err );
         }
         var result = data,
             message = "";
-         propertiesList.forEach(function( property ){
-           result = result.replace(new RegExp('^'+ property.name +'.+', "gm"), property.name + "=" + property.value);
-           message += 'Updated ' + property.name + ' to '+ property.value + ' in\n ' + pathToProps + '\n';
+         killSwitchList.forEach(function( killSwitch ){
+           if( result.search( new RegExp('^'+ killSwitch +'=.+', "gm") ) < 0){
+             result += '\n' + killSwitch + '=true';
+           }
          });
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
+        fs.writeFile( pathToFile, result, 'utf8', function (err) {
            if (err){
             winston.log('error', err);
             reject( err );
            }
-           winston.log('info', message);
+           winston.log('info', 'updates killswitch.properties file in ' + pathToFile);
            resolve( result );
         });
       });
@@ -551,10 +552,15 @@ function actionHandler( action ){
       }
       break;
     case 'updateNavAppTmp':
-      if( props.paths.tmp){
-        updateTmp();
+      if( props.paths.tmp && argv.killSwitchList ){
+        updateTmp( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;
+    case 'updateShopAppTmp':
+      if( props.paths.tmp && argv.killSwitchList ){
+        updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
+      }
+      break;      
     case 'updateNavAppWebXml':
       if( props.paths.navApp ){
         return updateWebXml( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml");
