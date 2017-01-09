@@ -1,8 +1,8 @@
 {
   "username": "u060014",
-  "branch": "16T",
+  "branch": "17A",
   "brand": "BCOM",
-  "envName": "qa13codebloomingdales",
+  "envName": "qa6codebloomingdales",
   "domainPrefix": "aori",
   "paths": {
     "shellRc": "/Users/u060014/.zshrc",

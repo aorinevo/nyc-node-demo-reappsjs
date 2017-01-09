@@ -46,6 +46,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 ## Basic Usage
 * Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m), and BloomiesAssets (svn).
 * Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
+  - xcode, node, git
   - Java (brew install java)
   - Maven (brew install maven)
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on OS (i.e. `~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
