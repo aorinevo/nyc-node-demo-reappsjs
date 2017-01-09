@@ -38,8 +38,6 @@ function updateHostsFile( pathToHostsFile ){
       } else {
         result = data;
       }
-      
-      console.log(result);
 
       fs.writeFile( './hosts', result, 'utf8', function (err) {
          if (err){

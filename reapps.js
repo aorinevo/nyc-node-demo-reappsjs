@@ -428,7 +428,7 @@ function actionHandler( action ){
     case 'initM2':
       if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
         shell.mkdir(process.env.HOME + '/.m2');
-        shell.cp('./settings.xml', process.env.HOME + '/.m2');
+        shell.cp( props.paths['bloomies-ui-reapps'] + '/settings.xml', process.env.HOME + '/.m2');
       } else {
         winston.log( 'info', '~/.m2 directory already exists.');
       }
@@ -586,9 +586,9 @@ startAjaxCall( requestOptions ).catch(function( reason ){
   responseBody = body,
   SDP_HOST = getIp(body);
   if( argv.save ){
-    jsonfile.writeFile('./reapps-properties.json', props, {spaces: 2}, function (err) {    
+    jsonfile.writeFile(props.paths['bloomies-ui-reapps'] + '/reapps-properties.json', props, {spaces: 2}, function (err) {    
       if( err ){
-        winston.log('error', error.message);
+        winston.log('error', err.message);
       } else {
         winston.log('info', 'saved options to reapps-properties.json \n' + options)
       }
