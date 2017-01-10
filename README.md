@@ -53,8 +53,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - Maven (brew install maven)
 * Add paths to git, jave, node, nvm, maven, etc... to your .bash_profile, .bashrc, or .zshrc file - depends on your shell.
-  - ```
-  export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'
+  - ```export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'
   export MAVEN_HOME='/usr/local/Cellar/maven/3.3.9/libexec'
   export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export MAVEN_OPTS='-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'
