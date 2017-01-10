@@ -46,6 +46,8 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 ## Basic Usage
 * Open xcode app and accept the license agreement.
 * Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [MacysUI](https://code.devops.fds.com/CAP/MacysUI), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m), and BloomiesAssets (svn).
+* For MacysUI, copy .npmrc file to ~/.npmrc.  From MacysUI root, run
+  - `cp .npmrc ~/.npmrc`
 * BloomiesAssets is an svn repo. Use this command to check it out:
   - svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/
 * Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
