@@ -50,7 +50,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/
 * Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
   - node (brew install node)
-  - nvm (brew install nvm)
+  - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
   - git (brew install git)
   - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - Maven (brew install maven)
