@@ -1,5 +1,5 @@
 ## Introduction
-Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
+Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
@@ -55,16 +55,15 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
   - git (brew install git)
   - node (brew install node)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
-  - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
-  - Maven (brew install maven)
+  - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
+  - maven (brew install maven)
 * Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
   
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
-* ReappsJS requires Node v6+.
-  - Use nvm to switch node versions
+* ReappsJS requires Node v6+. Use nvm to switch node versions. Examples:
     - `nvm install v6.9.4`
     - `nvm use v6.9.4`
     - `nvm use v4.7.2`
