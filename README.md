@@ -74,7 +74,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * That's it!
   
 ## Basic Usage
-* In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
+* In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
 * Edit /etc/apache2/extra/httpd-ssl.conf and uncomment the following modules: socache_shmcb_module, ssl_module, and rewrite_module.  
 * Edit /etc/apache2/httpd.conf and uncomment the line that includes httpd-ssl.conf.
 * Users just starting out with reapps should run `node reapps --action=initBox`, after which commands can be executed from anywhere on the command line without prefixing the command with node.  For example, you'll be able to run the `node reapps --action=initBox` from anywhere on the command line with `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
