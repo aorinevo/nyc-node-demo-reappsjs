@@ -4,12 +4,11 @@ var request = require('request'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
+    proxyServer = require('./proxy-server'),
     hosts = require( './hosts.js'),
     bloomiesAssets = require( './bloomies-assets.js' ),
     shell = require('shelljs'),
     proxy = require('./proxy.js'),
-    serverCrt = require('./server.crt.js'),
-    serverKey = require('./server.key.js'),
     httpdSsl = require('./httpd-ssl.js'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
@@ -497,30 +496,12 @@ function actionHandler( action ){
       actionHandler( 'initCertAndKey' );
       break;
     case 'initCertAndKey':
-      shell.exec('sudo mkdir /etc/apache2/cert');
-      if( !fs.existsSync('/etc/apache2/cert/server.crt') ){
-        fs.writeFile( '/etc/apache2/cert/server.crt', serverCrt, 'utf8', function (err) {
-           if (err) return console.log(err);
-           shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
-           winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
-           shell.exec('sudo apachectl restart');
-           winston.log( 'info', 'restarted apache');
-        });
-      } else {
-        winston.log( 'info', '/etc/apache2/cert/server.crt already exists.');
-      }
-
-      if( !fs.existsSync('/etc/apache2/cert/server.key') ){
-        fs.writeFile( '/etc/apache2/cert/server.key', serverKey, 'utf8', function (err) {
-           if (err) return console.log(err);
-           shell.exec('sudo cp ./server.key /etc/apache2/cert/server.key');
-           winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );           
-           shell.exec('sudo apachectl restart');
-           winston.log( 'info', 'restarted apache');
-        });
-      } else {
-        winston.log( 'info', '/etc/apache2/cert/server.key already exists.');
-      }    
+      //MobileCustomerAppUI certificate and key (secure-m)
+      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'crt' );
+      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'key' );
+      //ShopNServe and NavApp certificate and key
+      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'crt' );
+      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'key' );
       break;
     case 'initProxy':
       proxy.update( props.domainPrefix );
@@ -530,6 +511,11 @@ function actionHandler( action ){
       break;
     case 'initHosts':
       hosts.update('/etc/hosts');
+      break;
+    case 'initServerBlocks':
+      proxyServer.updateServerBlocks( props.proxyServer, 'navAppBcom', 'conf');
+      proxyServer.updateServerBlocks( props.proxyServer, 'secureM', 'conf');
+      proxyServer.updateServerBlocks( props.proxyServer, 'shopAppBcom', 'conf');
       break;
     case 'initBloomiesAssets':
       bloomiesAssets.update( props.username, props.paths.bloomiesAssets);

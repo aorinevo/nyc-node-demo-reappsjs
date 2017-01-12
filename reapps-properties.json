@@ -4,6 +4,10 @@
   "brand": "BCOM",
   "envName": "qa6codebloomingdales",
   "domainPrefix": "aori",
+  "proxyServer": {
+    "name": "nginx",
+    "path": "/usr/local/etc/nginx"
+  },
   "paths": {
     "shellRc": "/Users/u060014/.zshrc",
     "tmp": "/tmp",
