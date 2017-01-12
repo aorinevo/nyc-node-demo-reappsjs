@@ -6,6 +6,8 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
 | NavApp          | Complete |
 | ShopApp         | Complete |
 | secure-m        | Complete |
+| Apache2         | Complete |
+| nginx           | In Dev   |
 | bashrc/zshrc    | Partial  |
 | Update Proxy    | Complete |
 | Host file       | Complete |
