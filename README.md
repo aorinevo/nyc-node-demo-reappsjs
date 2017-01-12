@@ -43,22 +43,30 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 * Set the defaults for branch and brand in reapps-properties.json.
 * That's it!
 
-## Basic Usage
+##Installation of Dependencies
 * Open xcode app and accept the license agreement.
-* Clone and/or checkout [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!), [NavApp](https://code.devops.fds.com/CAP/NavApp), [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe), [MacysUI](https://code.devops.fds.com/CAP/MacysUI), [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI), [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m), and BloomiesAssets (svn).
-* For MacysUI, copy .npmrc file to ~/.npmrc.  From MacysUI root, run
-  - `cp .npmrc ~/.npmrc`
-* BloomiesAssets is an svn repo. Use this command to check it out:
-  - svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/
-* Install dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
+* Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
+* Clone and/or checkout 
+   - [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!) 
+   - [NavApp](https://code.devops.fds.com/CAP/NavApp)
+   - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
+   - [MacysUI](https://code.devops.fds.com/CAP/MacysUI)
+     - From MacysUI root, run: - `cp .npmrc ~/.npmrc`
+   - [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI)
+   - [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m)
+   - BloomiesAssets
+     - cli command: `svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/`
+* Install system dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
   - node (brew install node)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
   - git (brew install git)
   - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - Maven (brew install maven)
-* Add paths to git, node, nvm to your .bash_profile, .bashrc, or .zshrc file - depends on your shell. For example,
+* Add paths to git, node, and nvm to your ~/.bash_profile, /etc/bashrc, or ~/.zshrc file - depends on your shell. For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
+  
+## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
 * Edit /etc/apache2/extra/httpd-ssl.conf and uncomment the following modules: socache_shmcb_module, ssl_module, and rewrite_module.  
 * Edit /etc/apache2/httpd.conf and uncomment the line that includes httpd-ssl.conf.
