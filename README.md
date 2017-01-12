@@ -55,6 +55,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
   - git (brew install git)
   - node (brew install node)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
+  - nginx (brew install nginx)
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
 * Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
