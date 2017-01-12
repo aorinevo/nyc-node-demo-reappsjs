@@ -35,15 +35,7 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
   - Adds reapps.js alias.
 
-## Installation
-Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
-* ReappsJS requires Node v6+.
-* In bloomies-ui-reapps/ run `npm install`.
-* Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
-* Set the defaults for branch and brand in reapps-properties.json.
-* That's it!
-
-##Installation of Dependencies
+## Install Environment Dependencies
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
 * Clone and/or checkout 
@@ -62,9 +54,22 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   - git (brew install git)
   - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - Maven (brew install maven)
-* Add paths to git, node, and nvm to your ~/.bash_profile, /etc/bashrc, or ~/.zshrc file - depends on your shell. For example,
+* Add paths to git, node, and nvm to your ~/.bash_profile, /etc/bashrc, or ~/.zshrc file (depends on your shell). For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
+  
+## Install ReappsJS Dependencies
+Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
+* ReappsJS requires Node v6+.
+  - Use nvm to switch node versions
+    - `nvm install v6.9.4`
+    - `nvm use v6.9.4`
+    - `nvm use v4.7.2`
+    - etc ...
+* In bloomies-ui-reapps/ run `npm install`.
+* Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
+* Set the defaults for branch and brand in reapps-properties.json.
+* That's it!
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
