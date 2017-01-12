@@ -499,7 +499,7 @@ function actionHandler( action ){
     case 'initCertAndKey':
       shell.exec('sudo mkdir /etc/apache2/cert');
       if( !fs.existsSync('/etc/apache2/cert/server.crt') ){
-        fs.writeFile( './server.crt', serverCrt, 'utf8', function (err) {
+        fs.writeFile( '/etc/apache2/cert/server.crt', serverCrt, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.crt /etc/apache2/cert/server.crt');
            winston.log( 'info', 'server.crt file created in /etc/apache2/cert/' );
@@ -511,7 +511,7 @@ function actionHandler( action ){
       }
 
       if( !fs.existsSync('/etc/apache2/cert/server.key') ){
-        fs.writeFile( './server.key', serverKey, 'utf8', function (err) {
+        fs.writeFile( '/etc/apache2/cert/server.key', serverKey, 'utf8', function (err) {
            if (err) return console.log(err);
            shell.exec('sudo cp ./server.key /etc/apache2/cert/server.key');
            winston.log( 'info', 'server.key file created in /etc/apache2/cert/' );           

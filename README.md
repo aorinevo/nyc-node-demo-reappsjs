@@ -93,7 +93,9 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
        - initEnvs
        - initShell
        - initHosts
+       - initHttpdSsl
        - initProxy
+       - initCertAndKey
 * Initialize .m2 directory
   - API: `reapps --action=initM2`
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
