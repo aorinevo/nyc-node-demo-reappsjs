@@ -489,7 +489,7 @@ function actionHandler( action ){
     case 'initBox':
       actionHandler( 'initM2' );
       actionHandler( 'initEnvs' );
-      actionHandler( 'initShell' );
+      actionHandler( 'initShell' );      
       actionHandler( 'initProxy' );
       actionHandler( 'initHttpdSsl' );
       actionHandler( 'initHosts' );
@@ -504,7 +504,17 @@ function actionHandler( action ){
       proxyServer.updateCertOrKey( props.proxyServer, 'server', 'key' );
       break;
     case 'initProxy':
-      proxy.update( props.domainPrefix );
+      switch( props.proxyServer.name ){
+        case 'apache24':
+          proxy.update( props.domainPrefix );
+          break;
+        case 'nginx':
+          actionHandler( 'initServerBlocks' );
+          break;
+        default:
+          winston.log('error', 'ReappsJS does not support this server.  Check proxyServer in reapps-properties.json.')
+          break;
+      }
       break;
     case 'initShell':
       initShell();
