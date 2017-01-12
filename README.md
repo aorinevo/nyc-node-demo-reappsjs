@@ -43,18 +43,19 @@ Reapps.js is a custom NPM module that automates parts of the NavApp, ShopApp, Bl
    - [NavApp](https://code.devops.fds.com/CAP/NavApp)
    - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
    - [MacysUI](https://code.devops.fds.com/CAP/MacysUI)
-     - From MacysUI root, run: - `cp .npmrc ~/.npmrc`
+     - From MacysUI root, run: `cp .npmrc ~/.npmrc`
    - [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI)
    - [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m)
    - BloomiesAssets
      - cli command: `svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/`
-* Install system dependencies (Intallation instructions in parenthesis require [homebrew](http://brew.sh/) to be installed)
+* Install system dependencies in the given order.
+  - [homebrew](http://brew.sh/)
+  - git (brew install git)
   - node (brew install node)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
-  - git (brew install git)
   - Java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - Maven (brew install maven)
-* Add paths to git, node, and nvm to your ~/.bash_profile, /etc/bashrc, or ~/.zshrc file (depends on your shell). For example,
+* Add paths to git, node, and nvm to your ~/.bash_profile, /etc/bashrc, or ~/.zshrc file (`echo $0` prints your shell). For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
   
@@ -66,7 +67,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
     - `nvm use v6.9.4`
     - `nvm use v4.7.2`
     - etc ...
-* In bloomies-ui-reapps/ run `npm install`.
+* In bloomies-ui-reapps/ root, run `npm install`.
 * Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.
 * That's it!
