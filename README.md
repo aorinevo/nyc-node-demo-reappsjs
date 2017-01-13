@@ -61,7 +61,8 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 * Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
-  
+* Install [Junos Pulse](http://www.lse.ac.uk/intranet/LSEServices/IMT/guides/workingOffCampus/installing-pulse.aspx).
+
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * ReappsJS requires Node v6+. Use nvm to switch node versions. Examples:
