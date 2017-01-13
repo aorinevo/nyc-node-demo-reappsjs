@@ -63,7 +63,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
   export PATH=$GIT_HOME/bin:$PATH```
 * Install [Junos Pulse](http://www.lse.ac.uk/intranet/LSEServices/IMT/guides/workingOffCampus/installing-pulse.aspx).
 
-##Install Chrome Browser Plugins
+## Install Chrome Browser Plugins
   - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
   - [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US)
   - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
