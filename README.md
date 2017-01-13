@@ -65,6 +65,9 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 
 ##Install Chrome Browser Plugins
   - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
+  - [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US)
+  - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
+  - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
 
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
