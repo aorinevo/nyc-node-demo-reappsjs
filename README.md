@@ -61,7 +61,6 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 * Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
-* Install [Junos Pulse](http://www.lse.ac.uk/intranet/LSEServices/IMT/guides/workingOffCampus/installing-pulse.aspx).
 
 ## Install Chrome Browser Plugins
   - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
