@@ -63,6 +63,9 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
   export PATH=$GIT_HOME/bin:$PATH```
 * Install [Junos Pulse](http://www.lse.ac.uk/intranet/LSEServices/IMT/guides/workingOffCampus/installing-pulse.aspx).
 
+##Install Chrome Browser Plugins
+  - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
+
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
 * ReappsJS requires Node v6+. Use nvm to switch node versions. Examples:
