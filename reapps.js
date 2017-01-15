@@ -27,10 +27,6 @@ var request = require('request'),
 
 winston.cli();
 
-// if( !props.navApp ){
-//   winston.log('error', 'Must specify location to NavApp pom.xml');
-// }
-
 if( argv.brand ){
   options.push('brand: ' + argv.brand);
   props.brand = argv.brand;
