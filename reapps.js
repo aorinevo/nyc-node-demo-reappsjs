@@ -91,7 +91,7 @@ function listEnvs( body ){
   );
   
   body.envDetails.forEach(function(element){
-    let jenkinsEnvMgmtBOs = element.jenkinsEnvMgmtBOs[0];
+    var jenkinsEnvMgmtBOs = element.jenkinsEnvMgmtBOs[0];
     table.push( 
       [element.envName, jenkinsEnvMgmtBOs.backDoorUrl, jenkinsEnvMgmtBOs.envType, jenkinsEnvMgmtBOs.envStatus, jenkinsEnvMgmtBOs.completedTime]
     );
@@ -419,10 +419,33 @@ function updateShopAppPomXml(){
 function actionHandler( action ){
   switch ( action ) {
     case 'getIp':
-      return SDP_HOST;
+      if( SDP_HOST ){
+        return SDP_HOST;
+      } else {
+        return startAjaxCall( requestOptions ).catch(function( reason ){
+          winston.log( 'error', reason.message );
+        }).then( function( body ){
+          responseBody = body,
+          SDP_HOST = getIp(body);
+          return SDP_HOST;
+        }).catch(function( reason ){
+          winston.log( 'error', reason.message );
+        });
+      }
       break;
     case 'listEnvs':
-      return listEnvs( responseBody );
+      if( responseBody ){
+        return listEnvs( responseBody );
+      } else {
+        startAjaxCall( requestOptions ).catch(function( reason ){
+          winston.log( 'error', reason.message );
+        }).then( function( body ){
+          responseBody = body;
+          return listEnvs( responseBody );
+        }).catch(function( reason ){
+          winston.log( 'error', reason.message );
+        });
+      }    
       break;
     case 'initM2':
       if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
@@ -440,14 +463,18 @@ function actionHandler( action ){
       if( SDP_HOST ){
         return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
       } else {
-        winston.log('info', 'Trying to update NavApp SDP_HOST? Enter path to NavApp repo in reapps-properties.json.');
+        return actionHandler( 'getIp' ).then(function( response ){
+          actionHandler( 'updateNavAppSdpHost' );
+        });
       }
       break;
     case 'updateShopAppSdpHost':
       if( SDP_HOST ){
         return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
       } else {
-        winston.log('info', 'Trying to update ShopApp SDP_HOST? Enter path to ShopApp repo in reapps-properties.json.');
+        actionHandler( 'getIp' ).then(function( response ){
+          actionHandler( 'updateShopAppSdpHost' );
+        });
       }
       break;
     case 'setNavAppDomainPrefix':
@@ -479,21 +506,23 @@ function actionHandler( action ){
         });
       break;
     case 'initEnvs':
-      actionHandler( 'initNavAppEnv' );
-      actionHandler( 'initShopAppEnv' );
-      actionHandler( 'initBloomiesAssets' );
+      return actionHandler( 'initNavAppEnv' ).then(function( response ){
+        actionHandler( 'initShopAppEnv' );
+        actionHandler( 'initBloomiesAssets' );
+      });
       break;
     case 'initHttpdSsl':
       httpdSsl.update();
       break;
     case 'initBox':
-      actionHandler( 'initM2' );
-      actionHandler( 'initEnvs' );
-      actionHandler( 'initShell' );      
-      actionHandler( 'initProxy' );
-      actionHandler( 'initHttpdSsl' );
-      actionHandler( 'initHosts' );
-      actionHandler( 'initCertAndKey' );
+      actionHandler( 'initEnvs' ).then(function( response ){
+        actionHandler( 'initM2' );
+        actionHandler( 'initShell' );      
+        actionHandler( 'initProxy' );
+        actionHandler( 'initHttpdSsl' );
+        actionHandler( 'initHosts' );
+        actionHandler( 'initCertAndKey' );
+      });
       break;
     case 'initCertAndKey':
       //MobileCustomerAppUI certificate and key (secure-m)
@@ -572,25 +601,21 @@ function actionHandler( action ){
       }
       break;
     default:
-      winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');
+      if( !argv.save ){
+        winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');
+      }
   }
 }
 
-startAjaxCall( requestOptions ).catch(function( reason ){
-  winston.log( 'error', reason.message );
-}).then( function( body ){
-  responseBody = body,
-  SDP_HOST = getIp(body);
-  if( argv.save ){
-    jsonfile.writeFile(props.paths['bloomies-ui-reapps'] + '/reapps-properties.json', props, {spaces: 2}, function (err) {    
-      if( err ){
-        winston.log('error', err.message);
-      } else {
-        winston.log('info', 'saved options to reapps-properties.json \n' + options)
-      }
-    });
-  }  
-  return actionHandler( argv.action );
-}).catch(function( reason ){
-  winston.log( 'error', reason.message );
-});
+if( argv.save ){
+  jsonfile.writeFile(props.paths['bloomies-ui-reapps'] + '/reapps-properties.json', props, {spaces: 2}, function (err) {    
+    if( err ){
+      winston.log('error', err.message);
+    } else {
+      winston.log('info', 'saved options to reapps-properties.json \n' + options);
+      actionHandler( argv.action );
+    }
+  });
+} else {
+  actionHandler( argv.action );
+}

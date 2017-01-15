@@ -45,9 +45,17 @@ function updateHostsFile( pathToHostsFile ){
            reject( err );
          }
          shell.exec( 'sudo cp ./hosts /etc');         
-         winston.log('info', 'Updated hosts file located here: ' + pathToHostsFile);
-         shell.exec( 'sudo apachectl restart');
-         winston.log('info', 'restarted apache2');
+         winston.log('info', 'Updated ' + pathToHostsFile);
+         if( props.proxyServer === 'apache24'){
+           shell.exec( 'sudo apachectl restart');
+           winston.log('info', 'restarted apache2');
+         } else {
+           if( fs.existsSync( '/usr/local/var/run/nginx.pid' ) ){
+             shell.exec( 'sudo nginx -s stop');
+           }
+           shell.exec( 'sudo nginx');
+           winston.log('info', 'restarted nginx');
+         }
       });
     });
   });
