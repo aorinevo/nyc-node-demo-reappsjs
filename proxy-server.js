@@ -173,11 +173,11 @@ navAppBcom = `server {
   }
 
   location /styles/min/ {
-    proxy_pass http://localhost:8234/styles/;
+    proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/styles/min;
   }
 
   location /styles/ {
-    proxy_pass http://localhost:8234/styles/;
+    proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/styles;
   }
 
   location /templates/min/ {
@@ -202,11 +202,6 @@ navAppBcom = `server {
 
   location /images/ {
     proxy_pass http://www1.qa10codebloomingdales.fds.com/images/;
-  }
-
-  location /sdp/ {
-    #proxy_pass http://jcia8871:8180/sdp/;
-    proxy_pass http://www1.qa10codebloomingdales.fds.com/sdp/;
   }
 
   location /EventsWar/ {
@@ -278,7 +273,7 @@ shopAppBcom = `server {
  #}
 
  location  /img/ts {
-  proxy_pass http://macys-o.scene7.com;
+  proxy_pass https://macys-o.scene7.com;
  }
 
  location /shop {
