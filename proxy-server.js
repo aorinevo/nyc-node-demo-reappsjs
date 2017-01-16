@@ -140,7 +140,7 @@ Q/qj/3SC8J0buufPibECQHmAwz2BY/g+F096cUCbaLkzYACIzCIVnKlRRhXJuRuB
 +jvBOsM1ANIHQFPkjNgYLN3h29PSH5NHt/U0+JUcV+4=
 -----END RSA PRIVATE KEY-----`,
 navAppBcom = `server {
-  listen 8888;
+  listen 80;
   server_name ${props.domainPrefix}.bloomingdales.fds.com;
   #error_log /usr/local/etc/nginx/log/navapp.log debug;
 
@@ -224,15 +224,15 @@ navAppBcom = `server {
 }
 `,
 secureM = `server {
-    listen 4444;
+    listen 443;
     server_name ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$;
 
     #access_log /usr/local/etc/nginx/logs/access.log;
     #error_log /usr/local/etc/nginx/logs/error.log;
 
     ssl on;
-	  ssl_certificate /usr/local/etc/nginx/cert/server.crt;
-	  ssl_certificate_key /usr/local/etc/nginx/cert/server.key;
+	  ssl_certificate /usr/local/etc/nginx/cert/cert.crt;
+	  ssl_certificate_key /usr/local/etc/nginx/cert/cert.key;
 
     location /api {
       resolver 8.8.8.8;
@@ -250,7 +250,7 @@ secureM = `server {
     }
 }`,
 shopAppBcom = `server {
- listen 4444;
+ listen 443;
  server_name ${props.domainPrefix}.bloomingdales.fds.com;
  ssl on;
  ssl_certificate /usr/local/etc/nginx/cert/server.crt;
