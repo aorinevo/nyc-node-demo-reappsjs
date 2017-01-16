@@ -1,4 +1,5 @@
-var fs = require('fs'),
+var props = require('./reapps-properties.json'),
+    fs = require('fs'),
     winston = require( 'winston'),
     shell = require('shelljs'),
     argv = require('yargs').argv;
@@ -302,9 +303,9 @@ function updateHttpdSslFile( domainPrefix ){
   if( !fs.existsSync('/etc/apache2/extra/httpd-ssl.conf') || argv.force ){
     fs.writeFile( './httpd-ssl.conf', compileTemplate( ), 'utf8', function (err) {
        if (err) return console.log(err);
-       shell.exec('sudo cp ./httpd-ssl.conf /etc/apache2/extra/httpd-ssl.conf');
-       winston.log( 'info', 'httpd-ssl file created in /etc/apache2/extra/' );       
-       shell.exec('sudo apachectl restart');
+       shell.exec('sudo mv ./httpd-ssl.conf /etc/apache2/extra/httpd-ssl.conf');
+       winston.log( 'info', 'created in /etc/apache2/extra/httpd-ssl.conf' );       
+       shell.exec( 'sudo apachectl restart');
        winston.log('info', 'restarted apache2');
     });
   } else {

@@ -1,7 +1,2 @@
 node_modules
-proxy.conf
-server.crt
-server.key
-httpd-ssl.conf
-hosts
 reapps-properties.json
