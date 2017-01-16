@@ -46,7 +46,7 @@ function updateHostsFile( pathToHostsFile ){
          }
          shell.exec( 'sudo cp ./hosts /etc');         
          winston.log('info', 'Updated ' + pathToHostsFile);
-         if( props.proxyServer === 'apache24'){
+         if( props.proxyServer.name === 'apache24'){
            shell.exec( 'sudo apachectl restart');
            winston.log('info', 'restarted apache2');
          } else {
