@@ -255,6 +255,10 @@ shopAppBcom = `server {
  location /shop/topnav {
    proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/shop/topnav;
  }
+ 
+ location /catalog {
+   proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/catalog;
+ } 
 
  location navapp/dyn_img {
    proxy_pass http://www.bloomingdales.com;
