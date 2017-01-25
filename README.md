@@ -128,8 +128,11 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
   - API: `reapps --action=setDomainPrefix`
   - Description: Add domain prefix to url for ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, and HOST. 
 * Set ShopApp environment.properties domain prefix
-  - API: reapps --action=setDomainPrefix
-  - Description: Add domain prefix to url for ASSETS_HOST, SECURE_HOST, and HOST.       
+  - API: `reapps --action=setDomainPrefix`
+  - Description: Add domain prefix to url for ASSETS_HOST, SECURE_HOST, and HOST.    
+* Get reapps-properties.json
+  - API: `reapps --action=getReappsPropsJson`
+  - Description: Logs the contents of reapps-properties.json to the terminal.   
 * Get a list of environments
   - API: `reapps --action=listEnvs`
   - Description: Logs a list of environments to the terminal.

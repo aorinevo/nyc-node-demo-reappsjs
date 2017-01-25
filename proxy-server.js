@@ -277,17 +277,18 @@ shopAppBcom = `server {
  #}
 
  location  /img/ts {
-  proxy_pass https://macys-o.scene7.com;
+  proxy_pass https://www.qa7codebloomingdales.fds.com;
  }
 
  location /shop {
    proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/shop;
  }
- location /web20/assets/script/yahoo/3.8.1/yui/yui.js {
-   proxy_pass https://www.bcomexternal123.fds.com/web20/assets/script/yahoo/3.8.1/yui/yui.js;
- }
 
  #assets
+ location /web20/assets/script/yahoo/3.8.1/yui {
+   proxy_pass https://${props.domainPrefix}.bloomingdales.fds.com/web20/assets/script/yahoo/3.8.1/yui;
+ }
+  
  location /web20 {
    proxy_pass http://${props.domainPrefix}.bloomingdales.fds.com:2202/web20;
  }

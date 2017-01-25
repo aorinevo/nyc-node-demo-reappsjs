@@ -4,6 +4,7 @@ var request = require('request'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
+    prettyjson = require('prettyjson'),
     proxyServer = require('./proxy-server'),
     hosts = require( './hosts.js'),
     bloomiesAssets = require( './bloomies-assets.js' ),
@@ -414,6 +415,9 @@ function updateShopAppPomXml(){
 
 function actionHandler( action ){
   switch ( action ) {
+    case 'getReappsPropsJson':
+      winston.log('info', "\n" + prettyjson.render(props, options));
+      break;
     case 'getIp':
       if( SDP_HOST ){
         return SDP_HOST;
