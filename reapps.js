@@ -511,6 +511,9 @@ function actionHandler( action ){
         actionHandler( 'initBloomiesAssets' );
       });
       break;
+    case 'initHttpdVhosts':
+      require('./httpd-vhosts.js').update();
+      break;  
     case 'initHttpdSsl':
       httpdSsl.update();
       break;
