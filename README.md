@@ -171,6 +171,9 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 * Update apache2 hosts file
   - API: `reapps --action=initHosts`
   - Description: Updates apache2 hosts file. 
+* Update apache2 httpd-vhosts.conf file
+  - API: `reapps --action=initHttpdVhosts`
+  - Description: Updates apache2 httpd-vhosts.conf file.   
 * Options:
   - The following options override default properties in reapps-properties.json:
      - --branch overrides the branch property
