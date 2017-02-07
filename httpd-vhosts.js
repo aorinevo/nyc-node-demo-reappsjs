@@ -101,6 +101,7 @@ Listen 443
 
     # BloomiesAssets
     ProxyPass /js http://${props.domainPrefix}.bloomingdales.fds.com:9876/js
+    ProxyPass /javascript http://${props.domainPrefix}.bloomingdales.fds.com:9876/javascript
     ProxyPass /templates http://${props.domainPrefix}.bloomingdales.fds.com:9876/templates
     ProxyPass /styles http://${props.domainPrefix}.bloomingdales.fds.com:9876/styles
     ProxyPass /img http://${props.domainPrefix}.bloomingdales.fds.com:9876/img
