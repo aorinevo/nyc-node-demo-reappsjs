@@ -29,6 +29,9 @@ return `# Virtual Hosts
 # match a ServerName or ServerAlias in any <VirtualHost> block.
 #
 
+LoadModule ssl_module libexec/apache2/mod_ssl.so
+LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
+
 <VirtualHost *:80>    
     SSLCertificateFile "/private/etc/apache2/cert/server.crt"
     SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
