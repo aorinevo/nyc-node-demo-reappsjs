@@ -6,28 +6,10 @@ var props = require('./reapps-properties.json'),
 
 function compileTemplate( ){ 
   
-return `# Virtual Hosts
-#
-# Required modules: mod_log_config
+return `# BCOM Virtual Hosts for SNS, NavApp, and MobileCustomerAppUI
 
-# If you want to maintain multiple domains/hostnames on your
-# machine you can setup VirtualHost containers for them. Most configurations
-# use only name-based virtual hosts so the server doesn't need to worry about
-# IP addresses. This is indicated by the asterisks in the directives below.
-#
-# Please see the documentation at 
-# <URL:http://httpd.apache.org/docs/2.4/vhosts/>
-# for further details before you try to setup virtual hosts.
-#
-# You may use the command line option '-S' to verify your virtual host
-# configuration.
-
-#
-# VirtualHost example:
-# Almost any Apache directive may go into a VirtualHost container.
-# The first VirtualHost section is used for all requests that do not
-# match a ServerName or ServerAlias in any <VirtualHost> block.
-#
+LoadModule ssl_module libexec/apache2/mod_ssl.so
+LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
 
 <VirtualHost *:80>    
     SSLCertificateFile "/private/etc/apache2/cert/server.crt"
@@ -145,16 +127,16 @@ Listen 443
 }
 
 function updateHttpdVhostsFile( domainPrefix ){
-  if( !fs.existsSync('/etc/apache2/extra/httpd-vhosts.conf') || argv.force ){
-    fs.writeFile( './httpd-vhosts.conf', compileTemplate( ), 'utf8', function (err) {
+  if( !fs.existsSync('/etc/apache2/other/bcom-httpd-vhosts.conf') || argv.force ){
+    fs.writeFile( './bcom-httpd-vhosts.conf', compileTemplate( ), 'utf8', function (err) {
        if (err) return console.log(err);
-       shell.exec('sudo mv ./httpd-vhosts.conf /etc/apache2/extra/httpd-vhosts.conf');
-       winston.log( 'info', 'created in /etc/apache2/extra/httpd-vhosts.conf' );       
+       shell.exec('sudo mv ./bcom-httpd-vhosts.conf /etc/apache2/other/bcom-httpd-vhosts.conf');
+       winston.log( 'info', 'created in /etc/apache2/other/bcom-httpd-vhosts.conf' );       
        shell.exec( 'sudo apachectl restart');
        winston.log('info', 'restarted apache2');
     });
   } else {
-    winston.log( 'info', '/etc/apache2/extra/httpd-vhosts.conf already exists. To replace this file, run with --force');
+    winston.log( 'info', '/etc/apache2/other/bcom-httpd-vhosts.conf already exists. To replace this file, run with --force');
   }
 }
 

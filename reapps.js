@@ -9,8 +9,6 @@ var request = require('request'),
     hosts = require( './hosts.js'),
     bloomiesAssets = require( './bloomies-assets.js' ),
     shell = require('shelljs'),
-    proxy = require('./proxy.js'),
-    httpdSsl = require('./httpd-ssl.js'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
     fs = require('fs'),
@@ -25,6 +23,18 @@ var request = require('request'),
     SDP_HOST,
     responseBody,
     options = [];
+
+props.shopAppProperties.push({
+  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`,
+  "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+});
+props.navAppProperties.push({
+  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+},{
+  "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+},{
+  "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+});
 
 winston.cli();
 
@@ -489,6 +499,7 @@ function actionHandler( action ){
         }).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
+          console.log(props.navAppProperties);
           return updateAppProperty( navAppConfigProperties, props.navAppProperties );
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
@@ -502,8 +513,8 @@ function actionHandler( action ){
       }).then(function( result ){
         return updateAppProperty( shopAppConfigProperties, props.shopAppProperties );
       }).then( function( result ){
-          return actionHandler( 'updateShopAppSdpHost' );
-        });
+        return actionHandler( 'updateShopAppSdpHost' );
+      });
       break;
     case 'initEnvs':
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
@@ -513,18 +524,14 @@ function actionHandler( action ){
       break;
     case 'initHttpdVhosts':
       require('./httpd-vhosts.js').update();
-      break;  
-    case 'initHttpdSsl':
-      httpdSsl.update();
       break;
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
         actionHandler( 'initM2' );
-        actionHandler( 'initShell' );      
-        actionHandler( 'initProxy' );
-        actionHandler( 'initHttpdSsl' );
+        actionHandler( 'initShell' );
         actionHandler( 'initHosts' );
-        actionHandler( 'initCertAndKey' );
+        actionHandler( 'initCertAndKey' );      
+        actionHandler( 'initHttpdVhosts' );
       });
       break;
     case 'initCertAndKey':
@@ -538,7 +545,7 @@ function actionHandler( action ){
     case 'initProxy':
       switch( props.proxyServer.name ){
         case 'apache24':
-          proxy.update( props.domainPrefix );
+          actionHandler( 'initHttpdVhosts' ); 
           break;
         case 'nginx':
           actionHandler( 'initServerBlocks' );
