@@ -145,16 +145,16 @@ Listen 443
 }
 
 function updateHttpdVhostsFile( domainPrefix ){
-  if( !fs.existsSync('/etc/apache2/extra/httpd-vhosts.conf') || argv.force ){
-    fs.writeFile( './httpd-vhosts.conf', compileTemplate( ), 'utf8', function (err) {
+  if( !fs.existsSync('/etc/apache2/other/bcom-httpd-vhosts.conf') || argv.force ){
+    fs.writeFile( './bcom-httpd-vhosts.conf', compileTemplate( ), 'utf8', function (err) {
        if (err) return console.log(err);
-       shell.exec('sudo mv ./httpd-vhosts.conf /etc/apache2/extra/httpd-vhosts.conf');
-       winston.log( 'info', 'created in /etc/apache2/extra/httpd-vhosts.conf' );       
+       shell.exec('sudo mv ./bcom-httpd-vhosts.conf /etc/apache2/other/bcom-httpd-vhosts.conf');
+       winston.log( 'info', 'created in /etc/apache2/other/bcom-httpd-vhosts.conf' );       
        shell.exec( 'sudo apachectl restart');
        winston.log('info', 'restarted apache2');
     });
   } else {
-    winston.log( 'info', '/etc/apache2/extra/httpd-vhosts.conf already exists. To replace this file, run with --force');
+    winston.log( 'info', '/etc/apache2/other/bcom-httpd-vhosts.conf already exists. To replace this file, run with --force');
   }
 }
 
