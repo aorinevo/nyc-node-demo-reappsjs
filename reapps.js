@@ -18,18 +18,24 @@ var request = require('request'),
     requestOptions,
     navAppConfigProperties = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties",
     shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",
-    navAppPom,
-    shopAppPom,
     SDP_HOST,
     responseBody,
     options = [];
 
 props.shopAppProperties.push({
-  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`,
+  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
+},{
   "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+},{
+  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
 });
+
 props.navAppProperties.push({
   "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+},{
+  "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
+},{
+  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
 },{
   "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
 },{
@@ -146,8 +152,8 @@ function getGceIp(){
   });
 }
 
-function initShell(){
-  fs.readFile( props.paths.shellRc, 'utf8', function (err,data) {
+function initShell( pathToFile, props ){
+  fs.readFile( pathToFile, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
@@ -186,10 +192,10 @@ function initShell(){
       if( newLines ){
         result = newLines + "\n" + result;
       }
-      fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
+      fs.writeFile( pathToFile, result, 'utf8', function (err) {
          if (err) return console.log(err);
-         console.log('source ' + props.paths.shellRc);
-         shell.exec('source ' + props.paths.shellRc);
+         console.log('source ' + pathToFile);
+         shell.exec('source ' + pathToFile);
       });
     }
   });
@@ -213,54 +219,6 @@ function updateSdpHost( sdpHost, pathToProps ){
          resolve( sdpHost );
       });
     });
-  });
-}
-
-function setNavAppDomainPrefix( pathToProps ){
-  return new Promise(function(resolve, reject){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
-        if (err) {
-          winston.log('error', err);
-          reject( err );
-        }
-        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^COMMON_ASSETS_HOST.+/gm , 'COMMON_ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^ASSETS_SECURE_HOST.+/gm, 'ASSETS_SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
-           if (err){
-            winston.log('error', err);
-            reject( err );
-           }
-           winston.log('info', 'Set domain prefix on ASSETS_HOST, COMMON_ASSETS_HOST, ASSETS_SECURE_HOST, HOST, and SECURE_HOST in NavApp\n ' + pathToProps);
-           resolve( result );
-        });
-      });
-  });
-}
-
-function setShopAppDomainPrefix( pathToProps ){
-  return new Promise(function(resolve, reject){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
-        if (err) {
-          winston.log('error', err);
-          reject( err );
-        }
-        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
-           if (err){
-            winston.log('error', err);
-            reject( err );
-           }
-           winston.log('info', 'Set domain prefix on ASSETS_HOST, HOST, and SECURE_HOST in ShopApp\n ' + pathToProps);
-           resolve( result );
-        });
-      });
   });
 }
 
@@ -487,28 +445,17 @@ function actionHandler( action ){
         });
       }
       break;
-    case 'setNavAppDomainPrefix':
-      return setNavAppDomainPrefix( navAppConfigProperties );
-      break;
-    case 'setShopAppDomainPrefix':
-      return setShopAppDomainPrefix( shopAppConfigProperties );
-      break;
     case 'initNavAppEnv':
-      return actionHandler( 'setNavAppDomainPrefix' ).then(function( result ){
-          return actionHandler( 'updateNavAppPomXml' );
-        }).then(function( result){
+      return actionHandler( 'updateNavAppPomXml' ).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
-          console.log(props.navAppProperties);
           return updateAppProperty( navAppConfigProperties, props.navAppProperties );
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
       break;
     case 'initShopAppEnv':
-      return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
-        return actionHandler( 'updateShopAppPomXml' );
-      }).then(function( result){
+      return actionHandler( 'updateShopAppPomXml' ).then(function( result){
         return actionHandler( 'updateShopAppWebXml' );
       }).then(function( result ){
         return updateAppProperty( shopAppConfigProperties, props.shopAppProperties );
@@ -523,31 +470,43 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts':
-      require('./httpd-vhosts.js').update();
+      require('./httpd-vhosts.js').update( props.domainPrefix, props.envName );
       break;
+    case 'initServerBlocks':
+      require('./server-blocks.js').update( props.domainPrefix, props.envName );
+      break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
         actionHandler( 'initM2' );
         actionHandler( 'initShell' );
         actionHandler( 'initHosts' );
-        actionHandler( 'initCertAndKey' );      
+        actionHandler( 'initProxyServer' );      
         actionHandler( 'initHttpdVhosts' );
       });
       break;
     case 'initCertAndKey':
+      var secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
+      secureMKey = require('./templates/keys/mobile-customer-app-ui.js')(),
+      snsNavAppCrt = require('./templates/certificates/sns-nav-apps.js')(),
+      snsNavAppKey = require('./templates/keys/sns-nav-apps.js')(),
+      pathToWrite = props.proxyServer.path + '/cert';
       //MobileCustomerAppUI certificate and key (secure-m)
-      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'crt' );
-      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'key' );
+      proxyServer.updateCertOrKey( secureMCrt, pathToWrite, 'cert', 'crt' );
+      proxyServer.updateCertOrKey( secureMKey, pathToWrite, 'cert', 'key' );
       //ShopNServe and NavApp certificate and key
-      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'crt' );
-      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'key' );
+      proxyServer.updateCertOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt' );
+      proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
       break;
-    case 'initProxy':
+    case 'initProxyServer':
       switch( props.proxyServer.name ){
         case 'apache24':
-          actionHandler( 'initHttpdVhosts' ); 
+          //Need to use Promises
+          actionHandler( 'initCertAndKey' );
+          actionHandler( 'initHttpdVhosts' );
           break;
         case 'nginx':
+          //Need to use Promises
+          actionHandler( 'initCertAndKey' );
           actionHandler( 'initServerBlocks' );
           break;
         default:
@@ -556,15 +515,10 @@ function actionHandler( action ){
       }
       break;
     case 'initShell':
-      initShell();
+      initShell( props.paths.shellRc, props );
       break;
     case 'initHosts':
       hosts.update('/etc/hosts');
-      break;
-    case 'initServerBlocks':
-      proxyServer.updateServerBlocks( props.proxyServer, 'navAppBcom', 'conf');
-      proxyServer.updateServerBlocks( props.proxyServer, 'secureM', 'conf');
-      proxyServer.updateServerBlocks( props.proxyServer, 'shopAppBcom', 'conf');
       break;
     case 'initBloomiesAssets':
       bloomiesAssets.update( props.username, props.paths.bloomiesAssets);
