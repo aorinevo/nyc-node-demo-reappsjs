@@ -18,8 +18,6 @@ var request = require('request'),
     requestOptions,
     navAppConfigProperties = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties",
     shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",
-    navAppPom,
-    shopAppPom,
     SDP_HOST,
     responseBody,
     options = [];
