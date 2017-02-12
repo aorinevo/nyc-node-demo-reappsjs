@@ -41,7 +41,6 @@ Listen 443
     # SNS Assets
     ProxyPass /sns/signin/index.ognc https://${data.domainPrefix}.bloomingdales.fds.com:9443/account/signin
     ProxyPass /sns/web20/assets https://${data.domainPrefix}.bloomingdales.fds.com:9443/sns/web20/assets
-    ProxyPass /sns/web20/assets http://${data.domainPrefix}.bloomingdales.fds.com:9876/web20/assets
     ProxyPass /sns/web20 https://${data.domainPrefix}.bloomingdales.fds.com:9443/web20
     ProxyPass /sns/styles https://${data.domainPrefix}.bloomingdales.fds.com:9443/styles
     ProxyPass /sns/js https://${data.domainPrefix}.bloomingdales.fds.com:9443/js

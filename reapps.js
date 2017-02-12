@@ -146,8 +146,8 @@ function getGceIp(){
   });
 }
 
-function initShell(){
-  fs.readFile( props.paths.shellRc, 'utf8', function (err,data) {
+function initShell( pathToFile, props ){
+  fs.readFile( pathToFile, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
@@ -186,10 +186,10 @@ function initShell(){
       if( newLines ){
         result = newLines + "\n" + result;
       }
-      fs.writeFile( props.paths.shellRc, result, 'utf8', function (err) {
+      fs.writeFile( pathToFile, result, 'utf8', function (err) {
          if (err) return console.log(err);
-         console.log('source ' + props.paths.shellRc);
-         shell.exec('source ' + props.paths.shellRc);
+         console.log('source ' + pathToFile);
+         shell.exec('source ' + pathToFile);
       });
     }
   });
@@ -523,10 +523,10 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts':
-      require('./httpd-vhosts.js').update();
+      require('./httpd-vhosts.js').update( props.domainPrefix, props.envName );
       break;
     case 'initServerBlocks':
-      require('./server-blocks.js').update();
+      require('./server-blocks.js').update( props.domainPrefix, props.envName );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
@@ -566,7 +566,7 @@ function actionHandler( action ){
       }
       break;
     case 'initShell':
-      initShell();
+      initShell( props.paths.shellRc, props );
       break;
     case 'initHosts':
       hosts.update('/etc/hosts');
