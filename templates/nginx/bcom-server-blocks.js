@@ -2,6 +2,9 @@ module.exports = function( data ){
   return `server {
     listen 443;
     server_name ${data.domainPrefix}.bloomingdales.fds.com;
+    ssl on;
+    ssl_certificate /usr/local/etc/nginx/cert/server.crt;
+    ssl_certificate_key /usr/local/etc/nginx/cert/server.key;
     
     # SNS Assets
     location /sns/signin/index.ognc {

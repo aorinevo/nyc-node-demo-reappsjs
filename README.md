@@ -7,7 +7,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 | ShopApp         | Complete |
 | secure-m        | Partial - need to update create and update .env file; and update index.html |
 | Apache2         | Complete |
-| nginx           | In Dev   |
+| nginx           | Complete |
 | bashrc/zshrc    | Partial  |
 | Update Proxy    | Complete |
 | Host file       | Complete |

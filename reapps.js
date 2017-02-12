@@ -480,8 +480,7 @@ function actionHandler( action ){
         actionHandler( 'initM2' );
         actionHandler( 'initShell' );
         actionHandler( 'initHosts' );
-        actionHandler( 'initProxyServer' );      
-        actionHandler( 'initHttpdVhosts' );
+        actionHandler( 'initProxyServer' );
       });
       break;
     case 'initCertAndKey':
