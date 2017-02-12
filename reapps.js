@@ -25,11 +25,19 @@ var request = require('request'),
     options = [];
 
 props.shopAppProperties.push({
-  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`,
+  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
+},{
   "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+},{
+  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
 });
+
 props.navAppProperties.push({
   "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+},{
+  "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
+},{
+  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
 },{
   "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
 },{
@@ -213,54 +221,6 @@ function updateSdpHost( sdpHost, pathToProps ){
          resolve( sdpHost );
       });
     });
-  });
-}
-
-function setNavAppDomainPrefix( pathToProps ){
-  return new Promise(function(resolve, reject){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
-        if (err) {
-          winston.log('error', err);
-          reject( err );
-        }
-        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^COMMON_ASSETS_HOST.+/gm , 'COMMON_ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^ASSETS_SECURE_HOST.+/gm, 'ASSETS_SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
-           if (err){
-            winston.log('error', err);
-            reject( err );
-           }
-           winston.log('info', 'Set domain prefix on ASSETS_HOST, COMMON_ASSETS_HOST, ASSETS_SECURE_HOST, HOST, and SECURE_HOST in NavApp\n ' + pathToProps);
-           resolve( result );
-        });
-      });
-  });
-}
-
-function setShopAppDomainPrefix( pathToProps ){
-  return new Promise(function(resolve, reject){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
-        if (err) {
-          winston.log('error', err);
-          reject( err );
-        }
-        var result = data.replace(/^ASSETS_HOST.+/gm, 'ASSETS_HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^HOST.+/gm, 'HOST=http://'+ props.domainPrefix + '.bloomingdales.fds.com')
-                         .replace(/^SECURE_HOST.+/gm, 'SECURE_HOST=https://'+ props.domainPrefix + '.bloomingdales.fds.com');
-
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
-           if (err){
-            winston.log('error', err);
-            reject( err );
-           }
-           winston.log('info', 'Set domain prefix on ASSETS_HOST, HOST, and SECURE_HOST in ShopApp\n ' + pathToProps);
-           resolve( result );
-        });
-      });
   });
 }
 
@@ -487,28 +447,17 @@ function actionHandler( action ){
         });
       }
       break;
-    case 'setNavAppDomainPrefix':
-      return setNavAppDomainPrefix( navAppConfigProperties );
-      break;
-    case 'setShopAppDomainPrefix':
-      return setShopAppDomainPrefix( shopAppConfigProperties );
-      break;
     case 'initNavAppEnv':
-      return actionHandler( 'setNavAppDomainPrefix' ).then(function( result ){
-          return actionHandler( 'updateNavAppPomXml' );
-        }).then(function( result){
+      return actionHandler( 'updateNavAppPomXml' ).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
-          console.log(props.navAppProperties);
           return updateAppProperty( navAppConfigProperties, props.navAppProperties );
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
       break;
     case 'initShopAppEnv':
-      return actionHandler( 'setShopAppDomainPrefix' ).then(function( result){
-        return actionHandler( 'updateShopAppPomXml' );
-      }).then(function( result){
+      return actionHandler( 'updateShopAppPomXml' ).then(function( result){
         return actionHandler( 'updateShopAppWebXml' );
       }).then(function( result ){
         return updateAppProperty( shopAppConfigProperties, props.shopAppProperties );
@@ -533,7 +482,7 @@ function actionHandler( action ){
         actionHandler( 'initM2' );
         actionHandler( 'initShell' );
         actionHandler( 'initHosts' );
-        actionHandler( 'initCertAndKey' );      
+        actionHandler( 'initProxyServer' );      
         actionHandler( 'initHttpdVhosts' );
       });
       break;
@@ -553,10 +502,12 @@ function actionHandler( action ){
     case 'initProxyServer':
       switch( props.proxyServer.name ){
         case 'apache24':
+          //Need to use Promises
           actionHandler( 'initCertAndKey' );
           actionHandler( 'initHttpdVhosts' );
           break;
         case 'nginx':
+          //Need to use Promises
           actionHandler( 'initCertAndKey' );
           actionHandler( 'initServerBlocks' );
           break;

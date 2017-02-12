@@ -112,23 +112,15 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 * Initialize NavApp 
   - API: `reapps --action=initNavAppEnv`
   - Description: Updates navapp-config.properties from reapps-properties.json and runs the following actions
-     - setNavAppDomainPrefix
      - updateNavAppPomXml
      - updateNavAppWebXml
      - updateNavAppSdpHost
 * Initialize ShopApp
   - API: `reapps --action=initShopAppEnv`
   - Description: Updates environment.properties from reapps-properties.json and runs the following actions
-     - setNavAppDomainPrefix
      - updateNavAppPomXml
      - updateNavAppWebXml
-     - updateNavAppSdpHost   
-* Set navapp-config.properties domain prefix
-  - API: `reapps --action=setDomainPrefix`
-  - Description: Add domain prefix to url for ASSETS_HOST, COMMON_ASSETS_HOST, SECURE_HOST, and HOST. 
-* Set ShopApp environment.properties domain prefix
-  - API: `reapps --action=setDomainPrefix`
-  - Description: Add domain prefix to url for ASSETS_HOST, SECURE_HOST, and HOST.    
+     - updateNavAppSdpHost      
 * Get reapps-properties.json
   - API: `reapps --action=getReappsPropsJson`
   - Description: Logs the contents of reapps-properties.json to the terminal.   
