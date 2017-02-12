@@ -525,6 +525,9 @@ function actionHandler( action ){
     case 'initHttpdVhosts':
       require('./httpd-vhosts.js').update();
       break;
+    case 'initServerBlocks':
+      require('./server-blocks.js').update();
+      break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
         actionHandler( 'initM2' );
@@ -535,19 +538,26 @@ function actionHandler( action ){
       });
       break;
     case 'initCertAndKey':
+      var secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
+      secureMKey = require('./templates/keys/mobile-customer-app-ui.js')(),
+      snsNavAppCrt = require('./templates/certificates/sns-nav-apps.js')(),
+      snsNavAppKey = require('./templates/keys/sns-nav-apps.js')(),
+      pathToWrite = props.proxyServer.path + '/cert';
       //MobileCustomerAppUI certificate and key (secure-m)
-      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'crt' );
-      proxyServer.updateCertOrKey( props.proxyServer, 'cert', 'key' );
+      proxyServer.updateCertOrKey( secureMCrt, pathToWrite, 'cert', 'crt' );
+      proxyServer.updateCertOrKey( secureMKey, pathToWrite, 'cert', 'key' );
       //ShopNServe and NavApp certificate and key
-      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'crt' );
-      proxyServer.updateCertOrKey( props.proxyServer, 'server', 'key' );
+      proxyServer.updateCertOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt' );
+      proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
       break;
-    case 'initProxy':
+    case 'initProxyServer':
       switch( props.proxyServer.name ){
         case 'apache24':
-          actionHandler( 'initHttpdVhosts' ); 
+          actionHandler( 'initCertAndKey' );
+          actionHandler( 'initHttpdVhosts' );
           break;
         case 'nginx':
+          actionHandler( 'initCertAndKey' );
           actionHandler( 'initServerBlocks' );
           break;
         default:
@@ -560,11 +570,6 @@ function actionHandler( action ){
       break;
     case 'initHosts':
       hosts.update('/etc/hosts');
-      break;
-    case 'initServerBlocks':
-      proxyServer.updateServerBlocks( props.proxyServer, 'navAppBcom', 'conf');
-      proxyServer.updateServerBlocks( props.proxyServer, 'secureM', 'conf');
-      proxyServer.updateServerBlocks( props.proxyServer, 'shopAppBcom', 'conf');
       break;
     case 'initBloomiesAssets':
       bloomiesAssets.update( props.username, props.paths.bloomiesAssets);
