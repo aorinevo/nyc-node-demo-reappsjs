@@ -28,7 +28,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
   - Updates pom.xml with paths to macysCSS, macysJS, and macysTemplates.
 * In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
-  - Adds proxy.conf to /etc/apache2/other (if proxy.conf exist, reapps.js replaces its contents with the contents of the compiled proxy.js template).
+  - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `--force`).
   - Updates hosts file. 
   - Updates httpd-ssl in /etc/apache2/extra. 
 * In home directory:
@@ -40,7 +40,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 ## Install Environment Dependencies
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
-* Clone and/or checkout 
+* Clone
    - [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!) 
    - [NavApp](https://code.devops.fds.com/CAP/NavApp)
    - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
@@ -156,9 +156,12 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 * Update apache2 hosts file
   - API: `reapps --action=initHosts`
   - Description: Updates apache2 hosts file. 
-* Update apache2 httpd-vhosts.conf file
+* Create/update apache2 bcom-httpd-vhosts.conf file
   - API: `reapps --action=initHttpdVhosts`
-  - Description: Updates apache2 httpd-vhosts.conf file.   
+  - Description: Creates or updates apache2 httpd-vhosts.conf file in others directory.   
+* Create/update nginx bcom-server-blocks.conf file
+  - API: `reapps --action=initServerBlocks`
+  - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory.   
 * Options:
   - The following options override default properties in reapps-properties.json:
      - --branch overrides the branch property
