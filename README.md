@@ -13,6 +13,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
 | Host file       | Complete |
 | Bloomies Assets | Complete |
 | tmp             | Complete |
+| Dual Brand      | In dev   |
 
 ### What does it actually do?
 
