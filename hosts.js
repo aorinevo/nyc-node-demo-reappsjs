@@ -55,6 +55,7 @@ function updateHostsFile( pathToHostsFile ){
            }
            shell.exec( 'sudo nginx');
            winston.log('info', 'restarted nginx');
+           resolve(true);
          }
       });
     });

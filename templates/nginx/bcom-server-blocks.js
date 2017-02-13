@@ -51,6 +51,9 @@ module.exports = function( data ){
     location /chkout {
       proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout    ;
     }
+    location /registry/ {
+      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry/
+    }
     
     # NavApp Assets
     location /navapp/web20/assets {
