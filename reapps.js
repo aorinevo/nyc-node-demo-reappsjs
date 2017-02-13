@@ -16,31 +16,35 @@ var request = require('request'),
     props = require('./reapps-properties.json'),
     spinner = ora(cliSpinners.dots),
     requestOptions,
-    navAppConfigProperties = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties",
-    shopAppConfigProperties = props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties",
+    navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties"),
+    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
     SDP_HOST,
     responseBody,
     options = [];
 
-props.shopAppProperties.push({
-  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
-},{
-  "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-},{
-  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-});
+function parseProperties(){
+  props.shopAppProperties.push({
+    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
+  },{
+    "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  });
 
-props.navAppProperties.push({
-  "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
-},{
-  "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
-},{
-  "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-},{
-  "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
-},{
-  "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-});
+  props.navAppProperties.push({
+    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+  },{
+    "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+  },{
+    "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  });
+  
+  return props;
+}
 
 winston.cli();
 
@@ -278,7 +282,9 @@ function updateNavAppPomXml(){
       expectedSslSocketConnector = "<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedBloomiesUIAssetsLocation =  '<com.bloomies.webapp.BloomiesCommonUI.location>'+ props.paths.bloomiesCommonUi + 'src/main/webapp</com.bloomies.webapp.BloomiesCommonUI.location> \n \
                  <com.bloomies.webapp.BloomiesAssets.location>'+ props.paths.bloomiesAssets +'bloomies.war</com.bloomies.webapp.BloomiesAssets.location>',
-      pathToProps = props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/pom.xml",
+      expectedMacysUIAssetsLocation =  '<com.macys.webapp.MacysCommonUI.location>'+ props.paths.macysCommonUi + 'src/main/webapp</com.macys.webapp.MacysCommonUI.location> \n \
+                <com.macys.webapp.MacysAssets.location>'+ props.paths.macysAssets +'macys.war</com.macys.webapp.MacysAssets.location>',                 
+      pathToProps = props.paths.navApp + (props.brand === "BCOM" ? "BloomiesNavApp/BloomiesNavAppWeb/pom.xml": "MacysNavApp/MacysNavAppWeb/pom.xml"),
       result;
 
     return new Promise(function( resolve, reject ){
@@ -289,15 +295,21 @@ function updateNavAppPomXml(){
         }
         var result = data;
 
-        if( result.indexOf( expectedBloomiesUIAssetsLocation ) == -1 ){
-          result = result.replace("<com.bloomies.webapp.BloomiesCommonUI.location>${basedir}/target/commonui</com.bloomies.webapp.BloomiesCommonUI.location>", expectedBloomiesUIAssetsLocation );
+        if( props.brand === "BCOM" ){
+          if( result.indexOf( expectedBloomiesUIAssetsLocation ) == -1 ){
+            result = result.replace("<com.bloomies.webapp.BloomiesCommonUI.location>${basedir}/target/commonui</com.bloomies.webapp.BloomiesCommonUI.location>", expectedBloomiesUIAssetsLocation );
+          }
+        } else {
+          if( result.indexOf( expectedMacysUIAssetsLocation ) == -1 ){
+            result = result.replace("<com.macys.webapp.MacysCommonUI.location>${basedir}/target/commonui</com.macys.webapp.MacysCommonUI.location>", expectedMacysUIAssetsLocation );
+          }
         }
 
         if( result.indexOf( expectedSelectChannelConnector ) == -1 ){
           result = result.replace("<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\">", expectedSelectChannelConnector );
         }
 
-        if( result.indexOf( expectedSslSocketConnector ) == -1 ){
+        if( result.indexOf( expectedSslSocketConnector ) == -1 && props.brand === "BCOM"){
           result = result.replace("<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\">", expectedSslSocketConnector );
         }
 
@@ -576,9 +588,11 @@ if( argv.save ){
       winston.log('error', err.message);
     } else {
       winston.log('info', 'saved options to reapps-properties.json \n' + options);
+      parseProperties();
       actionHandler( argv.action );
     }
   });
 } else {
+  parseProperties();
   actionHandler( argv.action );
 }
