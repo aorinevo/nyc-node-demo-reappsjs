@@ -1,5 +1,5 @@
 ## Introduction
-Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
+ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
@@ -55,7 +55,7 @@ Reapps.js is an NPM module that automates parts of the NavApp, ShopApp, Bloomies
   - git (brew install git)
   - node (brew install node)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
-  - nginx (brew install nginx) - this is optional.
+  - nginx (brew install nginx) - this is optional; the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
 * Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
@@ -174,3 +174,8 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
      - Description: The command will override the default value of envName property in reapps-properties.json file with the value of the option --envName.  The command will log the IP address for qa6, provided that this is a qa environment name assigned to the branch and brand.
      - `reapps --action=listEnvs --save --branch=17A`
      - Description: The command will generate a list of environments for branch 17A and save the branch value to reapps-properties.json.
+
+## Deprecated API
+  * `reapps --action=initProxy`
+  * `reapps --action=setShopAppDomainPrefix`
+  * `reapps --action=setNavAppDomainPrefix`

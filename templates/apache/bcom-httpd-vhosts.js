@@ -1,5 +1,5 @@
 module.exports = function( data ){
-  return `# BCOM Virtual Hosts for SNS, NavApp, and MobileCustomerAppUI
+  return `# BCOM Virtual Hosts for polaris/credit-gateway, SNS, NavApp, and MobileCustomerAppUI
 
 LoadModule ssl_module libexec/apache2/mod_ssl.so
 LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
@@ -21,6 +21,22 @@ LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
 </VirtualHost>
 
 Listen 443
+
+<VirtualHost *:443>    
+    SSLEngine on  
+    SSLProxyEngine on 
+    SSLProxyVerify none 
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+    ProxyPreserveHost off        
+    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
+    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    ServerName credit-gateway.bloomingdales.fds.com
+    ServerAlias credit-gateway.bloomingdales.fds.com
+    
+    ProxyPass / http://localhost:8888/
+</VirtualHost>
 
 <VirtualHost *:443>    
     SSLEngine on  
