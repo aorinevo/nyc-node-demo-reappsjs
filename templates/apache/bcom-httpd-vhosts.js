@@ -32,8 +32,8 @@ Listen 443
     ProxyPreserveHost off        
     SSLCertificateFile "/private/etc/apache2/cert/server.crt"
     SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
-    ServerName credit-gateway.bloomingdales.fds.com
-    ServerAlias credit-gateway.bloomingdales.fds.com
+    ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
+    ServerAlias credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
     
     ProxyPass / http://localhost:8888/
 </VirtualHost>
