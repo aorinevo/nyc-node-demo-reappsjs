@@ -1,5 +1,5 @@
 ## Introduction
-ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, and MobileCustomerAppUI (secure-m) set-up process. Checkout the Basic Usage section for an example use case.
+ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, MobileCustomerAppUI (secure-m), proxy server, and shell set-up process. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
