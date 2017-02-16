@@ -35,6 +35,23 @@ Listen 443
     ProxyPreserveHost off        
     SSLCertificateFile "/private/etc/apache2/cert/server.crt"
     SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    ServerName credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
+    ServerAlias www.credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
+
+    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:9876/styles
+    ProxyPass / http://credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com:3000
+</VirtualHost>
+
+<VirtualHost *:443>    
+    SSLEngine on  
+    SSLProxyEngine on 
+    SSLProxyVerify none 
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+    ProxyPreserveHost off        
+    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
+    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
     ServerName ${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.${data.domainPrefix}.bloomingdales.fds.com
 
