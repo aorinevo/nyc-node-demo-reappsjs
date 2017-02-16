@@ -30,7 +30,10 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
   - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `--force`).
   - Updates hosts file. 
-  - Updates httpd-ssl in /etc/apache2/extra. 
+* In Nginx (reapps is configured to use Apache by default.  Change proxyServer property in reapps-properties.json to use nginx.):
+  - Adds cert/key files to cert directory in /usr/local/etc/nginx/cert (if cert directory does not exist, reapps.js creates it).
+  - Adds bcom-server-blocks.conf to /usr/local/etc/nginx/servers (if the file exist and the user wants the file to be overwritten, pass the flag `--force`).
+  - Updates hosts file.   
 * In home directory:
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
