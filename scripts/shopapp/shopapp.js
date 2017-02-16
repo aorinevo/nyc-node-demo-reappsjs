@@ -1,6 +1,8 @@
 var utils = require('../utils/utils.js'),
     winston = require('winston'),
-    fs = require('fs');
+    fs = require('fs'),
+    props = require('./reapps-properties.json'),
+    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties");
     
 winston.cli(); 
 
@@ -35,9 +37,20 @@ function updatePomXml( paths ){
     });
 }
 
+function updateSdpHost( sdpHost ){
+  if( sdpHost ){
+    return utils.updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
+  } else {
+    return utils.getIp().then(function( response ){
+      updateSdpHost( response );
+    });
+  }
+}
+
 module.exports = {
   update: {
-    pom: updatePomXml,
-    web: utils.updateWebXml
+    pom: updatePom,
+    web: utils.updateWebXml,
+    sdp: updateSdpHost
   }
 };

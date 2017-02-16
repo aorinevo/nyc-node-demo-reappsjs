@@ -7,10 +7,16 @@ var Table = require('cli-table'),
     shell = require('shelljs'),
     fs = require('fs'),
     utils = require('./scripts/utils/utils.js'),
-    argv = require('yargs').argv,
+    argv = require('yargs').alias({
+      a: "action",
+      b: "branch",
+      br: "brand",
+      e: "envName",
+      k: "killSwitchList"
+    }).argv,
     props = require('./reapps-properties.json'),
-    navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties"),
-    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
+    navApp = require('./scripts/navapp/navapp.js'),
+    shopApp = require('./scripts/shopapp/shopapp.js'),
     SDP_HOST,
     responseBody,
     options = [];
@@ -53,6 +59,7 @@ function actionHandler( action ){
       });   
       break;
     case 'initM2':
+      //create a separate m2.js file in scripts
       if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
         shell.mkdir(process.env.HOME + '/.m2');
         shell.cp( props.paths['bloomies-ui-reapps'] + '/settings.xml', process.env.HOME + '/.m2');
@@ -65,22 +72,14 @@ function actionHandler( action ){
       actionHandler( 'updateShopAppSdpHost');
       break;
     case 'updateNavAppSdpHost':
-      if( SDP_HOST ){
-        return updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
-      } else {
-        return actionHandler( 'getIp' ).then(function( response ){
-          actionHandler( 'updateNavAppSdpHost' );
-        });
-      }
+      return navApp.update.sdp( SDP_HOST ).then(function( response ){
+        SDP_HOST = reponse;
+      });
       break;
     case 'updateShopAppSdpHost':
-      if( SDP_HOST ){
-        return updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
-      } else {
-        actionHandler( 'getIp' ).then(function( response ){
-          actionHandler( 'updateShopAppSdpHost' );
-        });
-      }
+      return shopApp.update.sdp( SDP_HOST ).then(function( response ){
+        SDP_HOST = reponse;
+      });
       break;
     case 'initNavAppEnv':
       return actionHandler( 'updateNavAppPomXml' ).then(function( result){
@@ -166,14 +165,14 @@ function actionHandler( action ){
       break;
     case 'updateNavAppPomXml':
       if( props.paths.navApp ){
-        return require('./scripts/navapp/navapp.js').update.pom( props.paths, props.brand );
+        return navApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
     case 'updateShopAppPomXml':
       if( props.paths.shopApp ){
-        return require('./scripts/shopapp/shopapp.js').update.pom( props.paths, props.brand );
+        return shopApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
@@ -190,14 +189,14 @@ function actionHandler( action ){
       break;      
     case 'updateNavAppWebXml':
       if( props.paths.navApp ){
-        return require('./scripts/navapp/navapp.js').update.web( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
+        return navApp.update.web( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
     case 'updateShopAppWebXml':
       if( props.paths.shopApp ){
-        return require('./scripts/navapp/navapp.js').update.web( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
+        return navApp.update.web( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
         winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }

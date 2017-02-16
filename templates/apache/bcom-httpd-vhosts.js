@@ -4,22 +4,6 @@ module.exports = function( data ){
 LoadModule ssl_module libexec/apache2/mod_ssl.so
 LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
 
-<VirtualHost *:80>    
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
-    ServerName ${data.domainPrefix}.bloomingdales.fds.com
-    ServerAlias www.${data.domainPrefix}.bloomingdales.fds.com
-    
-    ProxyPass / http://${data.domainPrefix}.bloomingdales.fds.com:2202/
-    #Mobile Assets
-    ProxyPass /mew/assets/stylesheets/.css http://${data.domainPrefix}.bloomingdales.fds.com:3003/stylesheets/prod/.css
-    ProxyPass /mew/assets http://${data.domainPrefix}.bloomingdales.fds.com:3003
-
-    ProxyPass /index.jsp https://${data.domainPrefix}.bloomingdales.fds.com:9443/index.jsp
-
-    ProxyPassReverse / http://${data.domainPrefix}.bloomingdales.fds.com:2202/        
-</VirtualHost>
-
 Listen 443
 
 <VirtualHost *:443>    
@@ -33,9 +17,12 @@ Listen 443
     SSLCertificateFile "/private/etc/apache2/cert/server.crt"
     SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
     ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
-    ServerAlias credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
-    
-    ProxyPass / http://localhost:8888/
+    ServerAlias www.credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
+
+    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi
+    ProxyPass /credit-gateway http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:8888/credit-gateway
+    ProxyPass /page http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:8888/page
+    ProxyPass /img http://www.${data.envName}.fds.com/img
 </VirtualHost>
 
 <VirtualHost *:443>    

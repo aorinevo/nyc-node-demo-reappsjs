@@ -1,10 +1,12 @@
 var utils = require('../utils/utils.js'),
     winston = require('winston'),
-    fs = require('fs');
+    fs = require('fs'),
+    props = require('./reapps-properties.json'),
+    navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties");
     
 winston.cli();    
 
-function updatePomXml(paths, brand){
+function updatePom(paths, brand){
   console.log('test: ', paths, brand);
   var expectedSelectChannelConnector = "<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedSslSocketConnector = "<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
@@ -53,9 +55,20 @@ function updatePomXml(paths, brand){
     });
 }
 
+function updateSdpHost( sdpHost ){
+  if( sdpHost ){
+    return utils.updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
+  } else {
+    return utils.getIp().then(function( response ){
+      updateSdpHost( response );
+    });
+  }
+}
+
 module.exports = {
   update: {
-    pom: updatePomXml,
-    web: utils.updateWebXml
+    pom: updatePom,
+    web: utils.updateWebXml,
+    sdp: updateSdpHost
   }
 };
