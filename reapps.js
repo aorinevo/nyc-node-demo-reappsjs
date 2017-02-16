@@ -5,9 +5,6 @@ var request = require('request'),
     SSH = require('simple-ssh'),
     prompt = require('prompt'),
     prettyjson = require('prettyjson'),
-    proxyServer = require('./proxy-server'),
-    hosts = require( './hosts.js'),
-    bloomiesAssets = require( './bloomies-assets.js' ),
     shell = require('shelljs'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
@@ -482,10 +479,10 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts':
-      require('./httpd-vhosts.js').update( props.domainPrefix, props.envName );
+      require('./scripts/httpd-vhosts.js').update( props.domainPrefix, props.envName );
       break;
     case 'initServerBlocks':
-      require('./server-blocks.js').update( props.domainPrefix, props.envName );
+      require('./scripts/server-blocks.js').update( props.domainPrefix, props.envName );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
@@ -496,7 +493,8 @@ function actionHandler( action ){
       });
       break;
     case 'initCertAndKey':
-      var secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
+      var proxyServer = require('./scripts/proxy-server.js'),
+      secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
       secureMKey = require('./templates/keys/mobile-customer-app-ui.js')(),
       snsNavAppCrt = require('./templates/certificates/sns-nav-apps.js')(),
       snsNavAppKey = require('./templates/keys/sns-nav-apps.js')(),
@@ -508,7 +506,7 @@ function actionHandler( action ){
       proxyServer.updateCertOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt' );
       proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
       break;
-    case 'initProxyServer':
+    case 'initProxyServer':      
       switch( props.proxyServer.name ){
         case 'apache24':
           //Need to use Promises
@@ -529,10 +527,10 @@ function actionHandler( action ){
       initShell( props.paths.shellRc, props );
       break;
     case 'initHosts':
-      hosts.update('/etc/hosts');
+      require( './scripts/hosts.js').update('/etc/hosts');
       break;
     case 'initBloomiesAssets':
-      bloomiesAssets.update( props.username, props.paths.bloomiesAssets);
+      require( './scripts/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
       break;
     case 'getGceIp':
       getGceIp();
