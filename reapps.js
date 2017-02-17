@@ -6,10 +6,10 @@ var jsonfile = require('jsonfile'),
     utils = require('./scripts/utils/utils.js'),
     argv = require('yargs').alias({
       a: "action",
-      b: "branch",
-      br: "brand",
+      b: "branch",      
       e: "envName",
       k: "killSwitchList",
+      r: "brand",
       s: "save"
     }).argv,
     props = require('./reapps-properties.json'),
@@ -21,6 +21,7 @@ var jsonfile = require('jsonfile'),
 
 winston.cli();
 
+console.log(argv);
 if( argv.brand ){
   options.push('brand: ' + argv.brand);
   props.brand = argv.brand;

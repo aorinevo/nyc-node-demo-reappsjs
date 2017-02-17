@@ -93,6 +93,13 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
 
 ## API
 APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`)
+* Short flags dictionary
+  - a: "action"
+  - b: "branch"
+  - e: "envName"
+  - k: "killSwitchList"
+  - r: "brand"
+  - s: "save"
 * Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions

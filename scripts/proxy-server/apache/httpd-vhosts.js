@@ -1,5 +1,4 @@
-var props = require('../../../reapps-properties.json'),
-    fs = require('fs'),
+var fs = require('fs'),
     template = require('../../../templates/apache/bcom-httpd-vhosts.js'),
     winston = require( 'winston'),
     shell = require('shelljs'),
