@@ -1,6 +1,5 @@
 var jsonfile = require('jsonfile'),
     winston = require('winston'),
-    SSH = require('simple-ssh'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
     fs = require('fs'),
@@ -10,7 +9,8 @@ var jsonfile = require('jsonfile'),
       b: "branch",
       br: "brand",
       e: "envName",
-      k: "killSwitchList"
+      k: "killSwitchList",
+      s: "save"
     }).argv,
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
