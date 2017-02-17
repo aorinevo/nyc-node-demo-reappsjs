@@ -1,7 +1,7 @@
 var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
-    props = require('./reapps-properties.json'),
+    props = require('../../reapps-properties.json'),
     navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties");
     
 winston.cli();    
@@ -57,7 +57,7 @@ function updatePom(paths, brand){
 
 function updateSdpHost( sdpHost ){
   if( sdpHost ){
-    return utils.updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + SDP_HOST + ":85"}] );
+    return utils.updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + sdpHost + ":85"}] );
   } else {
     return utils.getIp().then(function( response ){
       updateSdpHost( response );

@@ -1,8 +1,6 @@
-var Table = require('cli-table'),
-    jsonfile = require('jsonfile'),
+var jsonfile = require('jsonfile'),
     winston = require('winston'),
     SSH = require('simple-ssh'),
-    prompt = require('prompt'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
     fs = require('fs'),
@@ -67,10 +65,6 @@ function actionHandler( action ){
         winston.log( 'info', '~/.m2 directory already exists.');
       }
       break;
-    case 'updateSdpHost':
-      actionHandler( 'updateNavAppSdpHost');
-      actionHandler( 'updateShopAppSdpHost');
-      break;
     case 'updateNavAppSdpHost':
       return navApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = reponse;
@@ -80,7 +74,49 @@ function actionHandler( action ){
       return shopApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = reponse;
       });
+      break;      
+    case 'updateSdpHost':
+      actionHandler( 'updateNavAppSdpHost');
+      actionHandler( 'updateShopAppSdpHost');
       break;
+    case 'updateNavAppPomXml':
+      if( props.paths.navApp ){
+        return navApp.update.pom( props.paths, props.brand );
+      } else {
+        winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
+      }
+      break;
+    case 'updateShopAppPomXml':
+      if( props.paths.shopApp ){
+        return shopApp.update.pom( props.paths, props.brand );
+      } else {
+        winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
+      }
+      break;
+    case 'updateNavAppTmp':
+      if( props.paths.tmp && argv.killSwitchList ){
+        utils.updateTmp( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', argv.killSwitchList.split(","));
+      }
+      break;
+    case 'updateShopAppTmp':
+      if( props.paths.tmp && argv.killSwitchList ){
+        utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
+      }
+      break;      
+    case 'updateNavAppWebXml':
+      if( props.paths.navApp ){
+        return navApp.update.web( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
+      } else {
+        winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
+      }
+      break;
+    case 'updateShopAppWebXml':
+      if( props.paths.shopApp ){
+        return navApp.update.web( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
+      } else {
+        winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
+      }
+      break;      
     case 'initNavAppEnv':
       return actionHandler( 'updateNavAppPomXml' ).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
@@ -162,44 +198,6 @@ function actionHandler( action ){
       break;
     case 'getGceIp':
       getGceIp();
-      break;
-    case 'updateNavAppPomXml':
-      if( props.paths.navApp ){
-        return navApp.update.pom( props.paths, props.brand );
-      } else {
-        winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
-      }
-      break;
-    case 'updateShopAppPomXml':
-      if( props.paths.shopApp ){
-        return shopApp.update.pom( props.paths, props.brand );
-      } else {
-        winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
-      }
-      break;
-    case 'updateNavAppTmp':
-      if( props.paths.tmp && argv.killSwitchList ){
-        utils.updateTmp( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', argv.killSwitchList.split(","));
-      }
-      break;
-    case 'updateShopAppTmp':
-      if( props.paths.tmp && argv.killSwitchList ){
-        utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
-      }
-      break;      
-    case 'updateNavAppWebXml':
-      if( props.paths.navApp ){
-        return navApp.update.web( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
-      } else {
-        winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
-      }
-      break;
-    case 'updateShopAppWebXml':
-      if( props.paths.shopApp ){
-        return navApp.update.web( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
-      } else {
-        winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
-      }
       break;
     default:
       if( !argv.save ){

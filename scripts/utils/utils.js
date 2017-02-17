@@ -1,6 +1,10 @@
-var winston = require('winston'),
+var Table = require('cli-table'),
+    winston = require('winston'),
     cliSpinners = require('cli-spinners'),
     ora = require('ora'),
+    request = require('request'),
+    prompt = require('prompt'),
+    props = require('../../reapps-properties.json'),
     spinner = ora(cliSpinners.dots),
     fs = require('fs');
 
@@ -29,31 +33,31 @@ winston.cli();
 //   
 //   return props;
 // }
-// 
-// requestOptions = {
-//   method: 'post',
-//   body: {
-//     "release": props.branch,
-//     "stream": props.brand
-//   },
-//   json: true,
-//   url: 'http://mdc2vr4073:9099/RAPADDashboardConfig/getEnvDetails.html'
-// }
-// 
-// function startAjaxCall( options ){
-//   spinner.text = 'Connecting to Reapps...';
-//   spinner.start();
-//   return new Promise(function(resolve, reject){
-//     request( options, function(err, res, body){
-//       spinner.stop();
-//       if(err){
-//         reject( new Error( 'Connection to Reapps failed!  Check that you are connected to the internet and on the VPN') );
-//       } else {
-//         resolve( body );
-//       }
-//     });
-//   });
-// }
+
+requestOptions = {
+  method: 'post',
+  body: {
+    "release": props.branch,
+    "stream": props.brand
+  },
+  json: true,
+  url: 'http://mdc2vr4073:9099/RAPADDashboardConfig/getEnvDetails.html'
+}
+
+function startAjaxCall( options ){
+  spinner.text = 'Connecting to Reapps...';
+  spinner.start();
+  return new Promise(function(resolve, reject){
+    request( options, function(err, res, body){
+      spinner.stop();
+      if(err){
+        reject( new Error( 'Connection to Reapps failed!  Check that you are connected to the internet and on the VPN') );
+      } else {
+        resolve( body );
+      }
+    });
+  });
+}
 // 
 // function updateSdpHost( sdpHost, pathToProps ){
 //   return new Promise(function(resolve, reject){
@@ -212,41 +216,41 @@ function getIp( sdpHost ){
 // }
 // 
 function listEnvs( body ){
-  
-  if( body ){
-    winston.log('info', 'List of Environments for '+ props.branch+' '+props.brand);
-    
-    var table = new Table({
-      chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
-             , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
-             , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
-             , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
-    });
-     
-    table.push(
-        ['Site', 'backDoorUrl', 'Type', 'State', 'Completion Date']
-    );
-    
-    body.envDetails.forEach(function(element){
-      var jenkinsEnvMgmtBOs = element.jenkinsEnvMgmtBOs[0];
-      table.push( 
-        [element.envName, jenkinsEnvMgmtBOs.backDoorUrl, jenkinsEnvMgmtBOs.envType, jenkinsEnvMgmtBOs.envStatus, jenkinsEnvMgmtBOs.completedTime]
+  return new Promise(function(resolve, reject){
+    if( body ){
+      winston.log('info', 'List of Environments for '+ props.branch+' '+props.brand);
+      
+      var table = new Table({
+        chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+               , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+               , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+               , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+      });
+       
+      table.push(
+          ['Site', 'backDoorUrl', 'Type', 'State', 'Completion Date']
       );
-    });
-     
-    winston.log('info', "\n" + table.toString());
-
-    return table;
-  } else {
-    startAjaxCall( requestOptions ).catch(function( reason ){
-      winston.log( 'error', reason.message );
-    }).then( function( body ){
-      listEnvs( responseBody );
-      return responseBody;
-    }).catch(function( reason ){
-      winston.log( 'error', reason.message );
-    });
-  } 
+      
+      body.envDetails.forEach(function(element){
+        var jenkinsEnvMgmtBOs = element.jenkinsEnvMgmtBOs[0];
+        table.push( 
+          [element.envName, jenkinsEnvMgmtBOs.backDoorUrl, jenkinsEnvMgmtBOs.envType, jenkinsEnvMgmtBOs.envStatus, jenkinsEnvMgmtBOs.completedTime]
+        );
+      });
+       
+      winston.log('info', "\n" + table.toString());
+      resolve(table);
+    } else {
+      resolve(startAjaxCall( requestOptions ).catch(function( reason ){
+        winston.log( 'error', reason.message );
+      }).then( function( body ){
+        listEnvs( body );
+        return body;
+      }).catch(function( reason ){
+        winston.log( 'error', reason.message );
+      }));
+    } 
+  });
 }
 
 module.exports = {
