@@ -61,7 +61,7 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - nginx (brew install nginx) - this is optional; the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
-* Add git, node, and nvm to your systems PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
+* Add git, node, and nvm to your system's PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
 
@@ -85,17 +85,15 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Edit /etc/apache2/extra/httpd-ssl.conf and uncomment the following modules: socache_shmcb_module, ssl_module, and rewrite_module.  
-* Edit /etc/apache2/httpd.conf and uncomment the line that includes httpd-ssl.conf.
 * Users just starting out with reapps should run `node reapps --action=initBox`, after which commands can be executed from anywhere on the command line without prefixing the command with node.  For example, you'll be able to run the `node reapps --action=initBox` from anywhere on the command line with `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
-* run `mvn clean install` from BloomiesCommonUI root
 * run `mvn clean install -Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
 
-Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other API calls to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
+Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
 
 ## API
-* Initialize everything!
+APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`)
+* Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions
        - initM2
@@ -112,6 +110,7 @@ Note: Typically, `reapps --action=initBox` will be run only once after which dev
   - Description: runs the following actions
      - initNavAppEnv
      - initShopAppEnv
+     - initBloomiesAssets
 * Initialize NavApp 
   - API: `reapps --action=initNavAppEnv`
   - Description: Updates navapp-config.properties from reapps-properties.json and runs the following actions
