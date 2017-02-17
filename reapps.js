@@ -121,7 +121,7 @@ function actionHandler( action ){
       return actionHandler( 'updateNavAppPomXml' ).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
-          return updateAppProperty( navAppConfigProperties, props.navAppProperties );
+          return navApp.update.properties( props.navAppProperties );
         }).then( function( result ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
@@ -130,12 +130,13 @@ function actionHandler( action ){
       return actionHandler( 'updateShopAppPomXml' ).then(function( result){
         return actionHandler( 'updateShopAppWebXml' );
       }).then(function( result ){
-        return updateAppProperty( shopAppConfigProperties, props.shopAppProperties );
+        return shopApp.update.properties( props.shopAppProperties );
       }).then( function( result ){
         return actionHandler( 'updateShopAppSdpHost' );
       });
       break;
-    case 'initEnvs':
+      //Continue testing past here
+    case 'initEnvs': 
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
         actionHandler( 'initShopAppEnv' );
         actionHandler( 'initBloomiesAssets' );
@@ -212,11 +213,11 @@ if( argv.save ){
       winston.log('error', err.message);
     } else {
       winston.log('info', 'saved options to reapps-properties.json \n' + options);
-      //parseProperties();
+      props = utils.parseProperties();
       actionHandler( argv.action );
     }
   });
 } else {
-  //parseProperties();
+  props = utils.parseProperties();
   actionHandler( argv.action );
 }

@@ -7,7 +7,6 @@ var utils = require('../utils/utils.js'),
 winston.cli();    
 
 function updatePom(paths, brand){
-  console.log('test: ', paths, brand);
   var expectedSelectChannelConnector = "<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedSslSocketConnector = "<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedBloomiesUIAssetsLocation =  '<com.bloomies.webapp.BloomiesCommonUI.location>'+ paths.bloomiesCommonUi + 'src/main/webapp</com.bloomies.webapp.BloomiesCommonUI.location> \n \
@@ -65,10 +64,15 @@ function updateSdpHost( sdpHost ){
   }
 }
 
+function updateProperties( properties ){
+  return utils.updateAppProperty( navAppConfigProperties, properties );
+}
+
 module.exports = {
   update: {
     pom: updatePom,
     web: utils.updateWebXml,
-    sdp: updateSdpHost
+    sdp: updateSdpHost,
+    properties: updateProperties
   }
 };

@@ -95,7 +95,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
 Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other API calls to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
 
 ## API
-APIs now support long and short flags (i.e. `reapps -a` instead of `reapps --action`)
+APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`)
 * Initialize everything!
   - API: `reapps --action=initBox`
   - Description: runs the following actions

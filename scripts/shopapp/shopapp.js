@@ -47,10 +47,16 @@ function updateSdpHost( sdpHost ){
   }
 }
 
+function updateProperties( properties ){
+  console.log('test2');
+  return utils.updateAppProperty( shopAppConfigProperties, properties );
+}
+
 module.exports = {
   update: {
     pom: updatePom,
     web: utils.updateWebXml,
-    sdp: updateSdpHost
+    sdp: updateSdpHost,
+    properties: updateProperties
   }
 };

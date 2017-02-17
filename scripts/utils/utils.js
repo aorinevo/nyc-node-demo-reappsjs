@@ -10,29 +10,29 @@ var Table = require('cli-table'),
 
 winston.cli();
 
-// function parseProperties(){
-//   props.shopAppProperties.push({
-//     "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
-//   },{
-//     "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-//   },{
-//     "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-//   });
-// 
-//   props.navAppProperties.push({
-//     "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
-//   },{
-//     "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
-//   },{
-//     "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-//   },{
-//     "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
-//   },{
-//     "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
-//   });
-//   
-//   return props;
-// }
+function parseProperties( ){
+  props.shopAppProperties.push({
+    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
+  },{
+    "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  });
+
+  props.navAppProperties.push({
+    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+  },{
+    "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  },{
+    "name": "ASSETS_SECURE_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+  },{
+    "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
+  });
+  
+  return props;
+}
 
 requestOptions = {
   method: 'post',
@@ -58,28 +58,7 @@ function startAjaxCall( options ){
     });
   });
 }
-// 
-// function updateSdpHost( sdpHost, pathToProps ){
-//   return new Promise(function(resolve, reject){
-//     fs.readFile( pathToProps, 'utf8', function (err,data) {
-//       if (err) {
-//         winston.log('error', err);
-//         reject( err );
-//       }
-//       var result = data.replace(/^SDP_HOST=http:\/\/.+/gm, 'SDP_HOST=http://'+ sdpHost + ':85');
-// 
-//       fs.writeFile(pathToProps, result, 'utf8', function (err) {
-//          if (err){
-//            winston.log('error', err);
-//            reject( err );
-//          }
-//          winston.log('info', 'Updated SDP_HOST in \n' + pathToProps);
-//          resolve( sdpHost );
-//       });
-//     });
-//   });
-// }
-// 
+
 function updateAppProperty( pathToProps, propertiesList ){
   return new Promise(function(resolve, reject){
       fs.readFile( pathToProps, 'utf8', function (err,data) {
@@ -254,6 +233,7 @@ function listEnvs( body ){
 }
 
 module.exports = {
+  parseProperties: parseProperties,
   updateWebXml: updateWebXml,
   updateTmp: updateTmp,
   getIp: getIp,
