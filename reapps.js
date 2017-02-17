@@ -14,7 +14,7 @@ var jsonfile = require('jsonfile'),
     }).argv,
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
-    shopApp = require('./scripts/shopapp/shopapp.js'),
+    shopApp = require('./scripts/shopapp/shopapp.js'),    
     SDP_HOST,
     responseBody,
     options = [];
@@ -67,12 +67,13 @@ function actionHandler( action ){
       break;
     case 'updateNavAppSdpHost':
       return navApp.update.sdp( SDP_HOST ).then(function( response ){
-        SDP_HOST = reponse;
+        SDP_HOST = response;
+        return SDP_HOST;
       });
       break;
     case 'updateShopAppSdpHost':
       return shopApp.update.sdp( SDP_HOST ).then(function( response ){
-        SDP_HOST = reponse;
+        SDP_HOST = response;
       });
       break;      
     case 'updateSdpHost':
@@ -135,7 +136,9 @@ function actionHandler( action ){
         return actionHandler( 'updateShopAppSdpHost' );
       });
       break;
-      //Continue testing past here
+    case 'initBloomiesAssets':
+      require( './scripts/bloomies-assets/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
+      break;
     case 'initEnvs': 
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
         actionHandler( 'initShopAppEnv' );
@@ -143,10 +146,10 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts':
-      require('./scripts/httpd-vhosts.js').update( props.domainPrefix, props.envName );
+      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName );
       break;
-    case 'initServerBlocks':
-      require('./scripts/server-blocks.js').update( props.domainPrefix, props.envName );
+    case 'initServerBlocks': //need to test
+      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
@@ -156,8 +159,8 @@ function actionHandler( action ){
         actionHandler( 'initProxyServer' );
       });
       break;
-    case 'initCertAndKey':
-      var proxyServer = require('./scripts/proxy-server.js'),
+    case 'initCertAndKey': //need to test for nginx
+      var proxyServer = require('./scripts/proxy-server/proxy-server.js'),
       secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
       secureMKey = require('./templates/keys/mobile-customer-app-ui.js')(),
       snsNavAppCrt = require('./templates/certificates/sns-nav-apps.js')(),
@@ -179,6 +182,7 @@ function actionHandler( action ){
           break;
         case 'nginx':
           //Need to use Promises
+          //need to test nginx
           actionHandler( 'initCertAndKey' );
           actionHandler( 'initServerBlocks' );
           break;
@@ -192,10 +196,7 @@ function actionHandler( action ){
       utils.initShell( props.paths.shellRc, props );
       break;
     case 'initHosts':
-      require( './scripts/hosts.js').update('/etc/hosts');
-      break;
-    case 'initBloomiesAssets':
-      require( './scripts/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
+      require( './scripts/hosts/hosts.js').update('/etc/hosts');
       break;
     case 'getGceIp':
       getGceIp();

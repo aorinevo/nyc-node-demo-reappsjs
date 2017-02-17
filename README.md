@@ -110,6 +110,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - Description: runs the following actions
      - initNavAppEnv
      - initShopAppEnv
+     - initBloomiesAssets
 * Initialize NavApp 
   - API: `reapps --action=initNavAppEnv`
   - Description: Updates navapp-config.properties from reapps-properties.json and runs the following actions

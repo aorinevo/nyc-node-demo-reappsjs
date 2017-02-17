@@ -1,4 +1,4 @@
-var props = require('./reapps-properties.json'),
+var props = require('../../reapps-properties.json'),
     fs = require('fs'),
     winston = require( 'winston'),
     shell = require('shelljs');

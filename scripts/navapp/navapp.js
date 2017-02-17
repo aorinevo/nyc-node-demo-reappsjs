@@ -56,10 +56,12 @@ function updatePom(paths, brand){
 
 function updateSdpHost( sdpHost ){
   if( sdpHost ){
-    return utils.updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + sdpHost + ":85"}] );
+    return utils.updateAppProperty( navAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + sdpHost + ":85"}] ).then(function( result ){
+      return sdpHost;
+    });
   } else {
     return utils.getIp().then(function( response ){
-      updateSdpHost( response );
+      return updateSdpHost( response );
     });
   }
 }

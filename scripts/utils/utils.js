@@ -78,7 +78,7 @@ function updateAppProperty( pathToProps, propertiesList ){
             winston.log('error', err);
             reject( err );
            }
-           winston.log('info', message);
+           winston.log('info', message);           
            resolve( result );
         });
       });

@@ -39,16 +39,17 @@ function updatePom( paths ){
 
 function updateSdpHost( sdpHost ){
   if( sdpHost ){
-    return utils.updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + sdpHost + ":85"}] );
+    return utils.updateAppProperty( shopAppConfigProperties, [{"name": "SDP_HOST", "value": "http://" + sdpHost + ":85"}] ).then(function( result ){
+      return sdpHost;
+    });
   } else {
     return utils.getIp().then(function( response ){
-      updateSdpHost( response );
+      return updateSdpHost( response );
     });
   }
 }
 
 function updateProperties( properties ){
-  console.log('test2');
   return utils.updateAppProperty( shopAppConfigProperties, properties );
 }
 

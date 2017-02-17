@@ -1,7 +1,7 @@
 var fs = require('fs'),
     winston = require( 'winston'),
     shell = require('shelljs'),
-    props = require('./reapps-properties.json'),
+    props = require('../../reapps-properties.json'),
     argv = require('yargs').argv;
 
 function updateCertOrKey( fileContent, pathToWrite, fileName, extension ){  
