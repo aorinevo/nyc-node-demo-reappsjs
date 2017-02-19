@@ -38,7 +38,6 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
-  - Adds reapps.js alias.
 
 ## Install Environment Dependencies
 * Open xcode app and accept the license agreement.
