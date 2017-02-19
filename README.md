@@ -100,6 +100,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - k: "killSwitchList"
   - r: "brand"
   - s: "save"
+  - h: "help"
 * Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions
