@@ -131,8 +131,8 @@ Listen 443
     SSLEngine on   
     SSLCertificateFile "/private/etc/apache2/cert/cert.crt"
     SSLCertificateKeyFile "/private/etc/apache2/cert/cert.key" 
-    ServerName local.secure-m.${data.envName}.fds.com
-    ServerAlias www.local.secure-m.${data.envName}.fds.com
+    ServerName ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$
+    ServerAlias ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$
     ProxyPass /api http://secure-m.${data.envName}.fds.com/api
     ProxyPass / http://127.0.0.1:8080/   
 </VirtualHost>                               

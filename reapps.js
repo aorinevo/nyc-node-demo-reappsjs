@@ -1,41 +1,12 @@
+#!/bin/sh
+':' //; exec "$(command -v nodejs || command -v node)" "$0" "$@"
+'use strict';
 var jsonfile = require('jsonfile'),
     winston = require('winston'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
-    fs = require('fs'),
     utils = require('./scripts/utils/utils.js'),
-    argv = require('yargs').options({
-      'action': {
-        alias: 'a',
-        describe: 'action',
-        choices: ['initBox','listEnvs','initShopApEnv','initNavAppEnv','initBloomiesAssets','initCertAndKey', 'initProxyServer','initShell', 'initHosts','updateSdpHost', 'updateShopAppSdpHost', 'updateNavAppSdpHost','initHttpdVhosts', 'initServerBlocks', 'initM2', 'getIp', 'getReappsPropsJson', 'updateNavAppPomXml', 'updateShopAppPomXml', 'updateShopAppTmp', 'updateNavAppTmp', 'updateShopAppWebXml', 'updateNavAppWebXml']
-      },
-      'branch': {
-        alias: 'b',
-        describe: 'branch',
-      },
-      'envName': {
-        alias: 'e',
-        describe: 'environment name'
-      },
-      'killSwitchList': {
-        alias: 'k',
-        describe: 'kill switch list'
-      },
-      'brand': {
-        alias: 'r',
-        describe: 'brand',
-        choices: ['MCOM', 'BCOM']
-      },
-      'save': {
-        alias: 's',
-        describe: 'save options'
-      },
-      'help': {
-        alias: 'h',
-        describe: 'help'
-      }
-    }).help().argv,
+    argv = require('./scripts/utils/cli-tools.js'),
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
     shopApp = require('./scripts/shopapp/shopapp.js'),    
@@ -81,13 +52,7 @@ function actionHandler( action ){
       });   
       break;
     case 'initM2':
-      //create a separate m2.js file in scripts
-      if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
-        shell.mkdir(process.env.HOME + '/.m2');
-        shell.cp( props.paths['bloomies-ui-reapps'] + '/settings.xml', process.env.HOME + '/.m2');
-      } else {
-        winston.log( 'info', '~/.m2 directory already exists.');
-      }
+      return require('./scripts/maven/m2.js').init();
       break;
     case 'updateNavAppSdpHost':
       return navApp.update.sdp( SDP_HOST ).then(function( response ){

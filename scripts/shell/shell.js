@@ -29,10 +29,6 @@ function initShell( pathToFile, props ){
     if( data.indexOf("export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH")== -1){
       newLines = newLines + "export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH\n";
     }
-    
-    if( data.indexOf("alias reapps=")== -1){
-      newLines = newLines + 'alias reapps="node '+ props.paths["bloomies-ui-reapps"] +'reapps.js "';
-    }
 
     if( newLines || data != result ){
       if( newLines ){
