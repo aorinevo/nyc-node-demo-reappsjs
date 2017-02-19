@@ -4,14 +4,38 @@ var jsonfile = require('jsonfile'),
     shell = require('shelljs'),
     fs = require('fs'),
     utils = require('./scripts/utils/utils.js'),
-    argv = require('yargs').alias({
-      a: "action",
-      b: "branch",      
-      e: "envName",
-      k: "killSwitchList",
-      r: "brand",
-      s: "save"
-    }).argv,
+    argv = require('yargs').options({
+      'action': {
+        alias: 'a',
+        describe: 'action',
+        choices: ['initBox','listEnvs','initShopApEnv','initNavAppEnv','initBloomiesAssets','initCertAndKey', 'initProxyServer','initShell', 'initHosts','updateSdpHost', 'updateShopAppSdpHost', 'updateNavAppSdpHost','initHttpdVhosts', 'initServerBlocks', 'initM2', 'getIp', 'getReappsPropsJson', 'updateNavAppPomXml', 'updateShopAppPomXml', 'updateShopAppTmp', 'updateNavAppTmp', 'updateShopAppWebXml', 'updateNavAppWebXml']
+      },
+      'branch': {
+        alias: 'b',
+        describe: 'branch',
+      },
+      'envName': {
+        alias: 'e',
+        describe: 'environment name'
+      },
+      'killSwitchList': {
+        alias: 'k',
+        describe: 'kill switch list'
+      },
+      'brand': {
+        alias: 'r',
+        describe: 'brand',
+        choices: ['MCOM', 'BCOM']
+      },
+      'save': {
+        alias: 's',
+        describe: 'save options'
+      },
+      'help': {
+        alias: 'h',
+        describe: 'help'
+      }
+    }).help().argv,
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
     shopApp = require('./scripts/shopapp/shopapp.js'),    
@@ -21,7 +45,6 @@ var jsonfile = require('jsonfile'),
 
 winston.cli();
 
-console.log(argv);
 if( argv.brand ){
   options.push('brand: ' + argv.brand);
   props.brand = argv.brand;
