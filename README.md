@@ -72,11 +72,6 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
-* ReappsJS requires Node v6+. Use nvm to switch node versions. Examples:
-    - `nvm install v6.9.4`
-    - `nvm use v6.9.4`
-    - `nvm use v4.7.2`
-    - etc ...
 * Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.    
 * In bloomies-ui-reapps/ root, run `npm install -g && npm link`.
