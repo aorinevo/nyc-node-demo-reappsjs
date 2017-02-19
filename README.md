@@ -78,9 +78,9 @@ Clone the repo anywhere onto your computer, preferably to a directory called blo
     - `nvm use v6.9.4`
     - `nvm use v4.7.2`
     - etc ...
-* In bloomies-ui-reapps/ root, run `npm install`.
 * Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
-* Set the defaults for branch and brand in reapps-properties.json.
+* Set the defaults for branch and brand in reapps-properties.json.    
+* In bloomies-ui-reapps/ root, run `npm install -g && npm link`.
 * That's it!
   
 ## Basic Usage
