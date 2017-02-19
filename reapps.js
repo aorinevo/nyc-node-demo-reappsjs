@@ -163,7 +163,7 @@ function actionHandler( action ){
       proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
       break;
     case 'initProxyServer':      
-      switch( props.proxyServer.name ){
+      switch( props.proxyServer.name ){        
         case 'apache24':
           //Need to use Promises
           actionHandler( 'initCertAndKey' );
@@ -182,7 +182,7 @@ function actionHandler( action ){
       break;
     case 'initShell':
       //Need to use Promises
-      utils.initShell( props.paths.shellRc, props );
+      require('./scripts/shell/shell.js').init( props.paths.shellRc, props );
       break;
     case 'initHosts':
       require( './scripts/hosts/hosts.js').update('/etc/hosts');
