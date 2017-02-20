@@ -1,3 +1,5 @@
+'use strict';
+
 var Table = require('cli-table'),
     winston = require('winston'),
     cliSpinners = require('cli-spinners'),
@@ -7,6 +9,15 @@ var Table = require('cli-table'),
     prompt = require('prompt'),
     props = require('../../reapps-properties.json'),
     spinner = ora(cliSpinners.dots),
+    requestOptions = {
+        method: 'post',
+        body: {
+            "release": props.branch,
+            "stream": props.brand
+        },
+        json: true,
+        url: 'http://mdc2vr4073:9099/RAPADDashboardConfig/getEnvDetails.html'
+    },
     fs = require('fs');
 
 winston.cli();
@@ -33,16 +44,6 @@ function parseProperties( ){
   });
   
   return props;
-}
-
-requestOptions = {
-  method: 'post',
-  body: {
-    "release": props.branch,
-    "stream": props.brand
-  },
-  json: true,
-  url: 'http://mdc2vr4073:9099/RAPADDashboardConfig/getEnvDetails.html'
 }
 
 function startAjaxCall( options ){
@@ -240,4 +241,4 @@ module.exports = {
   getIp: getIp,
   listEnvs: listEnvs,
   updateAppProperty: updateAppProperty
-}
+};
