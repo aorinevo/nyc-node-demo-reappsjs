@@ -2,7 +2,7 @@
   "username": "u060014",
   "branch": "17C",
   "brand": "BCOM",
-  "envName": "qa11codebloomingdales",
+  "envName": "qa14codebloomingdales",
   "domainPrefix": "aori",
   "proxyServer": {
     "name": "apache24",
@@ -11,7 +11,7 @@
   "paths": {
     "shellRc": "/Users/u060014/.zshrc",
     "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/u060014/Repositories/bloomies-ui-reapps/",
+    "bloomies-ui-reapps": "/Users/u060014/Repositories/bloomies-ui-reapps",
     "bloomiesCommonUi": "/Users/U060014/Repositories/BloomiesCommonUI/",
     "macysCommonUi": "/Users/U060014/Repositories/MacysCommonUI/",
     "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets/",

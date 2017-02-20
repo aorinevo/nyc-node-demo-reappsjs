@@ -1,17 +1,12 @@
+#!/bin/sh
+':' //; exec "$(command -v nodejs || command -v node)" "$0" "$@"
+'use strict';
 var jsonfile = require('jsonfile'),
     winston = require('winston'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
-    fs = require('fs'),
     utils = require('./scripts/utils/utils.js'),
-    argv = require('yargs').alias({
-      a: "action",
-      b: "branch",      
-      e: "envName",
-      k: "killSwitchList",
-      r: "brand",
-      s: "save"
-    }).argv,
+    argv = require('./scripts/utils/cli-tools.js'),
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
     shopApp = require('./scripts/shopapp/shopapp.js'),    
@@ -21,7 +16,6 @@ var jsonfile = require('jsonfile'),
 
 winston.cli();
 
-console.log(argv);
 if( argv.brand ){
   options.push('brand: ' + argv.brand);
   props.brand = argv.brand;
@@ -42,6 +36,45 @@ if( argv.domainPrefix ){
   props.domainPrefix = argv.domainPrefix;
 }
 
+//Build apps
+if( argv.mci || argv.mcist || argv.mcistd ){
+  var app = argv.mci || argv.mcist || argv.mcistd,
+      buildDirectories = {
+        navApp: "BloomiesNavApp",
+        shopApp: "BCOM",
+        macysUi: "",
+        bloomiesAssets: ""
+      },
+      buildCommand = `cd ${props.paths[app]}${buildDirectories[app]} && mvn clean install `;
+  if( argv.mcist ){
+    buildCommand += '-Dmaven.test.skip=true';
+  }
+  if( argv.mcistd ){
+    buildCommand += '-Dmaven.test.skip=true -Denforcer.skip=true'
+  }
+  shell.exec(buildCommand);
+}
+
+//Run apps
+if( argv.mjr || argv.mjro ){
+  var app = argv.mjr || argv.mjro,
+      runDirectories = {
+        navApp: "BloomiesNavApp/BloomiesNavAppWeb",
+        shopApp: "BCOM/BloomiesShopNServe",
+        bloomiesAssets: ""
+      },
+      runCommand = `cd ${props.paths[app]}${runDirectories[app]} && mvn jetty:run `;
+  if( argv.mjro ){
+    runCommand += '-o';
+  }
+  shell.exec(runCommand);
+}
+
+//Get ReappsJS version
+if( argv.version ){
+  winston.log('info', 'ReappsJS version: ' + require('./package.json').version);
+}
+
 function actionHandler( action ){
   switch ( action ) {
     case 'getReappsPropsJson':
@@ -58,13 +91,7 @@ function actionHandler( action ){
       });   
       break;
     case 'initM2':
-      //create a separate m2.js file in scripts
-      if( !fs.existsSync(process.env.HOME + '/.m2/settings.xml') ){
-        shell.mkdir(process.env.HOME + '/.m2');
-        shell.cp( props.paths['bloomies-ui-reapps'] + '/settings.xml', process.env.HOME + '/.m2');
-      } else {
-        winston.log( 'info', '~/.m2 directory already exists.');
-      }
+      return require('./scripts/maven/m2.js').init();
       break;
     case 'updateNavAppSdpHost':
       return navApp.update.sdp( SDP_HOST ).then(function( response ){
@@ -175,7 +202,7 @@ function actionHandler( action ){
       proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
       break;
     case 'initProxyServer':      
-      switch( props.proxyServer.name ){
+      switch( props.proxyServer.name ){        
         case 'apache24':
           //Need to use Promises
           actionHandler( 'initCertAndKey' );
@@ -194,7 +221,7 @@ function actionHandler( action ){
       break;
     case 'initShell':
       //Need to use Promises
-      utils.initShell( props.paths.shellRc, props );
+      require('./scripts/shell/shell.js').init( props.paths.shellRc, props );
       break;
     case 'initHosts':
       require( './scripts/hosts/hosts.js').update('/etc/hosts');
@@ -202,10 +229,6 @@ function actionHandler( action ){
     case 'getGceIp':
       getGceIp();
       break;
-    default:
-      if( !argv.save ){
-        winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');
-      }
   }
 }
 

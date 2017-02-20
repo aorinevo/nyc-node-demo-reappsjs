@@ -1,7 +1,12 @@
 {
+  "preferGlobal": "true",
+  "bin": {
+    "reapps": "./reapps.js",
+    "re": "./reapps.js"
+  },
   "name": "reapps",
   "version": "2.3.0",
-  "description": "",
+  "description": "ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesAssets, MobileCustomerAppUI (secure-m), proxy server, and shell set-up process.",
   "main": "reapps.js",
   "author": "Aori Nevo",
   "license": "ISC",

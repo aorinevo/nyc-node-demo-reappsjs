@@ -38,7 +38,6 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
-  - Adds reapps.js alias.
 
 ## Install Environment Dependencies
 * Open xcode app and accept the license agreement.
@@ -73,26 +72,21 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
-* ReappsJS requires Node v6+. Use nvm to switch node versions. Examples:
-    - `nvm install v6.9.4`
-    - `nvm use v6.9.4`
-    - `nvm use v4.7.2`
-    - etc ...
-* In bloomies-ui-reapps/ root, run `npm install`.
 * Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
-* Set the defaults for branch and brand in reapps-properties.json.
+* Set the defaults for branch and brand in reapps-properties.json.    
+* In bloomies-ui-reapps/ root, run `npm install -g && npm link`.
 * That's it!
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Users just starting out with reapps should run `node reapps --action=initBox`, after which commands can be executed from anywhere on the command line without prefixing the command with node.  For example, you'll be able to run the `node reapps --action=initBox` from anywhere on the command line with `reapps --action=initBox`. Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
+* Users just starting out with reapps should run `reapps --action=initBox`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
 * run `mvn clean install -Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
 
 Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
 
 ## API
-APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`)
+APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`).  There are two ways to run ReappsJS command, either `re ...` or `reapps ...` (i.e. `re -v` and `reapps -v`).
 * Short flags dictionary
   - a: "action"
   - b: "branch"
@@ -100,6 +94,8 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - k: "killSwitchList"
   - r: "brand"
   - s: "save"
+  - h: "help"
+  - v: "version"
 * Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions
@@ -109,6 +105,20 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
        - initHosts
        - initCertAndKey
        - initHttpdVHosts
+* Get ReappsJS version
+  - API: `reapps -v`
+* Build navApp
+  - API: `re --mci navApp` or `re --mcist navApp` or `re --mcistd navApp`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build shopApp
+  - API: `re --mci shopApp` or `re --mcist shopApp` or `re --mcistd shopApp`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build macysUi
+  - API: `re --mci macysUi` or `re --mcist macysUi` or `re --mcistd macysUi`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build bloomiesAssets
+  - API: `re --mci bloomiesAssets` or `re --mcist bloomiesAssets` or `re --mcistd bloomiesAssets`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
 * Initialize .m2 directory
   - API: `reapps --action=initM2`
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
