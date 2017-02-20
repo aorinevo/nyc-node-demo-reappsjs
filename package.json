@@ -1,7 +1,8 @@
 {
   "preferGlobal": "true",
   "bin": {
-    "reapps": "./reapps.js"
+    "reapps": "./reapps.js",
+    "re": "./reapps.js"
   },
   "name": "reapps",
   "version": "2.3.0",

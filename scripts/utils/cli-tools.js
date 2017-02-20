@@ -4,6 +4,30 @@ module.exports = require('yargs').options({
     describe: 'action',
     choices: ['initBox','listEnvs','initShopApEnv','initNavAppEnv','initBloomiesAssets','initEnvs','initCertAndKey', 'initProxyServer','initShell', 'initHosts','updateSdpHost', 'updateShopAppSdpHost', 'updateNavAppSdpHost','initHttpdVhosts', 'initServerBlocks', 'initM2', 'getIp', 'getReappsPropsJson', 'updateNavAppPomXml', 'updateShopAppPomXml', 'updateShopAppTmp', 'updateNavAppTmp', 'updateShopAppWebXml', 'updateNavAppWebXml']
   },
+  'version':{
+    alias: 'v',
+    describe: 'ReappsJS package version'
+  },
+  'mci': {
+    describe: 'maven clean install',
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+  },
+  'mcist': {
+    describe: 'maven clean install and skip tests',
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+  },
+  'mcistd': {
+    describe: 'maven clean install, skip tests and enforcer',
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+  },
+  'mjr': {
+    describe: 'maven jetty run',
+    choices: ['navApp', 'shopApp', 'bloomeisAssets']
+  },
+  'mjro': {
+    describe: 'maven jetty run offline',
+    choices: ['navApp', 'shopApp', 'bloomeisAssets']
+  },
   'branch': {
     alias: 'b',
     describe: 'branch',

@@ -36,6 +36,45 @@ if( argv.domainPrefix ){
   props.domainPrefix = argv.domainPrefix;
 }
 
+//Build apps
+if( argv.mci || argv.mcist || argv.mcistd ){
+  var app = argv.mci || argv.mcist || argv.mcistd,
+      buildDirectories = {
+        navApp: "BloomiesNavApp",
+        shopApp: "BCOM",
+        macysUi: "",
+        bloomiesAssets: ""
+      },
+      buildCommand = `cd ${props.paths[app]}${buildDirectories[app]} && mvn clean install `;
+  if( argv.mcist ){
+    buildCommand += '-Dmaven.test.skip=true';
+  }
+  if( argv.mcistd ){
+    buildCommand += '-Dmaven.test.skip=true -Denforcer.skip=true'
+  }
+  shell.exec(buildCommand);
+}
+
+//Run apps
+if( argv.mjr || argv.mjro ){
+  var app = argv.mjr || argv.mjro,
+      runDirectories = {
+        navApp: "BloomiesNavApp/BloomiesNavAppWeb",
+        shopApp: "BCOM/BloomiesShopNServe",
+        bloomiesAssets: ""
+      },
+      runCommand = `cd ${props.paths[app]}${runDirectories[app]} && mvn jetty:run `;
+  if( argv.mjro ){
+    runCommand += '-o';
+  }
+  shell.exec(runCommand);
+}
+
+//Get ReappsJS version
+if( argv.version ){
+  winston.log('info', 'ReappsJS version: ' + require('./package.json').version);
+}
+
 function actionHandler( action ){
   switch ( action ) {
     case 'getReappsPropsJson':
@@ -190,10 +229,6 @@ function actionHandler( action ){
     case 'getGceIp':
       getGceIp();
       break;
-    default:
-      if( !argv.save ){
-        winston.log('error', 'No action specified or action not recognized.  Try --action=[actionName].');
-      }
   }
 }
 

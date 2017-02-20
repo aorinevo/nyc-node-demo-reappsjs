@@ -95,6 +95,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - r: "brand"
   - s: "save"
   - h: "help"
+  - v: "version"
 * Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions
@@ -104,6 +105,20 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
        - initHosts
        - initCertAndKey
        - initHttpdVHosts
+* Get ReappsJS version
+  - API: `reapps -v`
+* Build navApp
+  - API: `re mci navApp` or `re mcist navApp` or `re mcistd navApp`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build shopApp
+  - API: `re mci shopApp` or `re mcist shopApp` or `re mcistd shopApp`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build macysUi
+  - API: `re mci macysUi` or `re mcist macysUi` or `re mcistd macysUi`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
+* Build bloomiesAssets
+  - API: `re mci bloomiesAssets` or `re mcist bloomiesAssets` or `re mcistd bloomiesAssets`
+  - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
 * Initialize .m2 directory
   - API: `reapps --action=initM2`
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
