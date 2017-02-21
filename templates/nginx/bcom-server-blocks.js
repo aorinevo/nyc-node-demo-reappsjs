@@ -49,10 +49,10 @@ module.exports = function( data ){
       proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/loyallist;
     }
     location /chkout {
-      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout    ;
+      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout;
     }
     location /registry/ {
-      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry/
+      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry/;
     }
     
     # NavApp Assets
