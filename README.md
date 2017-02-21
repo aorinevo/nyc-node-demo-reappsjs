@@ -96,6 +96,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - s: "save"
   - h: "help"
   - v: "version"
+  - f: "force"
 * Initialize everything! (Need admin access)
   - API: `reapps --action=initBox`
   - Description: runs the following actions
