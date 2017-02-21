@@ -24,7 +24,7 @@ winston.cli();
 
 function parseProperties( ){
   props.shopAppProperties.push({
-    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/sns`
+    "name": "ASSETS_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/sns`
   },{
     "name": "HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com`
   },{
@@ -32,7 +32,7 @@ function parseProperties( ){
   });
 
   props.navAppProperties.push({
-    "name": "ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com/navapp`
+    "name": "ASSETS_HOST", "value": `https://${props.domainPrefix}.bloomingdales.fds.com/navapp`
   },{
     "name": "COMMON_ASSETS_HOST", "value": `http://${props.domainPrefix}.bloomingdales.fds.com`
   },{

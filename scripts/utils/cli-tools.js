@@ -14,15 +14,15 @@ module.exports = require('yargs').options({
   },
   'mci': {
     describe: 'maven clean install',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
+    choices: ['navApp', 'shopApp', 'macysUi', 'bloomiesAssets']
   },
   'mcist': {
     describe: 'maven clean install and skip tests',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
+    choices: ['navApp', 'shopApp', 'macysUi', 'bloomiesAssets']
   },
   'mcistd': {
     describe: 'maven clean install, skip tests and enforcer',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
+    choices: ['navApp', 'shopApp', 'macysUi', 'bloomiesAssets']
   },
   'mjr': {
     describe: 'maven jetty run',
