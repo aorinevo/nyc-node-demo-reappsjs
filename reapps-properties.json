@@ -1,24 +1,24 @@
 {
-  "username": "u071071",
+  "username": "u067265",
   "branch": "17C",
   "brand": "BCOM",
   "envName": "qa14codebloomingdales",
-  "domainPrefix": "mike",
+  "domainPrefix": "edlc",
   "proxyServer": {
-    "name": "nginx",
-    "path": "/usr/local/etc/nginx"
+    "name": "apache24",
+    "path": "/etc/apache2"
   },
   "paths": {
-    "shellRc": "/Users/u071071/.zshrc",
+    "shellRc": "/Users/u067265/.bash_profile",
     "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/u071071/Repositories/bloomies-ui-reapps",
-    "bloomiesCommonUi": "/Users/u071071/Repositories/BloomiesCommonUI/",
-    "macysCommonUi": "/Users/u071071/Repositories/MacysCommonUI/",
-    "bloomiesAssets": "/Users/u071071/Repositories/BloomiesAssets/",
-    "macysAssets": "/Users/u071071/Repositories/BloomiesAssets/",
-    "macysUi": "/Users/u071071/Repositories/MacysUI/",
-    "navApp": "/Users/u071071/Repositories/NavApp/",
-    "shopApp": "/Users/u071071/Repositories/ShopNServe/",
+    "bloomies-ui-reapps": "/Users/u067265/workspace/bloomies-ui-reapps",
+    "bloomiesCommonUi": "/Users/u067265/workspace/BloomiesCommonUI/",
+    "macysCommonUi": "/Users/u067265/workspace/MacysCommonUI/",
+    "bloomiesAssets": "/Users/u067265/workspace/BloomiesAssets/",
+    "macysAssets": "/Users/u067265/workspace/BloomiesAssets/",
+    "macysUi": "/Users/u067265/workspace/MacysUI/",
+    "navApp": "/Users/u067265/workspace/NavApp/",
+    "shopApp": "/Users/u067265/workspace/ShopNServe/",
     "authWeb": ""
   },
   "libPaths": {
