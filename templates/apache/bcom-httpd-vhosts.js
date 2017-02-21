@@ -60,7 +60,7 @@ Listen 443
 
     # SNS Assets
     ProxyPass /sns/signin/index.ognc https://${data.domainPrefix}.bloomingdales.fds.com:9443/account/signin
-    ProxyPass /web20/assets/script/yahoo/3.8.1/yui/yui.js https://${data.domainPrefix}.bloomingdales.fds.com/web20/assets/script/yahoo/3.8.1/yui/yui.js
+    ProxyPass /web20/assets/script/yahoo/3.8.1/yui/yui.js https://${data.domainPrefix}.bloomingdales.fds.com:9443/web20/assets/script/yahoo/3.8.1/yui/yui.js
     ProxyPass /sns/web20/assets https://${data.domainPrefix}.bloomingdales.fds.com:9443/sns/web20/assets
     ProxyPass /sns/web20 https://${data.domainPrefix}.bloomingdales.fds.com:9443/web20
     ProxyPass /sns/styles https://${data.domainPrefix}.bloomingdales.fds.com:9443/styles
