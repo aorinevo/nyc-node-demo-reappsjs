@@ -1,6 +1,6 @@
-var props = require('./reapps-properties.json'),
+var props = require('../../../reapps-properties.json'),
     fs = require('fs'),
-    template = require('./templates/nginx/bcom-server-blocks.js'),
+    template = require('../../../templates/nginx/bcom-server-blocks.js'),
     winston = require( 'winston'),
     shell = require('shelljs'),
     argv = require('yargs').argv;
