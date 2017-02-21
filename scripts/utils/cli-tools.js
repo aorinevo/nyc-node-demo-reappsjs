@@ -10,23 +10,23 @@ module.exports = require('yargs').options({
   },
   'mci': {
     describe: 'maven clean install',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
   },
   'mcist': {
     describe: 'maven clean install and skip tests',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
   },
   'mcistd': {
     describe: 'maven clean install, skip tests and enforcer',
-    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomeisAssets']
+    choices: ['navApp', 'shopApp', 'macsyUi', 'bloomiesAssets']
   },
   'mjr': {
     describe: 'maven jetty run',
-    choices: ['navApp', 'shopApp', 'bloomeisAssets']
+    choices: ['navApp', 'shopApp', 'bloomiesAssets']
   },
   'mjro': {
     describe: 'maven jetty run offline',
-    choices: ['navApp', 'shopApp', 'bloomeisAssets']
+    choices: ['navApp', 'shopApp', 'bloomiesAssets']
   },
   'branch': {
     alias: 'b',
