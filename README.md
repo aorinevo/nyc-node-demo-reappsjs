@@ -8,7 +8,7 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 | secure-m        | Partial - need to create and update .env file; and update index.html.  Now certs are included in the MobileCustomerAppUI (but not all) repo. |
 | Apache2         | Complete |
 | nginx           | Complete |
-| bashrc/zshrc    | Partial  |
+| bashrc/zshrc    | Complete |
 | Host file       | Complete |
 | Bloomies Assets | Complete |
 | tmp             | Complete |

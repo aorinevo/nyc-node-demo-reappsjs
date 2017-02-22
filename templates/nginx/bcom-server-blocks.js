@@ -10,8 +10,8 @@ module.exports = function( data ){
     location /sns/signin/index.ognc {
       proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/account/signin;
     }
-    location /sns/web20/assets {
-      proxy_pass /web20/assets/script/yahoo/3.8.1/yui/yui.js https://${data.domainPrefix}.bloomingdales.fds.com:9443/web20/assets/script/yahoo/3.8.1/yui/yui.js;
+    location /web20/assets/script/yahoo/3.8.1/yui/yui.js {
+      proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/web20/assets/script/yahoo/3.8.1/yui/yui.js;
     }
     location /sns/web20/assets {
       proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/sns/web20/assets;
