@@ -163,7 +163,7 @@ function getIp( sdpHost ){
       if( environment.length == 0 ){
         winston.log('error', 'Environment name '+ props.envName + ' is not in the list of '+ props.branch +' environments.');
         return false;
-      } else {
+      } else {        
         var ip = environment[0].jenkinsEnvMgmtBOs[0].environmentDetails.f5vip;
         winston.log('info', 'SDP_HOST='+ip);
         return ip;
@@ -222,6 +222,8 @@ function listEnvs( body ){
       winston.log('info', "\n" + table.toString());
       resolve(table);
     } else {
+      requestOptions.body.release = props.branch;
+      requestOptions.body.stream = props.brand;
       resolve(startAjaxCall( requestOptions ).catch(function( reason ){
         winston.log( 'error', reason.message );
       }).then( function( body ){
