@@ -174,10 +174,10 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts':
-      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName );
+      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
       break;
     case 'initServerBlocks': //need to test
-      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName );
+      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
