@@ -1,3 +1,7 @@
+// Modifying this file?  Please make sure to support nginx too!
+// ../nginx/bcom-server-blocks.js
+
+
 module.exports = function( data ){
   return `# BCOM Virtual Hosts for polaris/credit-gateway, SNS, NavApp, and MobileCustomerAppUI
 
@@ -14,8 +18,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -33,8 +37,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -50,8 +54,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName ${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -130,8 +134,8 @@ Listen 443
 
 <VirtualHost *:443>    
     SSLEngine on   
-    SSLCertificateFile "/private/etc/apache2/cert/cert.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/cert.key" 
+    SSLCertificateFile "${data.apacheRoot}/cert/cert.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/cert.key" 
     ServerName https://local.secure-m.${data.envName}.bloomingdales.fds.com
     ServerAlias https://local.secure-m.${data.envName}.bloomingdales.fds.com
     #ServerName ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$
