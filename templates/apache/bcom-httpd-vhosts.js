@@ -1,3 +1,7 @@
+// Modifying this file?  Please make sure to support nginx too!
+// ../nginx/bcom-server-blocks.js
+
+
 module.exports = function( data ){
   return `# BCOM Virtual Hosts for polaris/credit-gateway, SNS, NavApp, and MobileCustomerAppUI
 
@@ -14,8 +18,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -24,7 +28,6 @@ Listen 443
     ProxyPass /page http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:8888/page
     ProxyPass /img http://www.${data.envName}.fds.com/img
 </VirtualHost>
-
 <VirtualHost *:443>    
     SSLEngine on  
     SSLProxyEngine on 
@@ -33,8 +36,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -50,8 +53,8 @@ Listen 443
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
     ProxyPreserveHost off        
-    SSLCertificateFile "/private/etc/apache2/cert/server.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/server.key"
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName ${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -76,7 +79,8 @@ Listen 443
     ProxyPass /loyallist/benefits http://${data.domainPrefix}.bloomingdales.fds.com:9080/loyallist/benefits
     ProxyPass /loyallist https://${data.domainPrefix}.bloomingdales.fds.com:9443/loyallist
     ProxyPass /chkout https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout
-    ProxyPass /registry/ https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry/
+    ProxyPass /wedding-registry https://${data.domainPrefix}.bloomingdales.fds.com/wedding-registry/
+    ProxyPass /registry https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry
 
     # NavApp Assets
     ProxyPass /navapp/web20/assets http://${data.domainPrefix}.bloomingdales.fds.com:2202/web20/assets
@@ -130,8 +134,8 @@ Listen 443
 
 <VirtualHost *:443>    
     SSLEngine on   
-    SSLCertificateFile "/private/etc/apache2/cert/cert.crt"
-    SSLCertificateKeyFile "/private/etc/apache2/cert/cert.key" 
+    SSLCertificateFile "${data.apacheRoot}/cert/cert.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/cert.key" 
     ServerName https://local.secure-m.${data.envName}.bloomingdales.fds.com
     ServerAlias https://local.secure-m.${data.envName}.bloomingdales.fds.com
     #ServerName ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$

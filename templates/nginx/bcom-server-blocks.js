@@ -1,10 +1,13 @@
+// Modifying this file?  Please make sure to support nginx too!
+// ../apache/httpd-vhosts.js
+
 module.exports = function( data ){
   return `server {
     listen 443;
     server_name ${data.domainPrefix}.bloomingdales.fds.com;
     ssl on;
-    ssl_certificate /usr/local/etc/nginx/cert/server.crt;
-    ssl_certificate_key /usr/local/etc/nginx/cert/server.key;
+    ssl_certificate ${data.nginxRoot}/cert/server.crt;
+    ssl_certificate_key ${data.nginxRoot}/cert/server.key;
     
     # SNS Assets
     location /sns/signin/index.ognc {
@@ -153,12 +156,12 @@ module.exports = function( data ){
     listen 443;
     server_name ~^local\.secure\-m\.qa(?<serverId>[\d]+)code(?<brand>macys|bloomingdales)\.fds\.com$;
 
-    #access_log /usr/local/etc/nginx/logs/access.log;
-    #error_log /usr/local/etc/nginx/logs/error.log;
+    #access_log ${data.nginxRoot}/logs/access.log;
+    #error_log ${data.nginxRoot}/logs/error.log;
 
     ssl on;
-	  ssl_certificate /usr/local/etc/nginx/cert/cert.crt;
-	  ssl_certificate_key /usr/local/etc/nginx/cert/cert.key;
+	  ssl_certificate ${data.nginxRoot}/cert/cert.crt;
+	  ssl_certificate_key ${data.nginxRoot}/cert/cert.key;
 
     location /api {
       resolver 8.8.8.8;
