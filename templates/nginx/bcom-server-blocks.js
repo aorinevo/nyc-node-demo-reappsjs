@@ -58,8 +58,8 @@ module.exports = function( data ){
       proxy_pass https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout;
     }
     location /registry/ {
-      ProxyPass /wedding-registry https://${data.domainPrefix}.bloomingdales.fds.com/wedding-registry/
-      ProxyPass /registry https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry
+      Proxy_Pass /wedding-registry https://${data.domainPrefix}.bloomingdales.fds.com/wedding-registry/
+      Proxy_Pass /registry https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry
     }
     
     # NavApp Assets
