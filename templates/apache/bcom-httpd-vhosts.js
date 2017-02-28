@@ -79,7 +79,7 @@ Listen 443
     ProxyPass /loyallist/benefits http://${data.domainPrefix}.bloomingdales.fds.com:9080/loyallist/benefits
     ProxyPass /loyallist https://${data.domainPrefix}.bloomingdales.fds.com:9443/loyallist
     ProxyPass /chkout https://${data.domainPrefix}.bloomingdales.fds.com:9443/chkout
-    ProxyPass /wedding-registry https://${data.domainPrefix}.bloomingdales.fds.com/wedding-registry/
+    ProxyPass /wedding-registry https://${data.domainPrefix}.${data.envName}.fds.com/wedding-registry/
     ProxyPass /registry https://${data.domainPrefix}.bloomingdales.fds.com:9443/registry
 
     # NavApp Assets
