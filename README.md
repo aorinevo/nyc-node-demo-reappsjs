@@ -108,6 +108,12 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
        - initHttpdVHosts
 * Get ReappsJS version
   - API: `reapps -v`
+* Get NavApp zookeeper killswitches and values
+  - API: `re -a getNavAppKs`
+  - Description: Returns the contents of navApp zookeeper file.
+* Get ShopApp zookeeper killswitches and values
+  - API: `re -a getShopAppKs`
+  - Description: Returns the contents of shopApp zookeeper file.
 * Build navApp
   - API: `re --mci navApp` or `re --mcist navApp` or `re --mcistd navApp`
   - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
@@ -165,11 +171,11 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - API: `reapps --action=updateShopAppSdpHost`
   - Description: Updates SDP_HOST property in environment.properties
 * Add kill switches to killswitch.properties file for NavApp
-  - API: `reapps --action=updateNavAppTmp --killSwitchList=test,test2`
-  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist. Every item in the killSwitchList will be set to true.
+  - API: `reapps --action=updateNavAppTmp --killSwitchList=test=false,test2`
+  - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
 * Add kill switches to killswitch.properties file for ShopApp
-  - API: `reapps --action=updateShopAppTmp --killSwitchList=test,test2`
-  - Description: Adds `test=true` and `test2=true` to killswitch.properties file, unless kill switch names already exist. Every item in the killSwitchList will be set to true.
+  - API: `reapps --action=updateShopAppTmp --killSwitchList=test=false,test2`
+  - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
 * Initialize NavApp and ShopApp property files
   - API: `reapps --action=initEnvs`
   - Description: Bundles actions setDomainPrefix and updateSdpHost.
