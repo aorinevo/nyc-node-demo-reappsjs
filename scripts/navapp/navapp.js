@@ -2,7 +2,8 @@ var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
     props = require('../../reapps-properties.json'),
-    navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties");
+    navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties"),
+    navAppKillSwitchProperties = props.paths.tmp + `/properties/local/${props.brand.toLowerCase()}/navapp/killswitch.properties`;
     
 winston.cli();    
 
@@ -71,10 +72,9 @@ function updateProperties( properties ){
 }
 
 function getKs(){
-  fs.readFile( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', 'utf8', function (err,data) {
+  fs.readFile( navAppKillSwitchProperties, 'utf8', function (err,data) {
     if (err) {
       winston.log('error', err);
-      reject( err );
     }
     var result = data;
     winston.log('info', "\n" + result);

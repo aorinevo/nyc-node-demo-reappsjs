@@ -100,7 +100,7 @@ function updateTmp( pathToFile, killSwitchList ){
                name = nameValue[0],
                value = nameValue[1] || true;
            if( result.search( new RegExp('^'+ name +'=.+', "gm") ) < 0){
-             result += '\n' + name + '=true';
+             result += '\n' + name + '=' + value;
            } else {
              result = result.replace( new RegExp('^'+ name +'=.+', "gm"), `${name}=${value}`);
            }

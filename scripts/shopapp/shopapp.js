@@ -2,7 +2,8 @@ var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
     props = require('../../reapps-properties.json'),
-    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties");
+    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
+    shopAppKillSwitchProperties = props.paths.tmp + `/properties/local/${props.brand.toLowerCase()}/shopapp/killswitch.properties`;
     
 winston.cli(); 
 
@@ -54,10 +55,9 @@ function updateProperties( properties ){
 }
 
 function getKs(){
-  fs.readFile( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', 'utf8', function (err,data) {
+  fs.readFile( shopAppKillSwitchProperties, 'utf8', function (err,data) {
     if (err) {
       winston.log('error', err);
-      reject( err );
     }
     var result = data;
     winston.log('info', "\n" + result);
