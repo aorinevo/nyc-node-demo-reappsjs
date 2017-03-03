@@ -77,6 +77,12 @@ if( argv.version ){
 
 function actionHandler( action ){
   switch ( action ) {
+    case 'getNavAppKs':
+      navApp.get.killSwitches();
+      break;
+    case 'getShopAppKs':
+      shopApp.get.killSwitches();
+      break;      
     case 'getReappsPropsJson':
       winston.log('info', "\n" + prettyjson.render(props, options));
       break;

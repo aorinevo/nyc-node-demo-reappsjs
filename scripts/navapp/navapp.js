@@ -70,11 +70,26 @@ function updateProperties( properties ){
   return utils.updateAppProperty( navAppConfigProperties, properties );
 }
 
+function getKs(){
+  fs.readFile( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', 'utf8', function (err,data) {
+    if (err) {
+      winston.log('error', err);
+      reject( err );
+    }
+    var result = data;
+    winston.log('info', "\n" + result);
+  });
+  return this;
+}
+
 module.exports = {
   update: {
     pom: updatePom,
     web: utils.updateWebXml,
     sdp: updateSdpHost,
     properties: updateProperties
+  },
+  get: {
+    killSwitches: getKs
   }
 };

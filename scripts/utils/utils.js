@@ -96,8 +96,13 @@ function updateTmp( pathToFile, killSwitchList ){
         var result = data,
             message = "";
          killSwitchList.forEach(function( killSwitch ){
-           if( result.search( new RegExp('^'+ killSwitch +'=.+', "gm") ) < 0){
-             result += '\n' + killSwitch + '=true';
+           var nameValue = killSwitch.split("="),
+               name = nameValue[0],
+               value = nameValue[1] || true;
+           if( result.search( new RegExp('^'+ name +'=.+', "gm") ) < 0){
+             result += '\n' + name + '=true';
+           } else {
+             result = result.replace( new RegExp('^'+ name +'=.+', "gm"), `${name}=${value}`);
            }
          });
         fs.writeFile( pathToFile, result, 'utf8', function (err) {
