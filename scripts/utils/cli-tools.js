@@ -2,7 +2,7 @@ module.exports = require('yargs').options({
   'action': {
     alias: 'a',
     describe: 'action',
-    choices: ['initBox','listEnvs','initShopAppEnv','initNavAppEnv','initBloomiesAssets','initEnvs','initCertAndKey', 'initProxyServer','initShell', 'initHosts','updateSdpHost', 'updateShopAppSdpHost', 'updateNavAppSdpHost','initHttpdVhosts', 'initServerBlocks', 'initM2', 'getIp', 'getNavAppKs','getShopAppKs','getReappsPropsJson', 'updateNavAppPomXml', 'updateShopAppPomXml', 'updateShopAppTmp', 'updateNavAppTmp', 'updateShopAppWebXml', 'updateNavAppWebXml']
+    choices: ['getIp', 'getNavAppKs', 'getShopAppKs', 'getReappsPropsJson', 'initBloomiesAssets', 'initBox', 'initCertAndKey', 'initEnvs', 'initHosts', 'initHttpdVhosts', 'initM2', 'initNavAppEnv', 'initProxyServer', 'initServerBlocks', 'initShell', 'initShopAppEnv', 'listEnvs', 'runMacysUiServer', 'updateSdpHost', 'updateShopAppSdpHost', 'updateNavAppSdpHost', 'updateNavAppPomXml', 'updateShopAppPomXml', 'updateShopAppTmp', 'updateNavAppTmp', 'updateShopAppWebXml', 'updateNavAppWebXml']
   },
   'force':{
     alias: 'f',

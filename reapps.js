@@ -77,6 +77,9 @@ if( argv.version ){
 
 function actionHandler( action ){
   switch ( action ) {
+    case 'runMacysUiServer':
+      shell.exec( 'grunt' );
+      break;
     case 'getNavAppKs':
       navApp.get.killSwitches();
       break;

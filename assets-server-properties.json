@@ -1,0 +1,13 @@
+{
+    "base": "/Users/u060014/Repositories/MacysUI",
+    "watchDirs": ["src/bcom", "/src/common"],
+    "removeOptimization": true,
+    "keepOptimized": ["src/bcom/base/Common.js", "src/bcom/features/bops/BopsSelectedStore.js"],
+    "assetsDir": "/Users/u060014/Repositories/BloomiesAssets//bloomies.war",
+    "certificate": {
+        "dir": "/etc/apache2/cert",
+        "key": "server.key",
+        "cert": "server.crt"
+    },
+    "secure": true
+}
