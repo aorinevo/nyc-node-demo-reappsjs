@@ -10,15 +10,15 @@ winston.cli();
 function updatePom(paths, brand){
   var expectedSelectChannelConnector = "<connector implementation=\"org.mortbay.jetty.nio.SelectChannelConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
       expectedSslSocketConnector = "<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\"> \n <headerBufferSize>24000</headerBufferSize>",
-      expectedBloomiesUIAssetsLocation =  '<com.bloomies.webapp.BloomiesCommonUI.location>'+ paths.bloomiesCommonUi + 'src/main/webapp</com.bloomies.webapp.BloomiesCommonUI.location> \n \
-                 <com.bloomies.webapp.BloomiesAssets.location>'+ paths.bloomiesAssets +'bloomies.war</com.bloomies.webapp.BloomiesAssets.location>',
-      expectedMacysUIAssetsLocation =  '<com.macys.webapp.MacysCommonUI.location>'+ paths.macysCommonUi + 'src/main/webapp</com.macys.webapp.MacysCommonUI.location> \n \
-                <com.macys.webapp.MacysAssets.location>'+ paths.macysAssets +'macys.war</com.macys.webapp.MacysAssets.location>',                 
-      pathToProps = paths.navApp + (brand === "BCOM" ? "BloomiesNavApp/BloomiesNavAppWeb/pom.xml": "MacysNavApp/MacysNavAppWeb/pom.xml"),
+      expectedBloomiesUIAssetsLocation = `<com.bloomies.webapp.BloomiesCommonUI.location>${paths.bloomiesCommonUi}/src/main/webapp</com.bloomies.webapp.BloomiesCommonUI.location>
+      <com.bloomies.webapp.BloomiesAssets.location>${paths.bloomiesAssets}/bloomies.war</com.bloomies.webapp.BloomiesAssets.location>`,
+      expectedMacysUIAssetsLocation = `<com.macys.webapp.MacysCommonUI.location>${paths.macysCommonUi}/src/main/webapp</com.macys.webapp.MacysCommonUI.location>
+      <com.macys.webapp.MacysAssets.location>${paths.macysAssets}/macys.war</com.macys.webapp.MacysAssets.location>`,                 
+      pathToPom = paths.navApp + (brand === "BCOM" ? "/BloomiesNavApp/BloomiesNavAppWeb/pom.xml": "/MacysNavApp/MacysNavAppWeb/pom.xml"),
       result;
 
     return new Promise(function( resolve, reject ){
-      fs.readFile( pathToProps, 'utf8', function (err,data) {
+      fs.readFile( pathToPom, 'utf8', function (err,data) {
         if (err) {
           winston.log('error', err);
           reject( err );
@@ -43,7 +43,7 @@ function updatePom(paths, brand){
           result = result.replace("<connector implementation=\"org.mortbay.jetty.security.SslSocketConnector\">", expectedSslSocketConnector );
         }
 
-        fs.writeFile( pathToProps, result, 'utf8', function (err) {
+        fs.writeFile( pathToPom, result, 'utf8', function (err) {
           if (err) {
             winston.log('error', err);
             reject( err );
