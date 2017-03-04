@@ -78,7 +78,7 @@ if( argv.version ){
 function actionHandler( action ){
   switch ( action ) {
     case 'runMacysUiServer':
-      shell.exec( 'grunt' );
+      shell.exec( `cd ${props.paths["bloomies-ui-reapps"]} && grunt` );
       break;
     case 'getNavAppKs':
       navApp.get.killSwitches();
