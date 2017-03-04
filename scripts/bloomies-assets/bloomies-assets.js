@@ -3,12 +3,12 @@ var fs = require('fs'),
     reappProps = require('./../../reapps-properties.json'),
     macysUiPath = reappProps.paths.macysUi;
 
-function updatePomXml( username, pathToNavApp ){
+function updatePomXml( username, pathToRepo ){
   var lineBeforeInsert = `<!-- Do NOT Commit: You can uncomment these for your local development use and replace the values with your respective project paths.-->`,
       expectedLocations = `<com.bloomies.webapp.macysCSS.location>${macysUiPath}/macysCSS/target/classes</com.bloomies.webapp.macysCSS.location>
                            <com.bloomies.webapp.macysJS.location>${macysUiPath}/macysJS/target/classes</com.bloomies.webapp.macysJS.location>
                            <com.bloomies.webapp.macysTemplates.location>${macysUiPath}/macysTemplates/target/classes</com.bloomies.webapp.macysTemplates.location>`,
-      pathToProps = pathToNavApp + "pom.xml",
+      pathToProps = pathToRepo + "/pom.xml",
       result;
 
     return new Promise(function( resolve, reject ){

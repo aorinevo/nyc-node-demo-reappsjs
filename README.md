@@ -5,6 +5,7 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 |-----------------|----------|
 | NavApp          | Complete |
 | ShopApp         | Complete |
+| MacysUI Assets Server | Complete |
 | secure-m        | Partial - need to create and update .env file; and update index.html.  Now certs are included in the MobileCustomerAppUI (but not all) repo. |
 | Apache2         | Complete |
 | nginx           | Complete |
@@ -115,6 +116,9 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
 * Get ShopApp zookeeper killswitches and values
   - API: `re -a getShopAppKs`
   - Description: Returns the contents of shopApp zookeeper file.
+* Run MacysUI Assets Server
+  - API: `re -a runMacysUiServer`
+  - Description: Runs grunt server for MacysUI instead of BloomiesAssets.  After running the assets server one time, edit the assets-server-properties file to watch the directories where changes are being made. Note: Do not run both at the same time!
 * Build navApp
   - API: `re --mci navApp` or `re --mcist navApp` or `re --mcistd navApp`
   - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.

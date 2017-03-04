@@ -45,7 +45,7 @@ if( argv.mci || argv.mcist || argv.mcistd ){
         macysUi: "",
         bloomiesAssets: ""
       },
-      buildCommand = `cd ${props.paths[app]}${buildDirectories[app]} && mvn clean install `;
+      buildCommand = `cd ${props.paths[app]}/${buildDirectories[app]} && mvn clean install `;
   if( argv.mcist ){
     buildCommand += '-Dmaven.test.skip=true';
   }
@@ -63,7 +63,7 @@ if( argv.mjr || argv.mjro ){
         shopApp: "BCOM/BloomiesShopNServe",
         bloomiesAssets: ""
       },
-      runCommand = `cd ${props.paths[app]}${runDirectories[app]} && mvn jetty:run `;
+      runCommand = `cd ${props.paths[app]}/${runDirectories[app]} && mvn jetty:run `;
   if( argv.mjro ){
     runCommand += '-o';
   }
@@ -77,6 +77,9 @@ if( argv.version ){
 
 function actionHandler( action ){
   switch ( action ) {
+    case 'runMacysUiServer':
+      shell.exec( `cd ${props.paths["bloomies-ui-reapps"]} && grunt` );
+      break;
     case 'getNavAppKs':
       navApp.get.killSwitches();
       break;
@@ -140,14 +143,14 @@ function actionHandler( action ){
       break;      
     case 'updateNavAppWebXml':
       if( props.paths.navApp ){
-        return navApp.update.web( props.paths.navApp + "BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
+        return navApp.update.web( props.paths.navApp + "/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
     case 'updateShopAppWebXml':
       if( props.paths.shopApp ){
-        return navApp.update.web( props.paths.shopApp + "BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
+        return navApp.update.web( props.paths.shopApp + "/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
         winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
