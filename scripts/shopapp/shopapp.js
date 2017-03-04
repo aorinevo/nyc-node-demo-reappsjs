@@ -2,7 +2,7 @@ var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
     props = require('../../reapps-properties.json'),
-    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
+    shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "/BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "/MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
     shopAppKillSwitchProperties = props.paths.tmp + `/properties/local/${props.brand.toLowerCase()}/shopapp/killswitch.properties`;
     
 winston.cli(); 
@@ -11,7 +11,7 @@ function updatePom( paths ){
   var expectedBloomiesUIAssetsLocation =  '</com.macys.buildtools.maven.plugin.version>\n\
                 <com.bloomies.webapp.BloomiesCommonUI.location>'+ paths.bloomiesCommonUi + 'src/main/webapp</com.bloomies.webapp.BloomiesCommonUI.location> \n \
                 <com.bloomies.webapp.BloomiesAssets.location>'+ paths.bloomiesAssets +'bloomies.war</com.bloomies.webapp.BloomiesAssets.location>',
-      pathToProps = paths.shopApp + "BCOM/BloomiesShopNServe/pom.xml",
+      pathToProps = paths.shopApp + "/BCOM/BloomiesShopNServe/pom.xml",
       result;
 
     return new Promise(function( resolve, reject ){
