@@ -1,5 +1,5 @@
 ## Introduction
-ReappsJS is an NPM module that exposes a set of command-line utilities for installing, updating, building, and running Macy's applications. Checkout the Basic Usage section for an example use case.
+ReappsJS is an NPM module that exposes a set of command-line utilities for installing, updating, building, and running Macy's and Bloomingdale's applications. Checkout the Basic Usage section for an example use case.
 
 | Automation      | Status   |
 |-----------------|----------|
@@ -95,7 +95,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
 Note: Typically, `re -a initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re -a updateSdpHost`).
 
 ## API
-APIs support long and short flags (i.e. `re -a` instead of `re --action`).  There are two ways to run ReappsJS command, either `re ...` or `re ...` (i.e. `re -v` and `re -v`).
+APIs support long and short flags (i.e. `re -a` instead of `re --action`).  There are two ways to run ReappsJS command, either `re ...` or `reapps ...` (i.e. `re -v` and `reapps -v`).
 * Short flags dictionary
   - a: "action"
   - b: "branch"
