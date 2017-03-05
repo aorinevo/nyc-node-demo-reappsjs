@@ -27,13 +27,14 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In BloomiesAssets:
   - Updates pom.xml with paths to macysCSS, macysJS, and macysTemplates.
+* Runs grunt server in place of BloomiesAssets.  
 * In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
-  - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `--force`).
+  - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `-f`).
   - Updates hosts file. 
 * In Nginx (reapps is configured to use Apache by default.  Change proxyServer property in reapps-properties.json to use nginx.):
   - Adds cert/key files to cert directory in /usr/local/etc/nginx/cert (if cert directory does not exist, reapps.js creates it).
-  - Adds bcom-server-blocks.conf to /usr/local/etc/nginx/servers (if the file exist and the user wants the file to be overwritten, pass the flag `--force`).
+  - Adds bcom-server-blocks.conf to /usr/local/etc/nginx/servers (if the file exist and the user wants the file to be overwritten, pass the flag `-f`).
   - Updates hosts file.   
 * In home directory:
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
@@ -76,21 +77,21 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 
 ## Install ReappsJS Dependencies
 Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
-* Update reapps-properties.json with the path to your reappsjs, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
+* Update reapps-properties.json with the path to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.    
 * In reappsjs/ root, run `npm install -g && npm link`.
 * That's it!
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Users just starting out with reapps should run `reapps --action=initBox`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
+* Users just starting out with reapps should run `re -a initBox`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
 * run `mvn clean install -Dmaven.test.skip=true` in both NavApp/BloomiesNavApp and ShopNServe/BCOM roots.
 * run `mvn jetty:run -o` in both NavApp/BloomiesNavApp/BloomiesNavAppWeb and ShopNServe/BCOM/BloomiesShopNServe
 
-Note: Typically, `reapps --action=initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `reapps --action=updateSdpHost`).
+Note: Typically, `re -a initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re -a updateSdpHost`).
 
 ## API
-APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`).  There are two ways to run ReappsJS command, either `re ...` or `reapps ...` (i.e. `re -v` and `reapps -v`).
+APIs support long and short flags (i.e. `re -a` instead of `re --action`).  There are two ways to run ReappsJS command, either `re ...` or `re ...` (i.e. `re -v` and `re -v`).
 * Short flags dictionary
   - a: "action"
   - b: "branch"
@@ -102,7 +103,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - v: "version"
   - f: "force"
 * Initialize everything! (Need admin access)
-  - API: `reapps --action=initBox`
+  - API: `re -a initBox`
   - Description: runs the following actions
        - initM2
        - initEnvs
@@ -111,7 +112,7 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
        - initCertAndKey
        - initHttpdVHosts
 * Get ReappsJS version
-  - API: `reapps -v`
+  - API: `re -v`
 * Get NavApp zookeeper killswitches and values
   - API: `re -a getNavAppKs`
   - Description: Returns the contents of navApp zookeeper file.
@@ -134,66 +135,66 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
   - API: `re --mci bloomiesAssets` or `re --mcist bloomiesAssets` or `re --mcistd bloomiesAssets`
   - Description: mci builds the app, runs tests, and runs enforcer; mcist skips tests; and mcistd skips enforcer.
 * Initialize .m2 directory
-  - API: `reapps --action=initM2`
+  - API: `re -a initM2`
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
 * Initialize environments
-  - API: `reapps --action=initEnvs`
+  - API: `re -a initEnvs`
   - Description: runs the following actions
      - initNavAppEnv
      - initShopAppEnv
      - initBloomiesAssets
 * Initialize NavApp 
-  - API: `reapps --action=initNavAppEnv`
+  - API: `re -a initNavAppEnv`
   - Description: Updates navapp-config.properties from reapps-properties.json and runs the following actions
      - updateNavAppPomXml
      - updateNavAppWebXml
      - updateNavAppSdpHost
 * Initialize ShopApp
-  - API: `reapps --action=initShopAppEnv`
+  - API: `re -a initShopAppEnv`
   - Description: Updates environment.properties from reapps-properties.json and runs the following actions
      - updateNavAppPomXml
      - updateNavAppWebXml
      - updateNavAppSdpHost      
 * Get reapps-properties.json
-  - API: `reapps --action=getReappsPropsJson`
+  - API: `re -a getReappsPropsJson`
   - Description: Logs the contents of reapps-properties.json to the terminal.   
 * Get a list of environments
-  - API: `reapps --action=listEnvs`
+  - API: `re -a listEnvs`
   - Description: Logs a list of environments to the terminal.
 * Get IP for a qa environment
-  - API: `reapps --action=getIp`
+  - API: `re -a getIp`
   - Description: Logs the GCE SDP_HOST IP to the terminal.
 * Get IP for a GCE
-  - API: `reapps --action=getGceIp`
+  - API: `re -a getGceIp`
   - Description: Logs the environment SDP_HOST IP to the terminal.
 * Update SDP_HOST on both NavApp and ShopApp
-  - API: `reapps --action=updateSdpHost`
+  - API: `re -a updateSdpHost`
   - Description: runs the following actions
      - updateNavAppSdpHost
      - updateShopAppSdpHost
 * Update SDP_HOST on NavApp
-  - API: `reapps --action=updateNavAppSdpHost`
+  - API: `re -a updateNavAppSdpHost`
   - Description: Updates SDP_HOST property in navapp-config.properties
 * Update SDP_HOST on ShopApp
-  - API: `reapps --action=updateShopAppSdpHost`
+  - API: `re -a updateShopAppSdpHost`
   - Description: Updates SDP_HOST property in environment.properties
 * Add kill switches to killswitch.properties file for NavApp
-  - API: `reapps --action=updateNavAppTmp --killSwitchList=test=false,test2`
+  - API: `re -a updateNavAppTmp -k test=false,test2`
   - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
 * Add kill switches to killswitch.properties file for ShopApp
-  - API: `reapps --action=updateShopAppTmp --killSwitchList=test=false,test2`
+  - API: `re -a updateShopAppTmp -k test=false,test2`
   - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
 * Initialize NavApp and ShopApp property files
-  - API: `reapps --action=initEnvs`
+  - API: `re -a initEnvs`
   - Description: Bundles actions setDomainPrefix and updateSdpHost.
 * Update apache2 hosts file
-  - API: `reapps --action=initHosts`
+  - API: `re -a initHosts`
   - Description: Updates apache2 hosts file. 
 * Create/update apache2 bcom-httpd-vhosts.conf file
-  - API: `reapps --action=initHttpdVhosts`
+  - API: `re -a initHttpdVhosts`
   - Description: Creates or updates apache2 httpd-vhosts.conf file in others directory.   
 * Create/update nginx bcom-server-blocks.conf file
-  - API: `reapps --action=initServerBlocks`
+  - API: `re -a initServerBlocks`
   - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory.   
 * Options:
   - The following options override default properties in reapps-properties.json:
@@ -203,12 +204,12 @@ APIs support long and short flags (i.e. `reapps -a` instead of `reapps --action`
      - --domainPrefix overrides the domainPrefix property
   - To save properties passed as options to reapps-properties.json file, use the options flag --save.     
   - Example usage:
-     - `reapps --action=getIp --envName=qa6codebloomingdales`
+     - `re -a getIp -e qa6codebloomingdales`
      - Description: The command will override the default value of envName property in reapps-properties.json file with the value of the option --envName.  The command will log the IP address for qa6, provided that this is a qa environment name assigned to the branch and brand.
-     - `reapps --action=listEnvs --save --branch=17A`
+     - `re -a listEnvs -s -b 17A`
      - Description: The command will generate a list of environments for branch 17A and save the branch value to reapps-properties.json.
 
 ## Deprecated API
-  * `reapps --action=initProxy`
-  * `reapps --action=setShopAppDomainPrefix`
-  * `reapps --action=setNavAppDomainPrefix`
+  * `re -a initProxy`
+  * `re -a setShopAppDomainPrefix`
+  * `re -a setNavAppDomainPrefix`
