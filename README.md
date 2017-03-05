@@ -63,9 +63,9 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
   - [homebrew](http://brew.sh/)
   - git (brew install git)
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown and run the following
-    - `nvm install 4.7.2`
-    - `nvm use 4.7.2`
-    - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
+     - `nvm install 4.7.2`
+     - `nvm use 4.7.2`
+     - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
   - nginx (brew install nginx) - this is optional; the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
