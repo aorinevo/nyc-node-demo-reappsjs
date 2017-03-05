@@ -45,7 +45,7 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
 * Clone
-   - [bloomies-ui-reapps](https://code.devops.fds.com/CAP/bloomies-ui-reapps) (that's this repo!) 
+   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!) 
    - [NavApp](https://code.devops.fds.com/CAP/NavApp)
    - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
    - [MacysUI](https://code.devops.fds.com/CAP/MacysUI)
@@ -57,12 +57,14 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
 * Install system dependencies in the given order.
   - [homebrew](http://brew.sh/)
   - git (brew install git)
-  - node (brew install node)
-  - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown
+  - nvm installation instructions can be found here: https://github.com/creationix/nvm/blob/master/README.markdown and run the following
+    - `nvm install 4.7.2`
+    - `nvm use 4.7.2`
+    - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
   - nginx (brew install nginx) - this is optional; the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
-* Add git, node, and nvm to your system's PATH variable.  Depending on your shell, this file will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc file. To determine which is your shell, use `echo $0`. For example,
+* If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
 
@@ -73,10 +75,10 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
 
 ## Install ReappsJS Dependencies
-Clone the repo anywhere onto your computer, preferably to a directory called bloomies-ui-reapps.
-* Update reapps-properties.json with the path to your bloomies-ui-reapps, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
+Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
+* Update reapps-properties.json with the path to your reappsjs, NavApp, ShopApp, BloomiesCommonUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.    
-* In bloomies-ui-reapps/ root, run `npm install -g && npm link`.
+* In reappsjs/ root, run `npm install -g && npm link`.
 * That's it!
   
 ## Basic Usage
