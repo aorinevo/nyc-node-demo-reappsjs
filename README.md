@@ -27,7 +27,6 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Updates web.xml with block to avoid having to manually restart the server everytime a change is made.
 * In BloomiesAssets:
   - Updates pom.xml with paths to macysCSS, macysJS, and macysTemplates.
-* Runs grunt server in place of BloomiesAssets.  
 * In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
   - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `-f`).
@@ -40,6 +39,11 @@ ReappsJS is an NPM module that automates parts of the NavApp, ShopApp, BloomiesA
   - Creates settings.xml file in ~/.m2 directory (if ~/.m2 does not directory exist, it is created).
 * In shell (bash/zshrc):
   - Adds JAVA_HOME, MAVEN_HOME, MAVEN_OPTS, and M2_OPTS properties and values.
+* Build apps from anywhere in the command line.
+* Run apps from anywhere in the command line.
+* See changes in real time without having to recompile huge chunks of MacysUI:
+  - Uses grunt server in place of BloomiesAssets server.
+* Get list of QA environments based on branch and brand.
 * And more!!! (see API section)
 
 ## Install Environment Dependencies
