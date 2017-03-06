@@ -121,14 +121,14 @@ function actionHandler( action ){
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
       break;
-    case 'updateNavAppPomXml':
+    case 'updateNavAppPomXml': //Will be deprecated in v2.6.0
       if( props.paths.navApp ){
         return navApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppPomXml':
+    case 'updateShopAppPomXml': //Will be deprecated in v2.6.0
       if( props.paths.shopApp ){
         return shopApp.update.pom( props.paths, props.brand );
       } else {
@@ -145,14 +145,14 @@ function actionHandler( action ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;      
-    case 'updateNavAppWebXml':
+    case 'updateNavAppWebXml': //Will be deprecated in v2.6.0
       if( props.paths.navApp ){
         return navApp.update.web( props.paths.navApp + "/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppWebXml':
+    case 'updateShopAppWebXml': //Will be deprecated in v2.6.0
       if( props.paths.shopApp ){
         return navApp.update.web( props.paths.shopApp + "/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
@@ -180,17 +180,17 @@ function actionHandler( action ){
     case 'initBloomiesAssets': //moved to cli directory. Will be deprecated in favor of "re init bloomies-assets"
       require( './scripts/bloomies-assets/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
       break;
-    case 'initEnvs': 
+    case 'initEnvs': //Action will be deprecated in v2.6.0 in favor of "re init shopapp && re init navapp"
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
         actionHandler( 'initShopAppEnv' );
         actionHandler( 'initBloomiesAssets' );
       });
       break;
-    case 'initHttpdVhosts':
-      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
+    case 'initHttpdVhosts': //moved to cli directory. Will be deprecated in favor of "re init httpd-vhosts"
+      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;
-    case 'initServerBlocks': //need to test
-      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
+    case 'initServerBlocks': //need to test //moved to cli directory. Will be deprecated in favor of "re init server-blocks"
+      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){

@@ -1,5 +1,4 @@
 var props = require('../../../../reapps-properties.json'),
-    prettyjson = require('prettyjson'),
     bloomiesAssets = require('../../../bloomies-assets/bloomies-assets.js'),
     winston = require('winston');
 

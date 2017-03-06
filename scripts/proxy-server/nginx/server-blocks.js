@@ -2,12 +2,11 @@ var props = require('../../../reapps-properties.json'),
     fs = require('fs'),
     template = require('../../../templates/nginx/bcom-server-blocks.js'),
     winston = require( 'winston'),
-    shell = require('shelljs'),
-    argv = require('yargs').argv;
+    shell = require('shelljs');
 
-function updateServerBlocksFile( domainPrefix, envName, nginxRoot ){
+function updateServerBlocksFile( domainPrefix, envName, nginxRoot, force ){
   console.log(nginxRoot);
-  if( !fs.existsSync(`${nginxRoot}/servers/bcom-server-blocks.conf`) || argv.force ){
+  if( !fs.existsSync(`${nginxRoot}/servers/bcom-server-blocks.conf`) || force ){
     fs.writeFile( './bcom-server-blocks.conf', template( { domainPrefix: domainPrefix, envName: envName, nginxRoot: nginxRoot } ), 'utf8', function (err) {
       if (err) {
         return console.log(err);
