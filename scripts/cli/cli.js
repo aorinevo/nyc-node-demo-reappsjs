@@ -1,5 +1,4 @@
 module.exports = require('yargs')
-  .completion()
   .commandDir('../cli/cmds')
   .help()
   .options({

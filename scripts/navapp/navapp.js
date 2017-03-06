@@ -95,7 +95,7 @@ function buildNavApp( tests, enforcer ){
 }
 
 function runNavApp( offline ){
-  var runCommand = `cd ${props.paths.navApp}/BloomiesNavApp && mvn jetty:run `;
+  var runCommand = `cd ${props.paths.navApp}/BloomiesNavApp/BloomiesNavAppWeb && mvn jetty:run `;
   if( offline ){
     runCommand += '-o';
   }

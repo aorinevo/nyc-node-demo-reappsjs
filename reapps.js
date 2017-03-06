@@ -84,10 +84,10 @@ function actionHandler( action ){
     case 'runMacysUiServer': //moved to cli directory. Will be deprecated in favor of "re run macysUi"
       shell.exec( `cd ${props.paths["bloomies-ui-reapps"]} && grunt` );
       break;
-    case 'getNavAppKs':
+    case 'getNavAppKs'://moved to cli directory. Will be deprecated in favor of "re get ks navapp"
       navApp.get.killSwitches();
       break;
-    case 'getShopAppKs':
+    case 'getShopAppKs': //moved to cli directory. Will be deprecated in favor of "re get ks shopapp"
       shopApp.get.killSwitches();
       break;      
     case 'getReappsPropsJson': //moved to cli directory. Will be deprecated in favor of "re get reapps-props"
@@ -106,18 +106,18 @@ function actionHandler( action ){
     case 'initM2':  //moved to cli directory. Will be deprecated in favor of "re init m2"
       return require('./scripts/maven/m2.js').init();
       break;
-    case 'updateNavAppSdpHost':
+    case 'updateNavAppSdpHost': //moved to cli directory. Will be deprecated in favor of "re update sdp navapp"
       return navApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = response;
         return SDP_HOST;
       });
       break;
-    case 'updateShopAppSdpHost':
+    case 'updateShopAppSdpHost': //moved to cli directory. Will be deprecated in favor of "re update sdp shopapp"
       return shopApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = response;
       });
       break;      
-    case 'updateSdpHost':
+    case 'updateSdpHost': //Will be deprecated in v2.6.0
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
       break;
@@ -135,12 +135,12 @@ function actionHandler( action ){
         winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateNavAppTmp':
+    case 'updateNavAppTmp': //moved to cli directory. Will be deprecated in favor of "re update ks navapp -k ..."
       if( props.paths.tmp && argv.killSwitchList ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;
-    case 'updateShopAppTmp':
+    case 'updateShopAppTmp': //moved to cli directory. Will be deprecated in favor of "re update ks shopapp -k ..."
       if( props.paths.tmp && argv.killSwitchList ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
       }

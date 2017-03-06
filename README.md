@@ -95,7 +95,112 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
 
 Note: Typically, `re -a initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re -a updateSdpHost`).
 
-## API
+## New APIs (Still supporting old APIs until v2.8.0)
+APIs support long and short flags.  There are two ways to run ReappsJS command, either `re ...` or `reapps ...` (i.e. `re -v` and `reapps -v`).
+* Short flags dictionary
+  - b: "branch"
+  - e: "envName"
+  - k: "killSwitchList"
+  - r: "brand"
+  - h: "help"
+  - v: "version"
+  - f: "force"
+* Get ReappsJS version
+  - API: `re -v`
+* Get NavApp zookeeper killswitches and values
+  - API: `re get navapp ks`
+  - Description: Returns the contents of navApp zookeeper file.
+* Get ShopApp zookeeper killswitches and values
+  - API: `re get shopapp ks`
+  - Description: Returns the contents of shopApp zookeeper file.
+* Run MacysUI Assets Server
+  - API: `re run macysui`
+  - Description: Runs grunt server for MacysUI instead of BloomiesAssets.  After running the assets server one time, edit the assets-server-properties file to watch the directories where changes are being made. Note: Do not run both at the same time!
+* Build navApp
+  - API: `re build navapp`
+  - options: 
+    - `-t` run tests
+    - `-d` run with enforcer
+  - Description: Builds NavApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
+* Build shopApp
+  - API: `re build shopapp`
+  - options: 
+    - `-t` run tests
+    - `-d` run with enforcer
+  - Description: Builds ShopApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
+* Build macysUi
+  - API: `re build macysui`
+  - options: 
+    - `-t` run tests
+    - `-d` run with enforcer
+  - Description: Builds MacysUI, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
+* Build bloomiesAssets
+  - API: `re build bloomies-assets`
+  - options: 
+    - `-t` run tests
+    - `-d` run with enforcer
+  - Description: Builds BloomiesAssets, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
+* Initialize .m2 directory
+  - API: `re init m2`
+  - Description: Creates a ~/.m2 directory that contains ./settings.xml.
+* Initialize NavApp 
+  - API: `re init navapp`
+  - Description: Updates 
+     - navapp-config.properties from reapps-properties.json
+     - pom.xml
+     - web.xml
+     - SDP_HOST
+* Initialize ShopApp
+  - API: `re init shopapp`
+  - Description: Updates 
+     - environment.properties from reapps-properties.json
+     - pom.xml
+     - web.xml
+     - SDP_HOST    
+* Get reapps-properties.json
+  - API: `re get reapps-props`
+  - Description: Logs the contents of reapps-properties.json to the terminal.   
+* Get a list of environments
+  - API: `re get listEnvs`
+  - Description: Logs a list of environments to the terminal.
+* Get IP for a qa environment
+  - API: `re get sdp`
+  - Description: Logs the GCE SDP_HOST IP to the terminal.
+* Update SDP_HOST on NavApp
+  - API: `re update sdp navapp`
+  - Description: Updates SDP_HOST property in navapp-config.properties
+* Update SDP_HOST on ShopApp
+  - API: `re update sdp shopapp`
+  - Description: Updates SDP_HOST property in environment.properties
+* Add kill switches to killswitch.properties file for NavApp
+  - API: `re update ks navapp -k test=false,test2`
+  - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
+* Add kill switches to killswitch.properties file for ShopApp
+  - API: `re update ks navapp -k test=false,test2`
+  - Description: If kill switch `test` exists in the zookeeper file, then the command updates its value to false.  If test does not exist, then adds it and sets its value to `false`.  If no value is specified, then kill switch is set to `true`.
+* Update apache2 hosts file
+  - API: `re init hosts`
+  - Description: Updates apache2 hosts file. 
+* Create/update apache2 bcom-httpd-vhosts.conf file
+  - API: `re init httpd-vhosts`
+  - Description: Creates or updates apache2 httpd-vhosts.conf file in others directory.   
+* Create/update nginx bcom-server-blocks.conf file
+  - API: `re init server-blocks`
+  - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory.   
+* Options:
+  - The following options override default properties in reapps-properties.json:
+     - --branch overrides the branch property
+     - --brand overrides the brand property
+     - --envName overrides the envName property
+     - --domainPrefix overrides the domainPrefix property
+  - To save properties passed as options to reapps-properties.json file, use the options flag --save.     
+  - Example usage:
+     - `re get sdp -e qa6codebloomingdales`
+     - Description: The command will override the default value of envName property in reapps-properties.json file with the value of the option --envName.  The command will log the IP address for qa6, provided that this is a qa environment name assigned to the branch and brand.
+     - `re -a listEnvs -s -b 17A`
+     - Description: The command will generate a list of environments for branch 17A and save the branch value to reapps-properties.json.
+   
+## API (Please use the new set of APIs.  Will support up to v2.8.0)
 APIs support long and short flags (i.e. `re -a` instead of `re --action`).  There are two ways to run ReappsJS command, either `re ...` or `reapps ...` (i.e. `re -v` and `reapps -v`).
 * Short flags dictionary
   - a: "action"

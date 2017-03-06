@@ -2,23 +2,18 @@ var props = require('../../../../reapps-properties.json'),
   navApp = require('../../../navapp/navapp.js'),
   shopApp = require('../../../shopapp/shopapp.js'),
   winston = require('winston');
-exports.command = 'ks <app> [k]'
-exports.desc = 'Updates or adds kill switches from [k] to <app> zookeeper file'
-exports.builder = {
-  'killSwitchList': {
-    alias: 'k',
-    default: ""
-  }
-}
+exports.command = 'sdp <app>'
+exports.desc = 'Updates SDP_HOST property in <app> properties file'
+exports.builder = {}
 exports.handler = function (argv) {
   switch(argv.app){
     case 'navapp':
-      navApp.update.ks( argv.k );
+      navApp.update.sdp();
       break;
     case 'shopapp':   
-      shopApp.update.ks( argv.k );
+      shopApp.update.sdp();
       break;
     default:
-      winston.log('error', `There is no zookeeper file for ${argv.app}`);
+      winston.log('error', `${argv.app} should be either shopapp or navapp`);
   }  
 }
