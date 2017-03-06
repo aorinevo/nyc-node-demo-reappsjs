@@ -1,6 +1,5 @@
 var fs = require('fs'),
     shell = require('shelljs'),
-    argv = require('../utils/cli-tools.js'),
     props = require('../../reapps-properties.json'),
     winston = require('winston');
     

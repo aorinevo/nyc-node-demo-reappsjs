@@ -16,5 +16,5 @@ exports.handler = function (argv) {
       winston = require('winston'); 
       
   winston.log('info','Building BloomiesAssets!');
-  bloomiesAssets.build( argv.t, argv.d );
+  bloomiesAssets.build( !argv.t, !argv.d );
 }

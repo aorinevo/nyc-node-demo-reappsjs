@@ -17,5 +17,5 @@ exports.handler = function (argv) {
       winston = require('winston');
     
   winston.log('info','Building NavApp!');
-  navApp.build( argv.t, argv.d );
+  navApp.build( !argv.t, !argv.d );
 }

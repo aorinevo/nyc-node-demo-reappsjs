@@ -11,5 +11,5 @@ exports.builder = {
 }
 exports.handler = function (argv) {
   winston.log('info', 'Running ShopApp!');
-  shopApp.run( argv.offline );
+  shopApp.run( !argv.offline );
 }

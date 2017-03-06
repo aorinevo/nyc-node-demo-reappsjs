@@ -17,5 +17,5 @@ exports.handler = function (argv) {
       winston = require('winston');
     
   winston.log('info','Building ShopApp!');
-  shopApp.build( argv.t, argv.d );
+  shopApp.build( !argv.t, !argv.d );
 }
