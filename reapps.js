@@ -6,7 +6,7 @@ var jsonfile = require('jsonfile'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
     utils = require('./scripts/utils/utils.js'),
-    argv = require('./scripts/utils/cli-tools.js'),
+    argv = require('./scripts/cli/cli.js'),
     props = require('./reapps-properties.json'),
     navApp = require('./scripts/navapp/navapp.js'),
     shopApp = require('./scripts/shopapp/shopapp.js'),    
@@ -36,7 +36,9 @@ if( argv.domainPrefix ){
   props.domainPrefix = argv.domainPrefix;
 }
 
-//Build apps
+//Build apps 
+//moved to cli directory
+//Will be deprecated in favor of "re build <app> ..."
 if( argv.mci || argv.mcist || argv.mcistd ){
   var app = argv.mci || argv.mcist || argv.mcistd,
       buildDirectories = {
@@ -55,7 +57,9 @@ if( argv.mci || argv.mcist || argv.mcistd ){
   shell.exec(buildCommand);
 }
 
-//Run apps
+//Run apps 
+//moved to cli directory
+//Will be deprecated in favor of "re run <app> ..."
 if( argv.mjr || argv.mjro ){
   var app = argv.mjr || argv.mjro,
       runDirectories = {
@@ -77,85 +81,85 @@ if( argv.version ){
 
 function actionHandler( action ){
   switch ( action ) {
-    case 'runMacysUiServer':
+    case 'runMacysUiServer': //moved to cli directory. Will be deprecated in favor of "re run macysUi"
       shell.exec( `cd ${props.paths["bloomies-ui-reapps"]} && grunt` );
       break;
-    case 'getNavAppKs':
+    case 'getNavAppKs'://moved to cli directory. Will be deprecated in favor of "re get ks navapp"
       navApp.get.killSwitches();
       break;
-    case 'getShopAppKs':
+    case 'getShopAppKs': //moved to cli directory. Will be deprecated in favor of "re get ks shopapp"
       shopApp.get.killSwitches();
       break;      
-    case 'getReappsPropsJson':
+    case 'getReappsPropsJson': //moved to cli directory. Will be deprecated in favor of "re get reapps-props"
       winston.log('info', "\n" + prettyjson.render(props, options));
       break;
-    case 'getIp':
+    case 'getIp': //moved to cli directory. Will be deprecated in favor of "re get sdp"
       return utils.getIp( SDP_HOST ).then(function( result ){
         SDP_HOST = result;
       }); 
       break;
-    case 'listEnvs':
+    case 'listEnvs': //moved to cli directory. Will be deprecated in favor of "re get listEnvs"
       return utils.listEnvs( responseBody ).then(function( result ){
         responseBody = result;
       });   
       break;
-    case 'initM2':
+    case 'initM2':  //moved to cli directory. Will be deprecated in favor of "re init m2"
       return require('./scripts/maven/m2.js').init();
       break;
-    case 'updateNavAppSdpHost':
+    case 'updateNavAppSdpHost': //moved to cli directory. Will be deprecated in favor of "re update sdp navapp"
       return navApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = response;
         return SDP_HOST;
       });
       break;
-    case 'updateShopAppSdpHost':
+    case 'updateShopAppSdpHost': //moved to cli directory. Will be deprecated in favor of "re update sdp shopapp"
       return shopApp.update.sdp( SDP_HOST ).then(function( response ){
         SDP_HOST = response;
       });
       break;      
-    case 'updateSdpHost':
+    case 'updateSdpHost': //Will be deprecated in v2.8.0
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
       break;
-    case 'updateNavAppPomXml':
+    case 'updateNavAppPomXml': //Will be deprecated in v2.8.0
       if( props.paths.navApp ){
         return navApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppPomXml':
+    case 'updateShopAppPomXml': //Will be deprecated in v2.8.0
       if( props.paths.shopApp ){
         return shopApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update ShopApp pom.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateNavAppTmp':
+    case 'updateNavAppTmp': //moved to cli directory. Will be deprecated in favor of "re update ks navapp -k ..."
       if( props.paths.tmp && argv.killSwitchList ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/navapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;
-    case 'updateShopAppTmp':
+    case 'updateShopAppTmp': //moved to cli directory. Will be deprecated in favor of "re update ks shopapp -k ..."
       if( props.paths.tmp && argv.killSwitchList ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;      
-    case 'updateNavAppWebXml':
+    case 'updateNavAppWebXml': //Will be deprecated in v2.8.0
       if( props.paths.navApp ){
         return navApp.update.web( props.paths.navApp + "/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppWebXml':
+    case 'updateShopAppWebXml': //Will be deprecated in v2.8.0
       if( props.paths.shopApp ){
         return navApp.update.web( props.paths.shopApp + "/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
         winston.log('info', 'Trying to update ShopApp web.xml? Enter path to ShopApp repo in reapps-properties.json.');
       }
       break;      
-    case 'initNavAppEnv':
+    case 'initNavAppEnv': //moved to cli directory. Will be deprecated in favor of "re init navapp"
       return actionHandler( 'updateNavAppPomXml' ).then(function( result){
           return actionHandler( 'updateNavAppWebXml' );
         }).then( function( result ){
@@ -164,7 +168,7 @@ function actionHandler( action ){
           return actionHandler( 'updateNavAppSdpHost' );
         });
       break;
-    case 'initShopAppEnv':
+    case 'initShopAppEnv': //moved to cli directory. Will be deprecated in favor of "re init shopapp"
       return actionHandler( 'updateShopAppPomXml' ).then(function( result){
         return actionHandler( 'updateShopAppWebXml' );
       }).then(function( result ){
@@ -173,20 +177,20 @@ function actionHandler( action ){
         return actionHandler( 'updateShopAppSdpHost' );
       });
       break;
-    case 'initBloomiesAssets':
+    case 'initBloomiesAssets': //moved to cli directory. Will be deprecated in favor of "re init bloomies-assets"
       require( './scripts/bloomies-assets/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
       break;
-    case 'initEnvs': 
+    case 'initEnvs': //Action will be deprecated in v2.8.0 in favor of "re init shopapp && re init navapp"
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
         actionHandler( 'initShopAppEnv' );
         actionHandler( 'initBloomiesAssets' );
       });
       break;
-    case 'initHttpdVhosts':
-      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
+    case 'initHttpdVhosts': //moved to cli directory. Will be deprecated in favor of "re init httpd-vhosts"
+      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;
-    case 'initServerBlocks': //need to test
-      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path );
+    case 'initServerBlocks': //need to test //moved to cli directory. Will be deprecated in favor of "re init server-blocks"
+      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
@@ -232,7 +236,7 @@ function actionHandler( action ){
       //Need to use Promises
       require('./scripts/shell/shell.js').init( props.paths.shellRc, props );
       break;
-    case 'initHosts':
+    case 'initHosts': //moved to cli directory. Will be deprecated in favor of "re init hosts"
       require( './scripts/hosts/hosts.js').update('/etc/hosts');
       break;
     case 'getGceIp':

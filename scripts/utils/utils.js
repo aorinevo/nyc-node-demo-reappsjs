@@ -154,7 +154,10 @@ function updateWebXml( pathToWebXml ){
   });
 }
 
-function getIp( sdpHost ){
+function getIp( sdpHost, envName, branch ){
+  var envName = envName || props.envName,
+      branch = branch || props.branch;
+      
   if( sdpHost ){
     return sdpHost;
   } else {
@@ -166,7 +169,7 @@ function getIp( sdpHost ){
       });
 
       if( environment.length == 0 ){
-        winston.log('error', 'Environment name '+ props.envName + ' is not in the list of '+ props.branch +' environments.');
+        winston.log('error', 'Environment name '+ envName + ' is not in the list of '+ branch +' environments.');
         return false;
       } else {        
         var ip = environment[0].jenkinsEnvMgmtBOs[0].environmentDetails.f5vip;

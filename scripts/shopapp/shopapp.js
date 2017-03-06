@@ -1,6 +1,7 @@
 var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
+    shell = require('shelljs'),
     props = require('../../reapps-properties.json'),
     shopAppConfigProperties = props.paths.shopApp + (props.brand === 'BCOM' ? "/BCOM/BloomiesShopNServe/src/main/resources/META-INF/properties/common/environment.properties": "/MCOM/MacysShopNServe/src/main/resources/META-INF/properties/common/environment.properties"),
     shopAppKillSwitchProperties = `${props.paths.tmp}/properties/local/${props.brand.toLowerCase()}/shopapp/killswitch.properties`;
@@ -54,6 +55,36 @@ function updateProperties( properties ){
   return utils.updateAppProperty( shopAppConfigProperties, properties );
 }
 
+function updateKillSwitches( killSwitchList ){
+  return utils.updateTmp( `${props.paths.tmp}/properties/local/${props.brand.toLowerCase()}/shopapp/killswitch.properties`, killSwitchList.split(","));
+}
+
+function initShopAppEnv(){
+  this.update.pom( props.paths, props.brand );
+  this.update.web( `${props.paths.shopApp}/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml` );
+  this.update.properties( props.shopAppProperties );
+  this.update.sdp();
+}
+
+function buildShopApp(tests, enforcer){
+  var buildCommand = `cd ${props.paths.shopApp}/BCOM && mvn clean install `;
+  if( tests ){
+    buildCommand += '-Dmaven.test.skip=true';
+  }
+  if( enforcer ){
+    buildCommand += '-Denforcer.skip=true'
+  }
+  shell.exec(buildCommand);
+}
+
+function runShopApp( offline ){
+  var runCommand = `cd ${props.paths.shopApp}/BCOM/BloomiesShopNServe && mvn jetty:run `;
+  if( offline ){
+    runCommand += '-o';
+  }
+  shell.exec( runCommand );
+}
+
 function getKs(){
   fs.readFile( shopAppKillSwitchProperties, 'utf8', function (err,data) {
     if (err) {
@@ -70,8 +101,12 @@ module.exports = {
     pom: updatePom,
     web: utils.updateWebXml,
     sdp: updateSdpHost,
-    properties: updateProperties
+    ks: updateKillSwitches,
+    properties: updateProperties    
   },
+  init: initShopAppEnv,
+  build: buildShopApp,
+  run: runShopApp,
   get: {
     killSwitches: getKs
   }

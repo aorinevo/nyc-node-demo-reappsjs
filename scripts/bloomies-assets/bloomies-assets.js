@@ -1,5 +1,6 @@
 var fs = require('fs'),
     winston = require( 'winston'),
+    shell = require('shelljs'),
     reappProps = require('./../../reapps-properties.json'),
     macysUiPath = reappProps.paths.macysUi;
 
@@ -36,6 +37,21 @@ function updatePomXml( username, pathToRepo ){
     });
 }
 
+var initBloomiesAssets = updatePomXml;
+
+function buildBloomiesAssets( tests, enforcer ){
+  var buildCommand = `cd ${reappProps.paths.bloomiesAssets} && mvn clean install `;
+  if( tests ){
+    buildCommand += '-Dmaven.test.skip=true';
+  }
+  if( enforcer ){
+    buildCommand += '-Denforcer.skip=true'
+  }
+  shell.exec(buildCommand);
+}
+
 module.exports = {
-  update: updatePomXml
+  update: updatePomXml,
+  init: initBloomiesAssets,
+  build: buildBloomiesAssets
 };

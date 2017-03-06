@@ -1,6 +1,7 @@
 var utils = require('../utils/utils.js'),
     winston = require('winston'),
     fs = require('fs'),
+    shell = require('shelljs'),
     props = require('../../reapps-properties.json'),
     navAppConfigProperties = props.paths.navApp + (props.brand === 'BCOM' ? "/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties": "/MacysNavApp/MacysNavAppWeb/src/main/webapp/WEB-INF/classes/configuration/navapp-config.properties"),
     navAppKillSwitchProperties = props.paths.tmp + `/properties/local/${props.brand.toLowerCase()}/navapp/killswitch.properties`;
@@ -71,6 +72,36 @@ function updateProperties( properties ){
   return utils.updateAppProperty( navAppConfigProperties, properties );
 }
 
+function updateKillSwitches( killSwitchList ){
+  return utils.updateTmp( `${props.paths.tmp}/properties/local/${props.brand.toLowerCase()}/navapp/killswitch.properties`, killSwitchList.split(","));
+}
+
+function initNavAppEnv(){
+  this.update.pom( props.paths, props.brand );
+  this.update.web( `${props.paths.navApp}/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml`);
+  this.update.properties( props.navAppProperties );
+  this.update.sdp();
+}
+
+function buildNavApp( tests, enforcer ){
+  var buildCommand = `cd ${props.paths.navApp}/BloomiesNavApp && mvn clean install `;
+  if( tests ){
+    buildCommand += '-Dmaven.test.skip=true';
+  }
+  if( enforcer ){
+    buildCommand += '-Denforcer.skip=true'
+  }
+  shell.exec(buildCommand);
+}
+
+function runNavApp( offline ){
+  var runCommand = `cd ${props.paths.navApp}/BloomiesNavApp/BloomiesNavAppWeb && mvn jetty:run `;
+  if( offline ){
+    runCommand += '-o';
+  }
+  shell.exec( runCommand );
+}
+
 function getKs(){
   fs.readFile( navAppKillSwitchProperties, 'utf8', function (err,data) {
     if (err) {
@@ -87,8 +118,12 @@ module.exports = {
     pom: updatePom,
     web: utils.updateWebXml,
     sdp: updateSdpHost,
-    properties: updateProperties
+    properties: updateProperties,
+    ks: updateKillSwitches
   },
+  init: initNavAppEnv,
+  build: buildNavApp,
+  run: runNavApp,
   get: {
     killSwitches: getKs
   }
