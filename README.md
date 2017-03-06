@@ -79,7 +79,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
   - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
   - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
 
-## Install ReappsJS Dependencies
+## Install ReappsJS
 Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
 * Update reapps-properties.json with the path to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.    
