@@ -42,10 +42,10 @@ var initBloomiesAssets = updatePomXml;
 function buildBloomiesAssets( tests, enforcer ){
   var buildCommand = `cd ${reappProps.paths.bloomiesAssets} && mvn clean install `;
   if( tests ){
-    buildCommand += '-Dmaven.test.skip=true';
+    buildCommand += '-Dmaven.test.skip=true ';
   }
   if( enforcer ){
-    buildCommand += '-Denforcer.skip=true'
+   buildCommand += '-Denforcer.skip=true '
   }
   shell.exec(buildCommand);
 }

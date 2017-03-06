@@ -86,10 +86,10 @@ function initNavAppEnv(){
 function buildNavApp( tests, enforcer ){
   var buildCommand = `cd ${props.paths.navApp}/BloomiesNavApp && mvn clean install `;
   if( tests ){
-    buildCommand += '-Dmaven.test.skip=true';
+    buildCommand += '-Dmaven.test.skip=true ';
   }
   if( enforcer ){
-    buildCommand += '-Denforcer.skip=true'
+    buildCommand += '-Denforcer.skip=true '
   }
   shell.exec(buildCommand);
 }

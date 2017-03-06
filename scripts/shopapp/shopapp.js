@@ -69,10 +69,10 @@ function initShopAppEnv(){
 function buildShopApp(tests, enforcer){
   var buildCommand = `cd ${props.paths.shopApp}/BCOM && mvn clean install `;
   if( tests ){
-    buildCommand += '-Dmaven.test.skip=true';
+    buildCommand += '-Dmaven.test.skip=true ';
   }
   if( enforcer ){
-    buildCommand += '-Denforcer.skip=true'
+    buildCommand += '-Denforcer.skip=true '
   }
   shell.exec(buildCommand);
 }
