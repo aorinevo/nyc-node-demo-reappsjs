@@ -12,8 +12,7 @@ function buildMacysUi( tests, enforcer ){
   if( enforcer ){
     buildCommand += '-Denforcer.skip=true ';
   }
-  console.log(buildCommand);
-  //shell.exec(buildCommand);
+  shell.exec(buildCommand);
 }
 
 function runMacysUi( ){
