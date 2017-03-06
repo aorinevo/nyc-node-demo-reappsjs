@@ -11,9 +11,8 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  console.log(argv);
-  var props = require('../../../reapps-properties.json'),
-      bloomiesAssets = require( '../../bloomies-assets/bloomies-assets.js' ),
+  var props = require('../../../../reapps-properties.json'),
+      bloomiesAssets = require( '../../../bloomies-assets/bloomies-assets.js' ),
       winston = require('winston'); 
       
   winston.log('info','Building BloomiesAssets!');

@@ -1,5 +1,5 @@
 var props = require('../../../../reapps-properties.json'),
-    shopApp = require('../../../navApp/navapp.js'),
+    shopApp = require('../../../shopapp/shopapp.js'),
     winston = require('winston');
 
 exports.command = 'shopapp'

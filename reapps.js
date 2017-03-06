@@ -93,7 +93,7 @@ function actionHandler( action ){
     case 'getReappsPropsJson': //moved to cli directory. Will be deprecated in favor of "re get reapps-props"
       winston.log('info', "\n" + prettyjson.render(props, options));
       break;
-    case 'getIp':
+    case 'getIp': //moved to cli directory. Will be deprecated in favor of "re get sdp"
       return utils.getIp( SDP_HOST ).then(function( result ){
         SDP_HOST = result;
       }); 
@@ -103,7 +103,7 @@ function actionHandler( action ){
         responseBody = result;
       });   
       break;
-    case 'initM2':
+    case 'initM2':  //moved to cli directory. Will be deprecated in favor of "re init m2"
       return require('./scripts/maven/m2.js').init();
       break;
     case 'updateNavAppSdpHost':

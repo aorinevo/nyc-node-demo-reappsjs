@@ -1,5 +1,6 @@
 var fs = require('fs'),
     winston = require( 'winston'),
+    shell = require('shelljs'),
     reappProps = require('./../../reapps-properties.json'),
     macysUiPath = reappProps.paths.macysUi;
 
@@ -39,7 +40,7 @@ function updatePomXml( username, pathToRepo ){
 var initBloomiesAssets = updatePomXml;
 
 function buildBloomiesAssets( tests, enforcer ){
-  var buildCommand = `cd ${props.paths.bloomiesAssets} && mvn clean install `;
+  var buildCommand = `cd ${reappProps.paths.bloomiesAssets} && mvn clean install `;
   if( tests ){
     buildCommand += '-Dmaven.test.skip=true';
   }

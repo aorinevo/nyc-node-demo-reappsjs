@@ -72,9 +72,13 @@ function updateProperties( properties ){
   return utils.updateAppProperty( navAppConfigProperties, properties );
 }
 
+function updateKillSwitches( killSwitchList ){
+  return utils.updateTmp( `${props.paths.tmp}/properties/local/${props.brand.toLowerCase()}/navapp/killswitch.properties`, killSwitchList.split(","));
+}
+
 function initNavAppEnv(){
-  this.update.pom( props.paths );
-  this.update.web();
+  this.update.pom( props.paths, props.brand );
+  this.update.web( `${props.paths.navApp}/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml`);
   this.update.properties( props.navAppProperties );
   this.update.sdp();
 }
@@ -114,7 +118,8 @@ module.exports = {
     pom: updatePom,
     web: utils.updateWebXml,
     sdp: updateSdpHost,
-    properties: updateProperties
+    properties: updateProperties,
+    ks: updateKillSwitches
   },
   init: initNavAppEnv,
   build: buildNavApp,

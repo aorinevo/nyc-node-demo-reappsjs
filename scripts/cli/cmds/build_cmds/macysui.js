@@ -11,10 +11,9 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  console.log(argv);
-  var props = require('../../../reapps-properties.json'),
-      macysUi = require('../../macysui/macysui.js'),
-      winston = require('winston'),
+  var props = require('../../../../reapps-properties.json'),
+      macysUi = require('../../../macysui/macysui.js'),
+      winston = require('winston');
       
   winston.log('info','Building MacysUI!');
   macysUi.build( argv.t, argv.d );

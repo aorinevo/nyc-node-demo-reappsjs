@@ -12,8 +12,8 @@ exports.builder = {
 }
 exports.handler = function (argv) {
   console.log(argv);
-  var props = require('../../../reapps-properties.json'),
-      navApp = require('../../navApp/navapp.js'),
+  var props = require('../../../../reapps-properties.json'),
+      navApp = require('../../../navapp/navapp.js'),
       winston = require('winston');
     
   winston.log('info','Building NavApp!');

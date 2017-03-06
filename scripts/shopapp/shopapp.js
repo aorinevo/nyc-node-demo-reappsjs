@@ -55,9 +55,13 @@ function updateProperties( properties ){
   return utils.updateAppProperty( shopAppConfigProperties, properties );
 }
 
+function updateKillSwitches( killSwitchList ){
+  return utils.updateTmp( `${props.paths.tmp}/properties/local/${props.brand.toLowerCase()}/shopapp/killswitch.properties`, killSwitchList.split(","));
+}
+
 function initShopAppEnv(){
-  this.update.pom( props.paths );
-  this.update.web();
+  this.update.pom( props.paths, props.brand );
+  this.update.web( `${props.paths.shopApp}/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml` );
   this.update.properties( props.shopAppProperties );
   this.update.sdp();
 }
@@ -89,6 +93,7 @@ module.exports = {
     pom: updatePom,
     web: utils.updateWebXml,
     sdp: updateSdpHost,
+    ks: updateKillSwitches,
     properties: updateProperties    
   },
   init: initShopAppEnv,
