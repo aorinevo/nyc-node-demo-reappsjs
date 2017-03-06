@@ -117,18 +117,18 @@ function actionHandler( action ){
         SDP_HOST = response;
       });
       break;      
-    case 'updateSdpHost': //Will be deprecated in v2.6.0
+    case 'updateSdpHost': //Will be deprecated in v2.8.0
       actionHandler( 'updateNavAppSdpHost');
       actionHandler( 'updateShopAppSdpHost');
       break;
-    case 'updateNavAppPomXml': //Will be deprecated in v2.6.0
+    case 'updateNavAppPomXml': //Will be deprecated in v2.8.0
       if( props.paths.navApp ){
         return navApp.update.pom( props.paths, props.brand );
       } else {
         winston.log('info', 'Trying to update NavApp pom.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppPomXml': //Will be deprecated in v2.6.0
+    case 'updateShopAppPomXml': //Will be deprecated in v2.8.0
       if( props.paths.shopApp ){
         return shopApp.update.pom( props.paths, props.brand );
       } else {
@@ -145,14 +145,14 @@ function actionHandler( action ){
         utils.updateTmp( props.paths.tmp + '/properties/local/bcom/shopapp/killswitch.properties', argv.killSwitchList.split(","));
       }
       break;      
-    case 'updateNavAppWebXml': //Will be deprecated in v2.6.0
+    case 'updateNavAppWebXml': //Will be deprecated in v2.8.0
       if( props.paths.navApp ){
         return navApp.update.web( props.paths.navApp + "/BloomiesNavApp/BloomiesNavAppWeb/src/main/webapp/WEB-INF/web.xml" );
       } else {
         winston.log('info', 'Trying to update NavApp web.xml? Enter path to NavApp repo in reapps-properties.json.');
       }
       break;
-    case 'updateShopAppWebXml': //Will be deprecated in v2.6.0
+    case 'updateShopAppWebXml': //Will be deprecated in v2.8.0
       if( props.paths.shopApp ){
         return navApp.update.web( props.paths.shopApp + "/BCOM/BloomiesShopNServe/src/main/webapp/WEB-INF/web.xml");
       } else {
@@ -180,7 +180,7 @@ function actionHandler( action ){
     case 'initBloomiesAssets': //moved to cli directory. Will be deprecated in favor of "re init bloomies-assets"
       require( './scripts/bloomies-assets/bloomies-assets.js' ).update( props.username, props.paths.bloomiesAssets);
       break;
-    case 'initEnvs': //Action will be deprecated in v2.6.0 in favor of "re init shopapp && re init navapp"
+    case 'initEnvs': //Action will be deprecated in v2.8.0 in favor of "re init shopapp && re init navapp"
       return actionHandler( 'initNavAppEnv' ).then(function( response ){
         actionHandler( 'initShopAppEnv' );
         actionHandler( 'initBloomiesAssets' );
