@@ -77,6 +77,14 @@ function buildShopApp(tests, enforcer){
   shell.exec(buildCommand);
 }
 
+function runShopApp( offline ){
+  var runCommand = `cd ${props.paths.shopApp}/BCOM/BloomiesShopNServe && mvn jetty:run `;
+  if( offline ){
+    runCommand += '-o';
+  }
+  shell.exec( runCommand );
+}
+
 function getKs(){
   fs.readFile( shopAppKillSwitchProperties, 'utf8', function (err,data) {
     if (err) {
@@ -98,6 +106,7 @@ module.exports = {
   },
   init: initShopAppEnv,
   build: buildShopApp,
+  run: runShopApp,
   get: {
     killSwitches: getKs
   }
