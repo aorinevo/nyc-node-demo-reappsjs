@@ -37,7 +37,9 @@ function updatePomXml( username, pathToRepo ){
     });
 }
 
-var initBloomiesAssets = updatePomXml;
+function initBloomiesAssets(){ 
+  return updatePomXml( reappProps.username, reappProps.paths.bloomiesAssets );
+}
 
 function buildBloomiesAssets( tests, enforcer ){
   var buildCommand = `cd ${reappProps.paths.bloomiesAssets} && mvn clean install `;

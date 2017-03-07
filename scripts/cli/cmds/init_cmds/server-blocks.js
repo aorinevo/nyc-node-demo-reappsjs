@@ -1,10 +1,15 @@
 var props = require('../../../../reapps-properties.json'),
-    serverBlocks = require('../../../proxy-server/nginx/server-blocks.js'),
+    nginx = require('../../../proxy-server/nginx/nginx.js'),
     winston = require('winston');
 
-exports.command = 'server-blocks'
-exports.desc = `Creates or updates ${props.brand.toLowerCase()}-server-blocks in ${props.proxyServer.path} directory`
-exports.builder = {}
+exports.command = 'server-blocks [f]'
+exports.desc = `Creates or updates nginx ${props.brand.toLowerCase()}-server-blocks file. Use [f] to overwrite file.`
+exports.builder = {
+  force: {
+    alias: 'f',
+    default: false
+  }
+}
 exports.handler = function (argv) {
-  serverBlocks.update( props.domainPrefix, props.envName, props.proxyServer.path );
+  nginx.update.serverBlocks( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
 }

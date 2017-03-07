@@ -1,10 +1,15 @@
 var props = require('../../../../reapps-properties.json'),
-    httpdVhosts = require('../../../proxy-server/apache/httpd-vhosts.js'),
+    apache = require('../../../proxy-server/apache/apache.js'),
     winston = require('winston');
 
-exports.command = 'httpd-vhosts';
-exports.desc = `Creates or updates ${props.brand.toLowerCase()}-httpd-vhosts in ${props.proxyServer.path} directory`;
-exports.builder = {};
+exports.command = 'httpd-vhosts [f]';
+exports.desc = `Creates or updates apache ${props.brand.toLowerCase()}-httpd-vhosts file. Use [f] to overwrite file.` ;
+exports.builder = {
+  force: {
+    alias: 'f',
+    default: false
+  }
+}
 exports.handler = function (argv) {
-  httpdVhosts.update( props.domainPrefix, props.envName, props.proxyServer.path );
+  apache.update.httpdVhosts( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
 }
