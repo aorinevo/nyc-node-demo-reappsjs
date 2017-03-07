@@ -187,10 +187,10 @@ function actionHandler( action ){
       });
       break;
     case 'initHttpdVhosts': //moved to cli directory. Will be deprecated in favor of "re init httpd-vhosts"
-      require('./scripts/proxy-server/apache/httpd-vhosts.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
+      require('./scripts/proxy-server/apache/apache.js').update.httpdVhosts( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;
     case 'initServerBlocks': //need to test //moved to cli directory. Will be deprecated in favor of "re init server-blocks"
-      require('./scripts/proxy-server/nginx/server-blocks.js').update( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
+      require('./scripts/proxy-server/nginx/nginx.js').update.serverBlocks( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
       break;      
     case 'initBox':
       actionHandler( 'initEnvs' ).then(function( response ){
@@ -201,6 +201,7 @@ function actionHandler( action ){
       });
       break;
     case 'initCertAndKey': //need to test for nginx
+      //Moved to cli directory.  Will be deprecated.
       var proxyServer = require('./scripts/proxy-server/proxy-server.js'),
       secureMCrt = require('./templates/certificates/mobile-customer-app-ui.js')(),
       secureMKey = require('./templates/keys/mobile-customer-app-ui.js')(),
@@ -208,13 +209,13 @@ function actionHandler( action ){
       snsNavAppKey = require('./templates/keys/sns-nav-apps.js')(),
       pathToWrite = props.proxyServer.path + '/cert';
       //MobileCustomerAppUI certificate and key (secure-m)
-      proxyServer.updateCertOrKey( secureMCrt, pathToWrite, 'cert', 'crt' );
-      proxyServer.updateCertOrKey( secureMKey, pathToWrite, 'cert', 'key' );
+      proxyServer.updateCertOrKey( secureMCrt, pathToWrite, 'cert', 'crt', argv.force);
+      proxyServer.updateCertOrKey( secureMKey, pathToWrite, 'cert', 'key', argv.force );
       //ShopNServe and NavApp certificate and key
-      proxyServer.updateCertOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt' );
-      proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key' );
+      proxyServer.updateCertOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt', argv.force );
+      proxyServer.updateCertOrKey( snsNavAppKey, pathToWrite, 'server', 'key', argv.force );
       break;
-    case 'initProxyServer':      
+    case 'initProxyServer':     //Moved to cli directory.  Will be deprecated in favor of "re init proxy-server". 
       switch( props.proxyServer.name ){        
         case 'apache24':
           //Need to use Promises

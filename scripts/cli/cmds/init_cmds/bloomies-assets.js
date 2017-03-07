@@ -7,6 +7,6 @@ exports.desc = 'Initializes BloomiesAssets'
 exports.builder = {}
 exports.handler = function (argv) {
   winston.log('Initializing BloomiesAssets!');
-  bloomiesAssets.init( props.username, props.paths.bloomiesAssets );
+  bloomiesAssets.init();
 }
 
