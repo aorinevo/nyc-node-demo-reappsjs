@@ -89,10 +89,10 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object's properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file name depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Users just starting out with reapps should run `re init box`.  Make sure you get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
+* Users just starting out with reapps should run `re init box`.  Get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
 * Build ShopApp and skip tests and skip enforcer: `re build shopApp`
 * Run ShopApp offline: `re run shopApp`
-* Build NavApp, skip tests, and run offline: `re build navApp && re run navApp`
+* Build NavApp, skip tests, skip enforcer, and run offline: `re build navApp && re run navApp`
 
 Note: Typically, `re init box` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re get listEnvs`).
 
@@ -165,14 +165,14 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Build navApp
   - API: `re build navapp`
   - options: 
-    - `-t` run tests
-    - `-d` run with enforcer
+      - `-t` run tests
+      - `-d` run with enforcer
   - Description: Builds NavApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
 * Build shopApp
   - API: `re build shopapp`
   - options: 
-    - `-t` run tests
-    - `-d` run with enforcer
+      - `-t` run tests
+      - `-d` run with enforcer
   - Description: Builds ShopApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
 * Build macysUi
   - API: `re build macysui`
