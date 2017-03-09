@@ -13,7 +13,6 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  console.log(argv);
   var utils = require('../../../utils/utils.js'),
       winston = require('winston'),
       responseBody = null;

@@ -11,7 +11,6 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  console.log(argv);
   var props = require('../../../../reapps-properties.json'),
       shopApp = require('../../../shopapp/shopapp.js'),
       winston = require('winston');
