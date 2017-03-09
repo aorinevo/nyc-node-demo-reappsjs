@@ -6,5 +6,5 @@ exports.command = 'hosts'
 exports.desc = 'Initializes hosts file.'
 exports.builder = {}
 exports.handler = function (argv) {
-  hosts.update('/etc/hosts');
+  hosts.init('/etc/hosts');
 }

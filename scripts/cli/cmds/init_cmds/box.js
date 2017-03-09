@@ -3,6 +3,7 @@ var winston = require('winston'),
     m2 = require('../../../maven/m2.js'),
     apache = require('../../../proxy-server/apache/apache.js'),
     nginx = require('../../../proxy-server/nginx/nginx.js'),
+    hosts = require('../../../hosts/hosts.js'),
     bloomiesAssets = require('../../../bloomies-assets/bloomies-assets.js'),
     navApp = require('../../../navapp/navapp.js'),
     shopApp = require('../../../shopapp/shopapp.js');
@@ -18,6 +19,8 @@ exports.builder = {
 exports.handler = function (argv) {
   m2.init( argv.force );
   bloomiesAssets.init();
+  hosts.init( '/etc/hosts' );
+  shell.init( props.paths.shellRc, props );
   navApp.init();
   shopApp.init();
   switch( props.proxyServer.name ){        

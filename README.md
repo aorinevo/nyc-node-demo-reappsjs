@@ -66,18 +66,13 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
      - `nvm install 4.7.2`
      - `nvm use 4.7.2`
      - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
-  - nginx (brew install nginx) - this is optional; the default proxy server is apache.
+  - grunt-cli (npm install -g grunt-cli)
+  - Optional: nginx (brew install nginx) - the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
 * If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
   - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
   export PATH=$GIT_HOME/bin:$PATH```
-
-## Install Chrome Browser Plugins
-  - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
-  - [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US)
-  - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
-  - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
 
 ## Install ReappsJS
 Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
@@ -85,6 +80,12 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
 * Set the defaults for branch and brand in reapps-properties.json.    
 * In reappsjs/ root, run `npm install -g && npm link`.
 * That's it!
+
+## Install Chrome Browser Plugins
+  - [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
+  - [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US)
+  - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
+  - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.

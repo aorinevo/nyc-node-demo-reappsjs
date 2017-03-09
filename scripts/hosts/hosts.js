@@ -63,6 +63,7 @@ function updateHostsFile( pathToHostsFile ){
 }
 
 module.exports = {
-  update: updateHostsFile
+  update: updateHostsFile,
+  init: updateHostsFile
 };
 

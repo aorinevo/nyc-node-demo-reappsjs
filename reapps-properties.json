@@ -1,12 +1,12 @@
 {
   "username": "u060014",
-  "branch": "17D",
+  "branch": "17C",
   "brand": "BCOM",
-  "envName": "qa6codebloomingdales",
+  "envName": "qa14codebloomingdales",
   "domainPrefix": "aori",
   "proxyServer": {
-    "name": "nginx",
-    "path": "/usr/local/etc/nginx"
+    "name": "apache24",
+    "path": "/etc/apache2"
   },
   "paths": {
     "shellRc": "/Users/u060014/.zshrc",
