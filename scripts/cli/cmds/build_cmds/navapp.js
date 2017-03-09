@@ -1,5 +1,5 @@
 exports.command = 'navapp [t] [d]'
-exports.desc = 'Build NavApp'
+exports.desc = '[t] runs tests and [d] runs enforcer'
 exports.builder = {
   'test': {
     default: false,
