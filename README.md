@@ -88,9 +88,9 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
   - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
   
 ## Basic Usage
-* In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Users just starting out with reapps should run `re init box`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
-* Build ShopApp and skip tests: `re build shopApp`
+* In reapps-properties.json, update the paths object so that the object's properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file name depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
+* Users just starting out with reapps should run `re init box`.  Make sure you get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
+* Build ShopApp and skip tests and skip enforcer: `re build shopApp`
 * Run ShopApp offline: `re run shopApp`
 * Build NavApp, skip tests, and run offline: `re build navApp && re run navApp`
 
