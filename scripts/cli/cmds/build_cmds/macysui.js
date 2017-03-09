@@ -1,5 +1,5 @@
 exports.command = 'macysui [t] [d]'
-exports.desc = 'Build MacysUI'
+exports.desc = '[t] runs tests and [d] runs enforcer'
 exports.builder = {
   'test': {
     default: false,

@@ -1,5 +1,5 @@
 exports.command = 'bloomies-assets [t] [d]'
-exports.desc = 'Build BloomiesAssets'
+exports.desc = '[t] runs tests and [d] runs enforcer'
 exports.builder = {
   'test': {
     default: false,
