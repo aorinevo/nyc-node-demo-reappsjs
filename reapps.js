@@ -54,5 +54,7 @@ if( argv.save ){
   });
 } else {
   props = utils.parseProperties();
-  winston.log('error', 'ReappsJS no longer supports -a API.  See README.md for updated API.');
+  if( argv.action ){
+    winston.log('error', 'ReappsJS no longer supports -a API.  See README.md for updated API.');
+  }
 }
