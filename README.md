@@ -89,12 +89,12 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
   
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
-* Users just starting out with reapps should run `re -a initBox`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `initBox` action.
+* Users just starting out with reapps should run `re init box`.  Make sure you get admin access admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
 * Build ShopApp and skip tests: `re build shopApp`
 * Run ShopApp offline: `re run shopApp`
 * Build NavApp, skip tests, and run offline: `re build navApp && re run navApp`
 
-Note: Typically, `re -a initBox` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re -a updateSdpHost`).
+Note: Typically, `re init box` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re get listEnvs`).
 
 ## API
 APIs support long and short flags (i.e. `re -v` and `re --version`).
