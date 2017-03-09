@@ -1,7 +1,7 @@
 var fs = require('fs'),
     winston = require( 'winston'),
     shell = require('shelljs'),
-    reappProps = require('./../../reapps-properties.json'),
+    reappProps = require('../../reapps-properties.json'),
     macysUiPath = reappProps.paths.macysUi;
 
 function updatePomXml( username, pathToRepo ){
@@ -52,8 +52,17 @@ function buildBloomiesAssets( tests, enforcer ){
   shell.exec(buildCommand);
 }
 
+function runBloomiesAssets( offline ){
+  var runCommand = `cd ${reappProps.paths.bloomiesAssets} && mvn jetty:run `;
+  if( offline ){
+    runCommand += '-o';
+  }
+  shell.exec( runCommand );
+}
+
 module.exports = {
   update: updatePomXml,
   init: initBloomiesAssets,
-  build: buildBloomiesAssets
+  build: buildBloomiesAssets,
+  run: runBloomiesAssets
 };
