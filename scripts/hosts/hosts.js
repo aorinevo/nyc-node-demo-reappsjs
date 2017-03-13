@@ -21,7 +21,7 @@ function updateHostsFile( pathToHostsFile ){
         return data.indexOf("local.secure-m.qa" + value ) == -1;
       });
       
-      var missingQaEnvs2 = ["","www.","www1.", "credit-gateway.", "credit-drop-down."].filter(function(value){
+      var missingQaEnvs2 = ["","www.","www1.", "credit-gateway.", "customer-preferences."].filter(function(value){
         return data.indexOf( value + props.domainPrefix + ".bloomingdales.fds.com") == -1;
       });      
       

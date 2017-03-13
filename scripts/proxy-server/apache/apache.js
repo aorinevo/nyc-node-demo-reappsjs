@@ -10,10 +10,10 @@ var fs = require('fs'),
     snsNavAppKey = require('../../../templates/keys/sns-nav-apps.js')(),
     pathToWrite = props.proxyServer.path + '/cert';
 
-function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force ){
+function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force, ports ){
   return new Promise(function(resolve, reject){
     if( !fs.existsSync(`${apacheRoot}/other/bcom-httpd-vhosts.conf`) || force ){
-      fs.writeFile( './bcom-httpd-vhosts.conf', template( { domainPrefix: domainPrefix, envName: envName, apacheRoot: apacheRoot } ), 'utf8', function (err) {
+      fs.writeFile( './bcom-httpd-vhosts.conf', template( { domainPrefix: domainPrefix, envName: envName, apacheRoot: apacheRoot, ports: ports } ), 'utf8', function (err) {
          if (err){
           winston.log('error', err); 
           reject(err);

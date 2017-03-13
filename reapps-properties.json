@@ -19,7 +19,13 @@
     "macysUi": "/Users/u060014/Repositories/MacysUI",
     "navApp": "/Users/u060014/Repositories/NavApp",
     "shopApp": "/Users/u060014/Repositories/ShopNServe",
+    "creditGateway": "/Users/u060014/Repositories/Polaris/credit-gateway",
+    "customerPreferences": "/Users/u060014/Repositories/Polaris/customer-preferences",
     "authWeb": ""
+  },
+  "ports": {
+    "customerPreferences": 8081,
+    "creditGateway": 9999
   },
   "libPaths": {
     "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
