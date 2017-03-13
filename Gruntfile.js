@@ -390,12 +390,10 @@ console.log('test2');
                                 
                                 switch(url.split("/")[1]){
 	                                case "js":
-                                  console.log('test3');
 	                                	dir = props.base + "macysJS/target/classes";
 	                                	break;
 	                                case "styles":
 	                                case "templates":
-                                  console.log('test');
 	                                	dir = props.base + "macysJS";
 	                                	break;
 	                                default:
@@ -403,7 +401,7 @@ console.log('test2');
 	                                break;
                                 }
                                 
-                                console.log("serving", url, dir);
+                                //console.log("serving", url, dir);
                                 sIndex = serveIndex( dir );
                                 sStatic = serveStatic( dir );
                                 sStatic( req, res, function onNext( err ) {
