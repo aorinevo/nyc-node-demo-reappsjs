@@ -23,11 +23,31 @@ Listen 443
     ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
 
-    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi
-    ProxyPass /credit-gateway http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:8888/credit-gateway
-    ProxyPass /page http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:8888/page
+    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi    
+    ProxyPass /page http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/page
     ProxyPass /img http://www.${data.envName}.fds.com/img
+    ProxyPass / http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/
 </VirtualHost>
+
+<VirtualHost *:443>    
+    SSLEngine on  
+    SSLProxyEngine on 
+    SSLProxyVerify none 
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+    ProxyPreserveHost off        
+    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
+    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
+    ServerName customer-preferences.${data.domainPrefix}.bloomingdales.fds.com
+    ServerAlias www.customer-preferences.${data.domainPrefix}.bloomingdales.fds.com
+
+    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi    
+    ProxyPass /page http://customer-preferences.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page
+    ProxyPass /img http://www.${data.envName}.fds.com/img
+    ProxyPass / http://customer-preferences.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/
+</VirtualHost>
+
 <VirtualHost *:443>    
     SSLEngine on  
     SSLProxyEngine on 
