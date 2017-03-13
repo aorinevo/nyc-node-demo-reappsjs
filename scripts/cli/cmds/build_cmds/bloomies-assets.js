@@ -1,3 +1,7 @@
+var props = require('../../../../reapps-properties.json'),
+    bloomiesAssets = require( '../../../bloomies-assets/bloomies-assets.js' ),
+    winston = require('winston'); 
+
 exports.command = 'bloomies-assets [t] [d]'
 exports.desc = '[t] runs tests and [d] runs enforcer'
 exports.builder = {
@@ -11,10 +15,8 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  var props = require('../../../../reapps-properties.json'),
-      bloomiesAssets = require( '../../../bloomies-assets/bloomies-assets.js' ),
-      winston = require('winston'); 
-      
-  winston.log('info','Building BloomiesAssets!');
+  var messageTests = argv.t ? "running": "skipping",
+      messageEnforcer = argv.t ? "running" : "skipping";
+  winston.log('info',`Building BloomiesAssets, ${messageTests} tests, and ${messageEnforcer} enforcer!`);
   bloomiesAssets.build( !argv.t, !argv.d );
 }

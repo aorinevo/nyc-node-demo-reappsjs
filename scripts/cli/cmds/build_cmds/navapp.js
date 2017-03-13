@@ -18,5 +18,5 @@ exports.handler = function (argv) {
   var messageTests = argv.t ? "running": "skipping",
       messageEnforcer = argv.t ? "running" : "skipping";
   winston.log('info',`Building NavApp, ${messageTests} tests, and ${messageEnforcer} enforcer!`);
-  //navApp.build( !argv.t, !argv.d );
+  navApp.build( !argv.t, !argv.d );
 }
