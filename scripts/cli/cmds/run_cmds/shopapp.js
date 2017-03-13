@@ -10,6 +10,7 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  winston.log('info', 'Running ShopApp!');
+  var messageOffline = argv.o ? "online": "offline";
+  winston.log('info',`Running ShopApp ${messageOffline}!`);
   shopApp.run( !argv.offline );
 }

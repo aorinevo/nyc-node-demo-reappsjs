@@ -377,7 +377,7 @@ module.exports = function ( grunt ) {
                             serveIndex = require( 'serve-index' ),
                             sIndex, 
                             sStatic
-
+console.log('test2');
                         // terminate on Control-C
                         process.on( 'SIGINT', function () {
                             process.exit();
@@ -390,10 +390,12 @@ module.exports = function ( grunt ) {
                                 
                                 switch(url.split("/")[1]){
 	                                case "js":
+                                  console.log('test3');
 	                                	dir = props.base + "macysJS/target/classes";
 	                                	break;
 	                                case "styles":
 	                                case "templates":
+                                  console.log('test');
 	                                	dir = props.base + "macysJS";
 	                                	break;
 	                                default:
@@ -401,7 +403,7 @@ module.exports = function ( grunt ) {
 	                                break;
                                 }
                                 
-                                //console.log("serving", url, dir);
+                                console.log("serving", url, dir);
                                 sIndex = serveIndex( dir );
                                 sStatic = serveStatic( dir );
                                 sStatic( req, res, function onNext( err ) {

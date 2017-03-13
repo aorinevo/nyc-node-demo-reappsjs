@@ -10,6 +10,7 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  winston.log('info', 'Running BloomiesAssets!');
+  var messageOffline = argv.o ? "offline": "online";
+  winston.log('info',`Running BloomiesAssets ${messageOffline}!`);
   bloomiesAssets.run( argv.offline );
 }

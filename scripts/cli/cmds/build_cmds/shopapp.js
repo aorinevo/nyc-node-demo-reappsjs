@@ -1,3 +1,7 @@
+var props = require('../../../../reapps-properties.json'),
+    shopApp = require('../../../shopapp/shopapp.js'),
+    winston = require('winston');
+    
 exports.command = 'shopapp [t] [d]'
 exports.desc = '[t] runs tests and [d] runs enforcer'
 exports.builder = {
@@ -11,10 +15,8 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  var props = require('../../../../reapps-properties.json'),
-      shopApp = require('../../../shopapp/shopapp.js'),
-      winston = require('winston');
-    
-  winston.log('info','Building ShopApp!');
+  var messageTests = argv.t ? "running": "skipping",
+      messageEnforcer = argv.t ? "running" : "skipping";
+  winston.log('info',`Building ShopApp, ${messageTests} tests, and ${messageEnforcer} enforcer!`);
   shopApp.build( !argv.t, !argv.d );
 }
