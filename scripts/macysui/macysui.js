@@ -3,7 +3,7 @@ var winston = require('winston'),
     props = require('../../reapps-properties.json');
     
 winston.cli();    
-console.log('macysui');
+
 function buildMacysUi( tests, enforcer ){
   var buildCommand = `cd ${props.paths.macysUi} && mvn clean install `;
   if( tests ){
