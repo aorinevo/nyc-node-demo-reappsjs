@@ -11,5 +11,5 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  nginx.update.serverBlocks( props.domainPrefix, props.envName, props.proxyServer.path, argv.force );
+  nginx.update.serverBlocks( props.domainPrefix, props.envName, props.proxyServer.path, argv.force, props.ports );
 }

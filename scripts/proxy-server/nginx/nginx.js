@@ -13,7 +13,7 @@ var props = require('../../../reapps-properties.json'),
 function updateServerBlocksFile( domainPrefix, envName, nginxRoot, force, ports ){
   return new Promise(function(resolve, reject){
     if( !fs.existsSync(`${nginxRoot}/servers/bcom-server-blocks.conf`) || force ){
-      fs.writeFile( './bcom-server-blocks.conf', template( { domainPrefix: domainPrefix, envName: envName, nginxRoot: nginxRoot } ), 'utf8', function (err) {
+      fs.writeFile( './bcom-server-blocks.conf', template( { domainPrefix: domainPrefix, envName: envName, nginxRoot: nginxRoot, ports: ports } ), 'utf8', function (err) {
         if (err) {
           winston.log(err);
           reject(false);
