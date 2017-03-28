@@ -29,9 +29,9 @@ function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force, ports 
   });
 }
 
-function initProxyServer( domainPrefix, envName, apacheRoot, force ){
+function initProxyServer( domainPrefix, envName, apacheRoot, force, ports ){
   var update = this.update;
-  update.httpdVhosts( domainPrefix, envName, apacheRoot, force ).then(function(result){
+  update.httpdVhosts( domainPrefix, envName, apacheRoot, force, ports ).then(function(result){
     return update.certOrKey( secureMKey, pathToWrite, 'cert', 'key', 'apache24', force )
   }).then(function(result){
     return update.certOrKey( secureMCrt, pathToWrite, 'cert', 'crt', 'apache24', force );

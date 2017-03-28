@@ -10,7 +10,7 @@ var props = require('../../../reapps-properties.json'),
     snsNavAppKey = require('../../../templates/keys/sns-nav-apps.js')(),
     pathToWrite = props.proxyServer.path + '/cert';
 
-function updateServerBlocksFile( domainPrefix, envName, nginxRoot, force ){
+function updateServerBlocksFile( domainPrefix, envName, nginxRoot, force, ports ){
   return new Promise(function(resolve, reject){
     if( !fs.existsSync(`${nginxRoot}/servers/bcom-server-blocks.conf`) || force ){
       fs.writeFile( './bcom-server-blocks.conf', template( { domainPrefix: domainPrefix, envName: envName, nginxRoot: nginxRoot } ), 'utf8', function (err) {
@@ -30,9 +30,9 @@ function updateServerBlocksFile( domainPrefix, envName, nginxRoot, force ){
 }
 
 
-function initProxyServer( domainPrefix, envName, nginxRoot, force ){
+function initProxyServer( domainPrefix, envName, nginxRoot, force, ports ){
   var update = this.update;
-  update.serverBlocks( domainPrefix, envName, nginxRoot, force ).then(function(result){
+  update.serverBlocks( domainPrefix, envName, nginxRoot, force, ports ).then(function(result){
     return update.certOrKey( secureMKey, pathToWrite, 'cert', 'key', 'nginx', force )
   }).then(function(result){
     return update.certOrKey( secureMCrt, pathToWrite, 'cert', 'crt', 'nginx', force );
