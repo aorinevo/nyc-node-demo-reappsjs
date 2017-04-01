@@ -3,50 +3,12 @@
 
 
 module.exports = function( data ){
-  return `# BCOM Virtual Hosts for polaris/credit-gateway, SNS, NavApp, and MobileCustomerAppUI
+  return `# BCOM Virtual Hosts for polaris/credit-gateway, polaris/credit-preferences, SNS, NavApp, and MobileCustomerAppUI
 
 LoadModule ssl_module libexec/apache2/mod_ssl.so
 LoadModule vhost_alias_module libexec/apache2/mod_vhost_alias.so
 
 Listen 443
-
-<VirtualHost *:443>    
-    SSLEngine on  
-    SSLProxyEngine on 
-    SSLProxyVerify none 
-    SSLProxyCheckPeerCN off
-    SSLProxyCheckPeerName off
-    SSLProxyCheckPeerExpire off
-    ProxyPreserveHost off        
-    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
-    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
-    ServerName credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
-    ServerAlias www.credit-gateway.${data.domainPrefix}.bloomingdales.fds.com
-
-    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi    
-    ProxyPass /page http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/page
-    ProxyPass /img http://www.${data.envName}.fds.com/img
-    ProxyPass / http://credit-gateway.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/
-</VirtualHost>
-
-<VirtualHost *:443>    
-    SSLEngine on  
-    SSLProxyEngine on 
-    SSLProxyVerify none 
-    SSLProxyCheckPeerCN off
-    SSLProxyCheckPeerName off
-    SSLProxyCheckPeerExpire off
-    ProxyPreserveHost off        
-    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
-    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
-    ServerName customer-preferences.${data.domainPrefix}.bloomingdales.fds.com
-    ServerAlias www.customer-preferences.${data.domainPrefix}.bloomingdales.fds.com
-
-    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi    
-    ProxyPass /page http://customer-preferences.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page
-    ProxyPass /img http://www.${data.envName}.fds.com/img
-    ProxyPass / http://customer-preferences.${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/
-</VirtualHost>
 
 <VirtualHost *:443>    
     SSLEngine on  
@@ -80,6 +42,14 @@ Listen 443
 
     # Scene7 (Page titles for pages like Sign In page)
     ProxyPass /img/ts https://macys-o.scene7.com
+    
+    # Polaris pages
+    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi
+    ProxyPass /img http://www.${data.envName}.fds.com/img
+    ProxyPass /credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/credit-gateway
+    ProxyPass /page/credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/page/credit-gateway
+    ProxyPass /account/preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/account/preferences
+    ProxyPass /page/customer-preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page/customer-preferences
 
     # SNS Assets
     ProxyPass /sns/signin/index.ognc https://${data.domainPrefix}.bloomingdales.fds.com:9443/account/signin
