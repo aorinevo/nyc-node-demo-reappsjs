@@ -7,7 +7,11 @@ winston.cli();
 
 function getWriteDirectory( typeOfFile, pathToProj, brand, componentName){
   var  projName = pathToProj.split("/").slice(-1)[0];
-  return `${pathToProj}/${typeOfFile}/${projName}/${brand}/components/${componentName}`;
+  if( typeOfFile === 'test'){
+    return `${pathToProj}/${typeOfFile}/${brand}/components/${componentName}`;
+  } else {
+    return `${pathToProj}/${typeOfFile}/${projName}/${brand}/components/${componentName}`;
+  }
 }
 
 function writeFile( path, content ){
@@ -80,14 +84,31 @@ function newHbs( pathToProj, componentName ){
   });
 }
 
+function newSpec( pathToProj, componentName ){
+  var template = require('../../templates/polaris/spec.js'),
+      projName = pathToProj.split("/").slice(-1)[0],
+      writeDirectory,
+      promisesArray = [];
+
+  
+  ['common','bcom','mcom'].forEach(function(item){
+    writeDirectory = getWriteDirectory( 'tests', pathToProj, item, componentName );
+    shell.mkdir('-p', writeDirectory);
+    var promise = writeFile( `${writeDirectory}/${componentName}.spec.js`, template( {componentName: componentName, brand: item, projName: projName}) );
+    promisesArray.push(promise);
+  });
+  Promise.all(promisesArray).then(function(results){
+    winston.log('info','Created spec files in common, bcom, and mcom');
+  }).catch(function(reason){
+    console.log(reason);
+  });
+}
+
 module.exports = {
   new: {
-    // component: newComponent,
     view: newView,
     hbs: newHbs,
-    scss: newScss
-    // spec: newSpec
+    scss: newScss,
+    spec: newSpec
   }
-  // build: buildPageApp,
-  // run: runPageApp
 };
