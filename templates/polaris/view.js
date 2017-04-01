@@ -5,11 +5,11 @@ module.exports = function( data ){
     pageApp = require('pageApp'),
     Context = require('util/Context');
 
-var ${data.componentName}View = Marionette.ItemView.extend({
+var View = Marionette.ItemView.extend({
 //Add cool stuff here!
 });
 
-module.exports = ${data.componentName}View;`;
+module.exports = View;`;
   } else {
     return `define([
   'jquery',
