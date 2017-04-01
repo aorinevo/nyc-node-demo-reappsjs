@@ -14,7 +14,7 @@ module.exports = ${data.componentName}View;`;
     return `define([
   'jquery',
   'util/Context',
-  './../../../common/components/${data.componentName}View'
+  './../../../common/components/${data.componentName}/${data.componentName}View'
 ],
 function($, Context, ${data.componentName}View) {
   var ${data.componentName}View = ${data.componentName}View.extend({

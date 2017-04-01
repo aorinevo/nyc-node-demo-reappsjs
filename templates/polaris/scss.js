@@ -3,7 +3,7 @@ module.exports = function( data ){
     return `#some-cool-common-style-rule{
 }`;
   } else {
-    return `@import "../../common/${data.componentName}";
+    return `@import "../../../common/components/${data.componentName}/${data.componentName}";
 #some-cool-style-rule {
 }`}
 };

@@ -139,6 +139,12 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Initialize .m2 directory
   - API: `re init m2`
   - Description: Creates a ~/.m2 directory that contains ./settings.xml.
+* Add entry points to a polaris project
+  - `re new polaris --proj credit-gateway entry-point`
+  - Adds `app-bcom` and `app-mcom` entry points to credit-gateway project
+* Add new page level component to a polaris project
+  - `re new polaris --proj credit-gateway component -n AddCardToWalletOverlay`
+  - Adds AddCardToWalletOverlay.hbs, AddCardToWalletOverlay.scss, AddCardToWalletOverlay.spec.js, AddCardToWalletOverlay.scss, and AddCardToWalletOverlayView.js under directory bcom, common, and mcom.  If the directories do not exist, they are created.
 * Initialize NavApp 
   - API: `re init navapp`
   - Description: Updates 
