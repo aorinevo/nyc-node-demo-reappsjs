@@ -5,11 +5,11 @@ module.exports = function( data ){
     pageApp = require('pageApp'),
     Context = require('util/Context');
 
-var View = Marionette.ItemView.extend({
+var ${data.componentName}View = Marionette.ItemView.extend({
 //Add cool stuff here!
 });
 
-module.exports = View;`;
+module.exports = ${data.componentName}View;`;
   } else {
     return `define([
   'jquery',
@@ -17,14 +17,14 @@ module.exports = View;`;
   './../../../common/components/${data.componentName}/${data.componentName}View'
 ],
 function($, Context, ${data.componentName}View) {
-  var ${data.componentName}View = ${data.componentName}View.extend({
+  var View = ${data.componentName}View.extend({
     initialize: function(options) {
         ${data.componentName}View.prototype.initialize.call(this, options);
         console.log("initialize ${data.brand.toUpperCase()} ${data.componentName}View");
     }
   });
 
-  return ${data.componentName}View;
+  return View;
 });`
   }
 };
