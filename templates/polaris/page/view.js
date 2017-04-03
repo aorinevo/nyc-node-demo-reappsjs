@@ -6,7 +6,12 @@ module.exports = function( data ){
     Context = require('util/Context');
 
 var ${data.componentName}View = Marionette.ItemView.extend({
-//Add cool stuff here!
+  initialize: function(options) {
+      this.template = Context.load("credit-gateway-templates", './pages/${data.componentName}/${data.componentName}.hbs');
+  },
+  onRender: function(){
+    $("#container").append(this.$el);
+  }
 });
 
 module.exports = ${data.componentName}View;`;

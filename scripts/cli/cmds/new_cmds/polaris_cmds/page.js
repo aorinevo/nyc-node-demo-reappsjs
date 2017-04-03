@@ -27,16 +27,16 @@ exports.builder = {
   }
 }
 exports.handler = function (argv) {
-  // if(!argv.v){
-  //   component.new.view( props.paths[argv.proj], argv.n);
-  // }
-  // if(!argv.s){
-  //   component.new.scss( props.paths[argv.proj], argv.n);
-  // }
+  if(!argv.v){
+    component.new.view( props.paths[argv.proj], argv.n);
+  }
+  if(!argv.s){
+    component.new.scss( props.paths[argv.proj], argv.n);
+  }
   if(!argv.b){
     component.new.hbs( props.paths[argv.proj], argv.n);
   }
-  // if(!argv.t){
-  //   component.new.spec( props.paths[argv.proj], argv.n);
-  // }
+  if(!argv.t){
+    component.new.spec( props.paths[argv.proj], argv.n);
+  }
 }

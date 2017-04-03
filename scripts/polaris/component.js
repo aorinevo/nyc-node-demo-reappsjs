@@ -72,7 +72,7 @@ function newHbs( pathToProj, componentName ){
 
   
   ['common','bcom','mcom'].forEach(function(item){
-    writeDirectory = getWriteDirectory( 'views/partials', pathToProj, item, componentName );
+    writeDirectory = getWriteDirectory( 'views/templates', pathToProj, item, componentName );
     shell.mkdir('-p', writeDirectory);
     var promise = writeFile( `${writeDirectory}/${componentName}.hbs`, template( {componentName: componentName, brand: item}) );
     promisesArray.push(promise);

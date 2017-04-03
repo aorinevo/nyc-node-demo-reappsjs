@@ -27,7 +27,7 @@ function writeFile( path, content ){
 }
 
 function newView( pathToProj, pageName ){
-  var template = require('../../../templates/polaris/page/view.js'),
+  var template = require('../../../templates/polaris/pages/view.js'),
       writeDirectory,
       promisesArray = [];
 
@@ -47,7 +47,7 @@ function newView( pathToProj, pageName ){
 }
 
 function newScss( pathToProj, pageName ){
-  var template = require('../../../templates/polaris/page/scss.js'),
+  var template = require('../../../templates/polaris/pages/scss.js'),
       writeDirectory,
       promisesArray = [];
 
@@ -66,7 +66,7 @@ function newScss( pathToProj, pageName ){
 }
 
 function newHbs( pathToProj, pageName ){
-  var template = require('../../../templates/polaris/page/hbs.js'),
+  var template = require('../../../templates/polaris/pages/hbs.js'),
       writeDirectory,
       promisesArray = [];
 
@@ -85,7 +85,7 @@ function newHbs( pathToProj, pageName ){
 }
 
 function newSpec( pathToProj, pageName ){
-  var template = require('../../../templates/polaris/page/spec.js'),
+  var template = require('../../../templates/polaris/pages/spec.js'),
       projName = pathToProj.split("/").slice(-1)[0],
       writeDirectory,
       promisesArray = [];
