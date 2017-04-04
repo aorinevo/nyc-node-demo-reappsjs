@@ -26,82 +26,79 @@ function writeFile( path, content ){
     });
 }
 
-function newView( pathToProj, componentName ){
-  var template = require('../../templates/polaris/view.js'),
+function newHelper( pathToProj, templatePath, name, directory, fileName ){
+  var template = require( templatePath ),
       writeDirectory,
       promisesArray = [];
 
   
   ['common','bcom','mcom'].forEach(function(item){
-    writeDirectory = getWriteDirectory( 'src', pathToProj, item, componentName );
+    writeDirectory = getWriteDirectory( directory, pathToProj, item, name );
     shell.mkdir('-p', writeDirectory);
-    var promise = writeFile( `${writeDirectory}/${componentName}View.js`, template( {componentName: componentName, brand: item}) );
+    var promise = writeFile( `${writeDirectory}/${fileName}`, template( {componentName: name, brand: item}) );
     promisesArray.push(promise);
   });
   
-  Promise.all(promisesArray).then(function(results){
+  return Promise.all(promisesArray);
+}
+
+function deleteHelper( pathToProj, name, directory ){
+  var  projName = pathToProj.split("/").slice(-1)[0];
+  ['common','bcom','mcom'].forEach(function(item){
+    shell.exec(`rm -rf ${pathToProj}/${directory}/${projName}/${item}/components/${name}`);
+  });
+}
+
+function newView( pathToProj, name ){
+  newHelper(pathToProj, '../../templates/polaris/view.js', name, 'src', `${name}View.js`).then(function(results){
     winston.log('info','Created views files in common, bcom, and mcom');
   }).catch(function(reason){
-    console.log(reason);
+    winston.log('error', reason);
   });
 }
 
-function newScss( pathToProj, componentName ){
-  var template = require('../../templates/polaris/scss.js'),
-      writeDirectory,
-      promisesArray = [];
-
-  
-  ['common','bcom','mcom'].forEach(function(item){
-    writeDirectory = getWriteDirectory( 'scss', pathToProj, item, componentName );
-    shell.mkdir('-p', writeDirectory);
-    var promise = writeFile( `${writeDirectory}/${componentName}.scss`, template( {componentName: componentName, brand: item}) );
-    promisesArray.push(promise);
-  });
-  Promise.all(promisesArray).then(function(results){
+function newScss( pathToProj, name ){
+  newHelper(pathToProj, '../../templates/polaris/scss.js', name, 'scss', `${name}.scss`).then(function(results){
     winston.log('info','Created scss files in common, bcom, and mcom');
   }).catch(function(reason){
-    console.log(reason);
+    winston.log('error', reason);
   });
 }
 
-function newHbs( pathToProj, componentName ){
-  var template = require('../../templates/polaris/hbs.js'),
-      writeDirectory,
-      promisesArray = [];
-
-  
-  ['common','bcom','mcom'].forEach(function(item){
-    writeDirectory = getWriteDirectory( 'views/templates', pathToProj, item, componentName );
-    shell.mkdir('-p', writeDirectory);
-    var promise = writeFile( `${writeDirectory}/${componentName}.hbs`, template( {componentName: componentName, brand: item}) );
-    promisesArray.push(promise);
-  });
-  Promise.all(promisesArray).then(function(results){
+function newHbs( pathToProj, name ){
+  newHelper(pathToProj, '../../templates/polaris/hbs.js', name, 'views/templates', `${name}.hbs`).then(function(results){
     winston.log('info','Created hbs files in common, bcom, and mcom');
   }).catch(function(reason){
-    console.log(reason);
+    winston.log('error', reason);
   });
 }
 
-function newSpec( pathToProj, componentName ){
-  var template = require('../../templates/polaris/spec.js'),
-      projName = pathToProj.split("/").slice(-1)[0],
-      writeDirectory,
-      promisesArray = [];
-
-  
-  ['common','bcom','mcom'].forEach(function(item){
-    writeDirectory = getWriteDirectory( 'tests', pathToProj, item, componentName );
-    shell.mkdir('-p', writeDirectory);
-    var promise = writeFile( `${writeDirectory}/${componentName}.spec.js`, template( {componentName: componentName, brand: item, projName: projName}) );
-    promisesArray.push(promise);
-  });
-  Promise.all(promisesArray).then(function(results){
+function newSpec( pathToProj, name ){
+  newHelper(pathToProj, '../../templates/polaris/spec.js', name, 'tests', `${name}.spec.js`).then(function(results){
     winston.log('info','Created spec files in common, bcom, and mcom');
   }).catch(function(reason){
-    console.log(reason);
+    winston.log('error', reason);
   });
+}
+
+function deleteView( pathToProj, name ){
+  deleteHelper( pathToProj, name, 'src' );
+  winston.log('info', `Deleted ${name} views directory and files in common, bcom, and mcom`);
+}
+
+function deleteHbs( pathToProj, name ){
+  deleteHelper( pathToProj, name, 'views/templates' );
+  winston.log('info', `Deleted ${name} specs directory and files in common, bcom, and mcom`);
+}
+
+function deleteScss( pathToProj, name ){
+  deleteHelper( pathToProj, name, 'scss' );
+  winston.log('info', `Deleted ${name} scss directory and files in common, bcom, and mcom`);
+}
+
+function deleteSpec( pathToProj, name ){
+  deleteHelper( pathToProj, name, 'tests' );
+  winston.log('info', `Deleted ${name} specs directory and files in common, bcom, and mcom`);
 }
 
 module.exports = {
@@ -110,5 +107,11 @@ module.exports = {
     hbs: newHbs,
     scss: newScss,
     spec: newSpec
+  },
+  delete: {
+    view: deleteView,
+    hbs: deleteHbs,
+    scss: deleteScss,
+    spec: deleteSpec
   }
 };

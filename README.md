@@ -3,6 +3,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 
 | Automation      | Status   |
 |-----------------|----------|
+| Polaris         | Partial - create/delete page-level polaris components/pages  |
 | NavApp          | Complete |
 | ShopApp         | Complete |
 | MacysUI Assets Server | Complete |
@@ -142,9 +143,18 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Add entry points to a polaris project
   - `re new polaris --proj credit-gateway entry-point`
   - Adds `app-bcom` and `app-mcom` entry points to credit-gateway project
-* Add new page level component to a polaris project
-  - `re new polaris --proj credit-gateway component -n AddCardToWalletOverlay`
-  - Adds AddCardToWalletOverlay.hbs, AddCardToWalletOverlay.scss, AddCardToWalletOverlay.spec.js, AddCardToWalletOverlay.scss, and AddCardToWalletOverlayView.js under directory bcom, common, and mcom.  If the directories do not exist, they are created.
+* Create page level component to a polaris project
+  - `re new polaris --proj credit-gateway component -n AnotherComponent`
+  - Adds hbs, scss, spec, and view under directory bcom/components/AnotherComponent, common/components/AnotherComponent, and mcom/components/AnotherComponent.  If the directories do not exist, they are created.
+* Create page level page to a polaris project
+  - `re new polaris --proj credit-gateway page -n AnotherPage`
+  - Adds hbs, scss, spec, and view under directory bcom/pages/AnotherPage, common/pages/AnotherPage, and mcom/pages/AnotherPage.  If the directories do not exist, they are created.
+* Delete page level component of a polaris project
+  - `re delete polaris --proj credit-gateway component -n AnotherComponent`
+  - Deletes directories bcom/components/AnotherComponent, common/components/AnotherComponent, and mcom/components/AnotherComponent in views/templates, scss, src, and tests.
+* Delete page level page of a polaris project  
+  - `re delete polaris --proj credit-gateway page -n AnotherPage`
+  - Deletes directories bcom/pages/AnotherPage, common/pages/AnotherPage, and mcom/pages/AnotherPage in views/templates, scss, src, and tests.
 * Initialize NavApp 
   - API: `re init navapp`
   - Description: Updates 
