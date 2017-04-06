@@ -1,3 +1,3 @@
 module.exports = function( data ){
-  return `<div>Here is your freshly minted hbs partial</div>`;
+  return `<div style="font-size: 40px;">Here is your freshly minted ${data.componentName} Component</div>`;
 };

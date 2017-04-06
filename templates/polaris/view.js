@@ -6,7 +6,11 @@ module.exports = function( data ){
     Context = require('util/Context');
 
 var ${data.componentName}View = Marionette.ItemView.extend({
-//Add cool stuff here!
+  el: "",
+  initialize: function(options) {
+      Context.load("credit-gateway", './components/${data.componentName}/${data.componentName}.scss');
+      this.template = Context.load("credit-gateway-templates", './components/${data.componentName}/${data.componentName}.hbs');
+  }
 });
 
 module.exports = ${data.componentName}View;`;
