@@ -1,4 +1,5 @@
 var winston = require('winston'),
+    shell = require('../../../shell/shell.js'),
     props = require('../../../../reapps-properties.json'),
     m2 = require('../../../maven/m2.js'),
     apache = require('../../../proxy-server/apache/apache.js'),
