@@ -44,7 +44,7 @@ Listen 443
     ProxyPass /img/ts https://macys-o.scene7.com
     
     # Polaris pages
-    ProxyPass /xapi http://www.${data.envName}.fds.com/xapi
+    ProxyPass /xapi https://www.${data.envName}.fds.com/xapi
     ProxyPass /img http://www.${data.envName}.fds.com/img
     ProxyPass /credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/credit-gateway
     ProxyPass /page/credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/page/credit-gateway
