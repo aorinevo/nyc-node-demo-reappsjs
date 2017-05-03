@@ -123,7 +123,13 @@ Listen 443
 </VirtualHost>  
 
 <VirtualHost *:443>    
-    SSLEngine on   
+    SSLEngine on
+    SSLProxyEngine on 
+    SSLProxyVerify none 
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+    ProxyPreserveHost off   
     SSLCertificateFile "${data.apacheRoot}/cert/cert.crt"
     SSLCertificateKeyFile "${data.apacheRoot}/cert/cert.key" 
     ServerName https://local.secure-m.${data.envName}.fds.com
