@@ -31,7 +31,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * In Apache:
   - Adds cert/key files to cert directory in /etc/apache2/cert (if cert directory does not exist, reapps.js creates it).
   - Adds bcom-httpd-vhosts.conf to /etc/apache2/other (if the file exist and the user wants the file to be overwritten, pass the flag `-f`).
-  - Updates hosts file. 
+  - Updates hosts file.
 * In Nginx (reapps is configured to use Apache by default.  Change proxyServer property in reapps-properties.json to use nginx.):
   - Adds cert/key files to cert directory in /usr/local/etc/nginx/cert (if cert directory does not exist, reapps.js creates it).
   - Adds bcom-server-blocks.conf to /usr/local/etc/nginx/servers (if the file exist and the user wants the file to be overwritten, pass the flag `-f`).
@@ -51,7 +51,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
 * Clone
-   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!) 
+   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)
    - [NavApp](https://code.devops.fds.com/CAP/NavApp)
    - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
    - [MacysUI](https://code.devops.fds.com/CAP/MacysUI)
@@ -72,7 +72,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
 * If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
-  - ```export GIT_HOME='/usr/local/Cellar/git/2.11.0'
+  - ```export GIT_HOME='/usr/local/Cellar/git/2.13.0'
   export PATH=$GIT_HOME/bin:$PATH```
 
 ## Install ReappsJS
@@ -87,7 +87,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
   - [Modify Headers](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US)
   - [Coremetrics Bar](https://chrome.google.com/webstore/detail/coremetrics-bar-for-chrom/llegcghmokaemodgdddnchiijfdbfnlg)
   - [Signal Inspector](https://chrome.google.com/webstore/detail/signal-inspector/plhigdejmcnjiljpefhbcmllngmmjggp?hl=en)
-  
+
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object's properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file name depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
 * Users just starting out with reapps should run `re init box`.  Get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
@@ -155,50 +155,50 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Delete page level page of a polaris project  
   - `re delete polaris --proj credit-gateway page -n AnotherPage`
   - Deletes directories bcom/pages/AnotherPage, common/pages/AnotherPage, and mcom/pages/AnotherPage in views/templates, scss, src, and tests.
-* Initialize NavApp 
+* Initialize NavApp
   - API: `re init navapp`
-  - Description: Updates 
+  - Description: Updates
      - navapp-config.properties from reapps-properties.json
      - pom.xml
      - web.xml
      - SDP_HOST
 * Initialize ShopApp
   - API: `re init shopapp`
-  - Description: Updates 
+  - Description: Updates
      - environment.properties from reapps-properties.json
      - pom.xml
      - web.xml
      - SDP_HOST
 * Update apache2 hosts file
   - API: `re init hosts`
-  - Description: Updates apache2 hosts file. 
+  - Description: Updates apache2 hosts file.
 * Create/update apache2 bcom-httpd-vhosts.conf file
   - API: `re init httpd-vhosts`
   - Description: Creates or updates apache2 httpd-vhosts.conf file in others directory.   
 * Create/update nginx bcom-server-blocks.conf file
   - API: `re init server-blocks`
-  - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory. 
+  - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory.
 * Build navApp
   - API: `re build navapp`
-  - options: 
+  - options:
       - `-t` run tests
       - `-d` run with enforcer
   - Description: Builds NavApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
 * Build shopApp
   - API: `re build shopapp`
-  - options: 
+  - options:
       - `-t` run tests
       - `-d` run with enforcer
   - Description: Builds ShopApp, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
 * Build macysUi
   - API: `re build macysui`
-  - options: 
+  - options:
       - `-t` run tests
       - `-d` run with enforcer
   - Description: Builds MacysUI, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.
 * Build bloomiesAssets
   - API: `re build bloomies-assets`
-  - options: 
+  - options:
       - `-t` run tests
       - `-d` run with enforcer
   - Description: Builds BloomiesAssets, runs tests if `t` flag is present, and runs enforcer if `d` flag is present.  
