@@ -48,9 +48,14 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * And more!!! (see API section)
 
 ## Install Environment Dependencies
+* Get Admin access
+   - Open Macy's Self Service and login
+   - Go to 'MCOM Demo' under Categories
+   - Click 'ACCEPT' under 'Make Me Admin'
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
 * Clone
+   - Optional: create 'Repositories' folder in root directory
    - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)
    - [NavApp](https://code.devops.fds.com/CAP/NavApp)
    - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
@@ -60,6 +65,41 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
    - [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m)
    - BloomiesAssets
      - cli command: `svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/`
+* Optional: Setup iTerm
+   - Change shell path
+     - In Terminal open preferences
+     - Under General select Shell open with: Command (complete path):
+     - Set path to `/bin/zsh`
+   - Install iterm2 and set preferences. Download: https://www.iterm2.com/downloads.html (download the stable release) With admin access, move app into your Applications folder
+   - Change default shell to zsh over bash and set theme (I use Dark Background).
+     - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
+   - Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
+   - Clone and install Prezto.
+   - Copy and paste the following bash command:
+      ```
+      git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+        setopt EXTENDED_GLOB
+          for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+            ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+          done
+       ```
+   - If you are getting errors, like file already exists, you can delete all files that start with .z from ~/
+   - Install your favorite IDE (I use Atom).
+     - Option 1: Using brew cask
+       1. Install [homebrew](http://brew.sh/)
+       2. run: `brew cask install atom`
+     - Option 2: Downloading binaries from atom.io
+       1. Download dmg from https://atom.io/
+       2. With admin access, move app into your Applications folder
+       3. In Atom, Atom -> Install Shell Commands
+   - Change the theme in ~/.zpreztorc to steeef (Line 95, at time of writing this doc)
+Notes:
+   - If you are using sublime, make sure to add an alias in ~/.zshrc file:
+       ```
+       #Applications
+       alias sublime="open -a /Applications/Sublime.app"
+       ```
+   - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
 * Install system dependencies in the given order.
   - [homebrew](http://brew.sh/)
   - git (brew install git)
@@ -67,19 +107,19 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
      - `nvm install 4.7.2`
      - `nvm use 4.7.2`
      - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
+  - If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
+     - ```export GIT_HOME='/usr/local/Cellar/git/2.13.0'
+       export PATH=$GIT_HOME/bin:$PATH```
   - grunt-cli (npm install -g grunt-cli)
   - Optional: nginx (brew install nginx) - the default proxy server is apache.
   - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
   - maven (brew install maven)
-* If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
-  - ```export GIT_HOME='/usr/local/Cellar/git/2.13.0'
-  export PATH=$GIT_HOME/bin:$PATH```
 
 ## Install ReappsJS
 Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
 * Update reapps-properties.json with the path to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos.
 * Set the defaults for branch and brand in reapps-properties.json.    
-* In reappsjs/ root, run `npm install -g && npm link`.
+* In reappsjs/ root, run `npm link`.
 * That's it!
 
 ## Install Chrome Browser Plugins
@@ -91,6 +131,7 @@ Clone the repo anywhere onto your computer, preferably to a directory called rea
 ## Basic Usage
 * In reapps-properties.json, update the paths object so that the object's properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file name depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
 * Users just starting out with reapps should run `re init box`.  Get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
+* Source (run: `source ~/.zshrc` ) or restart all terminal sessions after `re init box`. Alternatively you can restart your computer.
 * Build ShopApp and skip tests and skip enforcer: `re build shopApp`
 * Run ShopApp offline: `re run shopApp`
 * Build NavApp, skip tests, skip enforcer, and run offline: `re build navApp && re run navApp`
