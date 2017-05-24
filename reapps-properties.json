@@ -1,9 +1,9 @@
 {
-  "username": "u073485",
+  "username": "u060014",
   "branch": "17I",
   "brand": "BCOM",
   "envName": "qa8codebloomingdales",
-  "domainPrefix": "james",
+  "domainPrefix": "aori",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
