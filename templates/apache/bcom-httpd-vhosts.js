@@ -20,23 +20,6 @@ Listen 443
     ProxyPreserveHost off        
     SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
     SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
-    ServerName credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
-    ServerAlias www.credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com
-
-    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:9876/styles
-    ProxyPass / http://credit-drop-down.${data.domainPrefix}.bloomingdales.fds.com:3000
-</VirtualHost>
-
-<VirtualHost *:443>    
-    SSLEngine on  
-    SSLProxyEngine on 
-    SSLProxyVerify none 
-    SSLProxyCheckPeerCN off
-    SSLProxyCheckPeerName off
-    SSLProxyCheckPeerExpire off
-    ProxyPreserveHost off        
-    SSLCertificateFile "${data.apacheRoot}/cert/server.crt"
-    SSLCertificateKeyFile "${data.apacheRoot}/cert/server.key"
     ServerName ${data.domainPrefix}.bloomingdales.fds.com
     ServerAlias www.${data.domainPrefix}.bloomingdales.fds.com
 
@@ -46,10 +29,15 @@ Listen 443
     # Polaris pages
     ProxyPass /xapi https://www.${data.envName}.fds.com/xapi
     ProxyPass /img http://www.${data.envName}.fds.com/img
-    ProxyPass /credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/credit-gateway
-    ProxyPass /page/credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/page/credit-gateway
+    ProxyPass /my-credit http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/my-credit
+    ProxyPass /feature/credit-gateway http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/feature/credit-gateway
+    ProxyPass /assets http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/assets
+    ProxyPass /static http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/static
     ProxyPass /account/preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/account/preferences
     ProxyPass /page/customer-preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page/customer-preferences
+    
+    #Ajax
+    ProxyPass /creditservice/respgateway https://www.${data.envName}.fds.com/creditservice/respgateway
 
     # SNS Assets
     ProxyPass /sns/signin/index.ognc https://${data.domainPrefix}.bloomingdales.fds.com:9443/account/signin
