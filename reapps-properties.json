@@ -1,9 +1,9 @@
 {
-  "username": "u060014",
-  "branch": "17I",
+  "username": "u073485",
+  "branch": "17J",
   "brand": "BCOM",
-  "envName": "qa8codebloomingdales",
-  "domainPrefix": "aori",
+  "envName": "qa9codebloomingdales",
+  "domainPrefix": "james",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
@@ -52,6 +52,10 @@
     {
       "name": "local_killswitch_overwrite_in_dev_mode_enabled",
       "value": false
+    },
+    {
+      "name": "hnf_service_host",
+      "value": "https://www.qa8codebloomingdales.fds.com"
     }
   ],
   "shopAppProperties": [
@@ -70,6 +74,14 @@
     {
       "name": "local_killswitch_overwrite_in_dev_mode_enabled",
       "value": false
+    },
+    {
+      "name": "hnf_assets_host",
+      "value": "https://www.qa8codebloomingdales.fds.com"
+    },
+    {
+      "name": "hnf_service_host",
+      "value": "https://www.qa8codebloomingdales.fds.com"
     }
   ]
 }
