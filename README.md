@@ -55,16 +55,16 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * Open xcode app and accept the license agreement.
 * Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
 * Optional: Setup iTerm
-  - Change shell path
-  - In Terminal open preferences
-  - Under General select Shell open with: Command (complete path):
-  - Set path to `/bin/zsh`
+  - Change Terminal shell path
+    - In Terminal open preferences
+    - Under General select Shell open with: Command (complete path):
+    - Set path to `/bin/zsh`
   - Install iterm2 and set preferences. Download: https://www.iterm2.com/downloads.html (download the stable release) With admin access, move app into your Applications folder
-  - Change default shell to zsh over bash and set theme (I use Dark Background).
-  - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
-  - Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
+    - Change default shell to zsh over bash and set theme (I use Dark Background).
+      - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
+      - Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
   - Clone and install Prezto.
-  - Copy and paste the following bash command:
+    - Copy and paste the following bash command:
     ```
       git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
       setopt EXTENDED_GLOB
@@ -72,23 +72,23 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
     ```
-  - If you are getting errors, like file already exists, you can delete all files that start with .z from ~/
+    - If you are getting errors, like file already exists, you can delete all files that start with .z from ~/
   - Install your favorite IDE (I use Atom).
-  - Option 1: Using brew cask
-    1. Install [homebrew](http://brew.sh/)
-    2. run: `brew cask install atom`
-  - Option 2: Downloading binaries from atom.io
-    1. Download dmg from https://atom.io/
-    2. With admin access, move app into your Applications folder
-    3. In Atom, Atom -> Install Shell Commands
+    - Option 1: Using brew cask
+      1. Install [homebrew](http://brew.sh/)
+      2. run: `brew cask install atom`
+      - Option 2: Downloading binaries from atom.io
+      1. Download dmg from https://atom.io/
+      2. With admin access, move app into your Applications folder
+      3. In Atom, Atom -> Install Shell Commands
   - Change the theme in ~/.zpreztorc to steeef (Line 95, at time of writing this doc)
 Notes:
-  - If you are using sublime, make sure to add an alias in ~/.zshrc file:
+    - If you are using sublime, make sure to add an alias in ~/.zshrc file:
      ```
       #Applications
       alias sublime="open -a /Applications/Sublime.app"
      ```
-  - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
+     - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
 * Install homebrew and git
   - [homebrew](http://brew.sh/)
   - git `brew install git`
