@@ -47,24 +47,28 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * Get list of QA environments based on branch and brand.
 * And more!!! (see API section)
 
-## Install Environment Dependencies
-* Get Admin access
+## Installing Environment Dependencies
+* Get Admin access (<b>Note:</b> Optional. Applies only to BCOM Laptops. Skip this and proceed to 'Add SSH' keys if you have a non BCOM laptop/desktop.)
   - Open Macy's Self Service and login
   - Go to 'MCOM Demo' under Categories
   - Click 'ACCEPT' under 'Make Me Admin'
-* Open xcode app and accept the license agreement.
-* Add ssh [keys](https://code.devops.fds.com/profile/keys) to Gitlab.
-* Optional: Setup iTerm
-  - Change Terminal shell path
-    - In Terminal open preferences
-    - Under General select Shell open with: Command (complete path):
-    - Set path to `/bin/zsh`
+* Open xcode app and accept the license agreement. (Optional. Applies only for BCOM laptops.)
+* Add SSH keys to Gitlab.
+  - <a href="https://code.devops.fds.com/help/ssh/README" target="_blank">Click Here</a> to generate an SSH Key depending on your OS. Follow the steps listed carefully and in order.
+  - Once you have the SSH Key generated and copied in your clipboard as mentioned above, 
+  <a href="https://code.devops.fds.com/profile/keys" target="_blank">Click Here</a> and follow the steps mentioned to add them to Gitlab.
+* iTerm2 Setup (iTerm is a replacement for Terminal on Mac. It brings the terminal into the modern age with features like syntax highlighting, themes, etc. Read More <a href="https://www.iterm2.com/" target="_blank">here.</a>). The below steps listed will set the correct paths needed for iTerm to come at par with native Terminal behavior.
+    * Change Terminal shell path
+      - In Terminal open preferences
+      - Under the General tab go to 'Shells open with' and select the radio option 'Command (complete path)'
+      - Set path to `/bin/zsh` in the text field.
   - Install iterm2 and set preferences. Download: https://www.iterm2.com/downloads.html (download the stable release) With admin access, move app into your Applications folder
-    - Change default shell to zsh over bash and set theme (I use Dark Background).
+      - Change default shell to zsh over bash and choose your theme .
       - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
-      - Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
-  - Clone and install Prezto.
-    - Copy and paste the following bash command:
+      - Enter your Admin password when prompted. (Note: For non BCOM Laptops this will be the admin password specific to your username)
+      - (Optional)Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
+  - Clone and install Prezto. (Prezto is the configuration framework for Zsh; it enriches the command line interface environment with sane defaults, aliases, functions, auto completion, and prompt themes.)
+    - Copy and paste the following command into iTerm (preferred) or Terminal:
     ```
       git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
       setopt EXTENDED_GLOB
@@ -72,12 +76,12 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
     ```
-    - If you are getting errors, like file already exists, you can delete all files that start with .z from ~/
-  - Install your favorite IDE (I use Atom).
+    - If you are getting errors, like 'file already exists', you can delete all files that start with .z from ~/
+  - Install your favorite IDE (Atom/VSCode/Sublime are recommended ones).
     - Option 1: Using brew cask
       1. Install [homebrew](http://brew.sh/)
       2. run: `brew cask install atom`
-      - Option 2: Downloading binaries from atom.io
+      - Option 2: Downloading binaries from respective websites.
       1. Download dmg from https://atom.io/
       2. With admin access, move app into your Applications folder
       3. In Atom, Atom -> Install Shell Commands
@@ -89,11 +93,11 @@ Notes:
       alias sublime="open -a /Applications/Sublime.app"
      ```
      - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
-* Install homebrew and git
-  - [homebrew](http://brew.sh/)
-  - git `brew install git`
+* Install homebrew and git (Homebrew is a package manager/installer which installs packages to their own directory and then symlinks their files into /usr/local.)
+  - [Homebrew](http://brew.sh/) 
+  - `git brew install git`
 * Clone
-  - Optional: create 'Repositories' folder in root directory
+  - Create a 'Repositories' folder in your root directory `your-username/Repositories/`
   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)
   - [NavApp](https://code.devops.fds.com/CAP/NavApp)
   - [ShopNServe (ShopApp)](https://code.devops.fds.com/CAP/ShopNServe)
@@ -101,7 +105,7 @@ Notes:
     - From MacysUI root, run: `cp .npmrc ~/.npmrc`
   - [BloomiesCommonUI](https://code.devops.fds.com/CAP/BloomiesCommonUI)
   - [MobileCustomerAppUI](https://code.devops.fds.com/CAP/MobileCustomerAppUI) (secure-m)
-  - BloomiesAssets
+  - BloomiesAssets (SVN Repository)
     - cli command: `svn co http://vcsnavy/wds/projects/Bloomies.war/trunk/BloomiesAssets/`
 * Install system dependencies in the given order.
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/ and run the following
@@ -109,18 +113,52 @@ Notes:
     - `nvm use 4.7.2`
     - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
   - If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
-    - ```export GIT_HOME='/usr/local/Cellar/git/2.13.0'
-       export PATH=$GIT_HOME/bin:$PATH```
+  ```
+    export GIT_HOME='/usr/local/Cellar/git/2.13.0'
+    export PATH=$GIT_HOME/bin:$PATH
+  ```
   - grunt-cli (npm install -g grunt-cli)
   - Optional: nginx (brew install nginx) - the default proxy server is apache.
-  - java (brew install Caskroom/versions/java7) - this command downloads the .pkg file.  Locate the file and double click to install.
+  - Download JAVA7 from Oracle's Website at <a  href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank">Oracle Archive Download</a>
+  - Look for <b>Java SE Development Kit 7u80</b> It is important that you download JDK7 and not 8 since all applications are using version 7.
   - maven (brew install maven)
 
-## Install ReappsJS
-Clone the repo anywhere onto your computer, preferably to a directory called reappsjs.
-* Update reapps-properties.json with the path to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos.
-* Set the defaults for branch and brand in reapps-properties.json.    
-* In reappsjs/ root, run `npm link`.
+## Installing ReappsJS
+Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere onto your computer, preferably to a directory called reappsjs.
+* Update reapps-properties.json with the correct paths to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos. <b>Remember:</b> These folder and file paths are relative to your laptop and you may not have the same folder structure. The goal here is to point all target paths to the correct folders. See example below from `reapps-properties.json`
+```
+  "paths": {
+    "shellRc": "/Users/your-username/.zshrc",
+    "tmp": "/tmp",
+    "bloomies-ui-reapps": "/Users/your-username/Repositories/reappsjs",
+    "bloomiesCommonUi": "/Users/your-username/Repositories/BloomiesCommonUI",
+    "macysCommonUi": "/Users/your-username/Repositories/MacysCommonUI",
+    "bloomiesAssets": "/Users/your-username/Repositories/BloomiesAssets",
+    "macysAssets": "/Users/your-username/Repositories/BloomiesAssets",
+    "macysUi": "/Users/your-username/Repositories/MacysUI",
+    "navApp": "/Users/your-username/Repositories/NavApp",
+    "shopApp": "/Users/your-username/Repositories/ShopNServe",
+    "creditGateway": "/Users/your-username/Repositories/Polaris/credit-gateway",
+    "customerPreferences": "/Users/your-username/Repositories/Polaris/customer-preferences",
+    "authWeb": ""
+  }
+```
+* Set the defaults for branch and brand in reapps-properties.json. See example below.
+``` {
+  "username": "your-username",
+  "branch": "17K", //The release/branch name
+  "brand": "BCOM", //BCOM or MCOM
+  "envName": "qa7codebloomingdales", //This is the QA enviorenment which can change depending on availability.
+  "domainPrefix": "your-name", //The domain prefix you want on your local env. 
+                               // example:your-name.bloomingdales.com
+  "proxyServer": {
+    "name": "apache24",
+    "path": "/etc/apache2" //Paths relative to your laptop for apache installations.
+  },
+
+```   
+* Now that we have cloned and configured Reapps, it is time to install and link it globally.
+* In reappsjs/ root directory, run `npm link`.
 * That's it!
 
 ## Install Chrome Browser Plugins
