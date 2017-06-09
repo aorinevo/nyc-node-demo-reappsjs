@@ -113,6 +113,7 @@ Notes:
     - `nvm use 4.7.2`
     - If nvm cannot be found, restart the terminal and try the above commands again.  If you need to use a different version of node, run the first two commands with the version of node you want to use.
   - If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
+
   ```
     export GIT_HOME='/usr/local/Cellar/git/2.13.0'
     export PATH=$GIT_HOME/bin:$PATH
@@ -126,6 +127,7 @@ Notes:
 ## Installing ReappsJS
 Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere onto your computer, preferably to a directory called reappsjs.
 * Update reapps-properties.json with the correct paths to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos. <b>Remember:</b> These folder and file paths are relative to your laptop and you may not have the same folder structure. The goal here is to point all target paths to the correct folders. See example below from `reapps-properties.json`
+
 ```
   "paths": {
     "shellRc": "/Users/your-username/.zshrc",
@@ -143,20 +145,24 @@ Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere 
     "authWeb": ""
   }
 ```
-* Set the defaults for branch and brand in reapps-properties.json. See example below.
-``` {
-  "username": "your-username",
-  "branch": "17K", //The release/branch name
-  "brand": "BCOM", //BCOM or MCOM
-  "envName": "qa7codebloomingdales", //This is the QA enviorenment which can change depending on availability.
-  "domainPrefix": "your-name", //The domain prefix you want on your local env. 
-                               // example:your-name.bloomingdales.com
-  "proxyServer": {
-    "name": "apache24",
-    "path": "/etc/apache2" //Paths relative to your laptop for apache installations.
-  },
 
-```   
+* Set the defaults for branch and brand in reapps-properties.json. See example below.
+
+```
+  {
+    "username": "your-username",
+    "branch": "17K", //The release/branch name
+    "brand": "BCOM", //BCOM or MCOM
+    "envName": "qa7codebloomingdales", //This is the QA enviorenment which can change depending on availability.
+    "domainPrefix": "your-name", //The domain prefix you want on your local env. 
+                                // example:your-name.bloomingdales.com
+    "proxyServer": {
+      "name": "apache24",
+      "path": "/etc/apache2" //Paths relative to your laptop for apache installations.
+      }
+  }
+```
+
 * Now that we have cloned and configured Reapps, it is time to install and link it globally.
 * In reappsjs/ root directory, run `npm link`.
 * That's it!
