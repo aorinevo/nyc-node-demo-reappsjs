@@ -1,26 +1,26 @@
 {
-  "username": "u073485",
-  "branch": "17J",
+  "username": "avenuecode",
+  "branch": "17K",
   "brand": "BCOM",
-  "envName": "qa9codebloomingdales",
-  "domainPrefix": "james",
+  "envName": "qa7codebloomingdales",
+  "domainPrefix": "sid",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
   },
   "paths": {
-    "shellRc": "/Users/u073485/.zshrc",
+    "shellRc": "/Users/avenuecode/.zshrc",
     "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/u073485/Repositories/reappsjs",
-    "bloomiesCommonUi": "/Users/u073485/Repositories/BloomiesCommonUI",
-    "macysCommonUi": "/Users/u073485/Repositories/MacysCommonUI",
-    "bloomiesAssets": "/Users/u073485/Repositories/BloomiesAssets",
-    "macysAssets": "/Users/u073485/Repositories/BloomiesAssets",
-    "macysUi": "/Users/u073485/Repositories/MacysUI",
-    "navApp": "/Users/u073485/Repositories/NavApp",
-    "shopApp": "/Users/u073485/Repositories/ShopNServe",
-    "creditGateway": "/Users/u073485/Repositories/Polaris/credit-gateway",
-    "customerPreferences": "/Users/u073485/Repositories/Polaris/customer-preferences",
+    "bloomies-ui-reapps": "/Users/avenuecode/Repositories/reappsjs",
+    "bloomiesCommonUi": "/Users/avenuecode/Repositories/BloomiesCommonUI",
+    "macysCommonUi": "/Users/avenuecode/Repositories/MacysCommonUI",
+    "bloomiesAssets": "/Users/avenuecode/Repositories/BloomiesAssets",
+    "macysAssets": "/Users/avenuecode/Repositories/BloomiesAssets",
+    "macysUi": "/Users/avenuecode/Repositories/MacysUI",
+    "navApp": "/Users/avenuecode/Repositories/NavApp",
+    "shopApp": "/Users/avenuecode/Repositories/ShopNServe",
+    "creditGateway": "/Users/avenuecode/Repositories/Polaris/credit-gateway",
+    "customerPreferences": "/Users/avenuecode/Repositories/Polaris/customer-preferences",
     "authWeb": ""
   },
   "ports": {
@@ -28,7 +28,7 @@
     "creditGateway": 9999
   },
   "libPaths": {
-    "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
+    "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home'",
     "mavenHome": "'/usr/local/Cellar/maven/3.5.0/libexec'",
     "mavenOpts": "'-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'"
   },
@@ -55,7 +55,7 @@
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa8codebloomingdales.fds.com"
+      "value": "https://www.qa7codebloomingdales.fds.com"
     }
   ],
   "shopAppProperties": [
@@ -77,11 +77,11 @@
     },
     {
       "name": "hnf_assets_host",
-      "value": "https://www.qa8codebloomingdales.fds.com"
+      "value": "https://www.qa7codebloomingdales.fds.com"
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa8codebloomingdales.fds.com"
+      "value": "https://www.qa7codebloomingdales.fds.com"
     }
   ]
 }
