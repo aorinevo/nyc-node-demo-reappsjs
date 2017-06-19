@@ -68,7 +68,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
       - Enter your Admin password when prompted. (Note: For non BCOM Laptops this will be the admin password specific to your username)
       - (Optional)Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
   - Clone and install Prezto. (Prezto is the configuration framework for Zsh; it enriches the command line interface environment with sane defaults, aliases, functions, auto completion, and prompt themes.)
-    - Copy and paste the following command into iTerm (preferred) or Terminal:
+      - Copy and paste the following command into iTerm (preferred) or Terminal:
     ```
       git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
       setopt EXTENDED_GLOB
@@ -95,7 +95,7 @@ Notes:
      - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
 * Install homebrew and git (Homebrew is a package manager/installer which installs packages to their own directory and then symlinks their files into /usr/local.)
   - [Homebrew](http://brew.sh/) 
-  - `git brew install git`
+  - `brew install git`
 * Clone
   - Create a 'Repositories' folder in your root directory `your-username/Repositories/`
   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)
@@ -115,7 +115,7 @@ Notes:
   - If git and nvm are not on your system's PATH variable, add them!  Depending on your shell, the file you will need to modify will be ~/.bash_profile, /etc/bashrc, or ~/.zshrc. To determine which one, use `echo $0`.  An example of adding git to system variables:
 
   ```
-    export GIT_HOME='/usr/local/Cellar/git/2.13.0'
+    export GIT_HOME='/usr/local/Cellar/git/2.13.1'
     export PATH=$GIT_HOME/bin:$PATH
   ```
   - grunt-cli (npm install -g grunt-cli)
