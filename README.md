@@ -55,7 +55,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 * Open xcode app and accept the license agreement. (Optional. Applies only for BCOM laptops.)
 * Add SSH keys to Gitlab.
   - <a href="https://code.devops.fds.com/help/ssh/README" target="_blank">Click Here</a> to generate an SSH Key depending on your OS. Follow the steps listed carefully and in order.
-  - Once you have the SSH Key generated and copied in your clipboard as mentioned above, 
+  - Once you have the SSH Key generated and copied in your clipboard as mentioned above,
   <a href="https://code.devops.fds.com/profile/keys" target="_blank">Click Here</a> and follow the steps mentioned to add them to Gitlab.
 * iTerm2 Setup (iTerm is a replacement for Terminal on Mac. It brings the terminal into the modern age with features like syntax highlighting, themes, etc. Read More <a href="https://www.iterm2.com/" target="_blank">here.</a>). The below steps listed will set the correct paths needed for iTerm to come at par with native Terminal behavior.
     * Change Terminal shell path
@@ -68,11 +68,14 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
       - Enter your Admin password when prompted. (Note: For non BCOM Laptops this will be the admin password specific to your username)
       - (Optional)Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
   - Clone and install Prezto. (Prezto is the configuration framework for Zsh; it enriches the command line interface environment with sane defaults, aliases, functions, auto completion, and prompt themes.)
-      - Copy and paste the following command into iTerm (preferred) or Terminal:
     ```
       git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    ```
+      - Restart iTerm or Terminal
+      - Copy and paste the following command into iTerm (preferred) or Terminal:
+    ```
       setopt EXTENDED_GLOB
-        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md; do
           ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         done
     ```
@@ -81,7 +84,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
     - Option 1: Using brew cask
       1. Install [homebrew](http://brew.sh/)
       2. run: `brew cask install atom`
-      - Option 2: Downloading binaries from respective websites.
+    - Option 2: Downloading binaries from respective websites.
       1. Download dmg from https://atom.io/
       2. With admin access, move app into your Applications folder
       3. In Atom, Atom -> Install Shell Commands
@@ -94,7 +97,7 @@ Notes:
      ```
      - Also for sublime users, make sure you have sublime in your Applications folder and name the app Sublime.app (The default name is Sublime Text.app)
 * Install homebrew and git (Homebrew is a package manager/installer which installs packages to their own directory and then symlinks their files into /usr/local.)
-  - [Homebrew](http://brew.sh/) 
+  - [Homebrew](http://brew.sh/)
   - `brew install git`
 * Clone
   - Create a 'Repositories' folder in your root directory `your-username/Repositories/`
@@ -154,7 +157,7 @@ Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere 
     "branch": "17K", //The release/branch name
     "brand": "BCOM", //BCOM or MCOM
     "envName": "qa7codebloomingdales", //This is the QA enviorenment which can change depending on availability.
-    "domainPrefix": "your-name", //The domain prefix you want on your local env. 
+    "domainPrefix": "your-name", //The domain prefix you want on your local env.
                                 // example:your-name.bloomingdales.com
     "proxyServer": {
       "name": "apache24",

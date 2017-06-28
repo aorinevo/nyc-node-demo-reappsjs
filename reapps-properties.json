@@ -1,26 +1,26 @@
 {
-  "username": "avenuecode",
+  "username": "smitapanasa",
   "branch": "17K",
   "brand": "BCOM",
   "envName": "qa7codebloomingdales",
-  "domainPrefix": "sid",
+  "domainPrefix": "smitapanasa",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
   },
   "paths": {
-    "shellRc": "/Users/avenuecode/.zshrc",
+    "shellRc": "/Users/smitapanasa/.zshrc",
     "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/avenuecode/Repositories/reappsjs",
-    "bloomiesCommonUi": "/Users/avenuecode/Repositories/BloomiesCommonUI",
-    "macysCommonUi": "/Users/avenuecode/Repositories/MacysCommonUI",
-    "bloomiesAssets": "/Users/avenuecode/Repositories/BloomiesAssets",
-    "macysAssets": "/Users/avenuecode/Repositories/BloomiesAssets",
-    "macysUi": "/Users/avenuecode/Repositories/MacysUI",
-    "navApp": "/Users/avenuecode/Repositories/NavApp",
-    "shopApp": "/Users/avenuecode/Repositories/ShopNServe",
-    "creditGateway": "/Users/avenuecode/Repositories/Polaris/credit-gateway",
-    "customerPreferences": "/Users/avenuecode/Repositories/Polaris/customer-preferences",
+    "bloomies-ui-reapps": "/Users/smitapanasa/Repositories/reappsjs",
+    "bloomiesCommonUi": "/Users/smitapanasa/Repositories/BloomiesCommonUI",
+    "macysCommonUi": "/Users/smitapanasa/Repositories/MacysCommonUI",
+    "bloomiesAssets": "/Users/smitapanasa/Repositories/BloomiesAssets",
+    "macysAssets": "/Users/smitapanasa/Repositories/BloomiesAssets",
+    "macysUi": "/Users/smitapanasa/Repositories/MacysUI",
+    "navApp": "/Users/smitapanasa/Repositories/NavApp",
+    "shopApp": "/Users/smitapanasa/Repositories/ShopNServe",
+    "creditGateway": "/Users/smitapanasa/Repositories/Polaris/credit-gateway",
+    "customerPreferences": "/Users/smitapanasa/Repositories/Polaris/customer-preferences",
     "authWeb": ""
   },
   "ports": {
@@ -28,7 +28,7 @@
     "creditGateway": 9999
   },
   "libPaths": {
-    "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_72.jdk/Contents/Home'",
+    "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
     "mavenHome": "'/usr/local/Cellar/maven/3.5.0/libexec'",
     "mavenOpts": "'-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'"
   },
