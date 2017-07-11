@@ -181,9 +181,9 @@ Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere 
 * In reapps-properties.json, update the paths object so that the object's properties point to the cloned repos and binaries for java and maven.  Property shellRc should point to a file that sets your shells PATH. The file name depends on your shell (i.e. `/etc/bashrc`, `~/.zshrc`, or `~/.bash_profile`).  If the file does not exist, create it.
 * Users just starting out with reapps should run `re init box`.  Get admin access through Macy's Self Service app (command + spacebar and enter Macy's Self Service) before running `re init box` action.
 * Source (run: `source ~/.zshrc` ) or restart all terminal sessions after `re init box`. Alternatively you can restart your computer.
-* Build ShopApp and skip tests and skip enforcer: `re build shopApp`
-* Run ShopApp offline: `re run shopApp`
-* Build NavApp, skip tests, skip enforcer, and run offline: `re build navApp && re run navApp`
+* Build ShopApp and skip tests and skip enforcer: `re build shopapp`
+* Run ShopApp offline: `re run shopapp`
+* Build NavApp, skip tests, skip enforcer, and run offline: `re build navapp && re run navapp`
 
 Note: Typically, `re init box` will be run only once after which developers can use other APIs to make changes to their environments (i.e. `re get listEnvs`).
 
