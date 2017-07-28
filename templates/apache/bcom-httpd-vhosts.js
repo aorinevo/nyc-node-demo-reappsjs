@@ -121,10 +121,10 @@ Listen 443
     ProxyPreserveHost off   
     SSLCertificateFile "${data.apacheRoot}/cert/cert.crt"
     SSLCertificateKeyFile "${data.apacheRoot}/cert/cert.key" 
-    ServerName https://local.secure-m.${data.envName}.fds.com
-    ServerAlias https://local.secure-m.${data.envName}.fds.com
-    ProxyPass /api http://secure-m.${data.envName}.fds.com/api
-    ProxyPass / http://127.0.0.1:8080/   
+    ServerName local.secure-m.${data.envName}.fds.com
+    ServerAlias www.local.secure-m.${data.envName}.fds.com
+    ProxyPass /api https://secure-m.${data.envName}.fds.com/api
+    ProxyPass / https://127.0.0.1:8080/   
 </VirtualHost>                               
 `;
 };
