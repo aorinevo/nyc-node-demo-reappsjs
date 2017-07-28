@@ -7,7 +7,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 | NavApp          | Complete |
 | ShopApp         | Complete |
 | MacysUI Assets Server | Complete |
-| secure-m        | Partial - need to create and update .env file; and update index.html.  Now certs are included in the MobileCustomerAppUI (but not all) repo. |
+| secure-m        | Complete |
 | Apache2         | Complete |
 | nginx           | Complete |
 | bashrc/zshrc    | Complete |
