@@ -41,6 +41,7 @@ function initMobileCustomerAppUi(){
 }
 
 function runMobileCustomerAppUi(){
+  console.log('test');
   var runCommand = `cd ${props.paths.mobileCustomerAppUi} && grunt`;
   shell.exec( runCommand );
 }
