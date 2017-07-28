@@ -259,6 +259,9 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
      - pom.xml
      - web.xml
      - SDP_HOST
+* Initialize MobileCustomerAppUI (secure-m)
+  - API: `re init secure-m`
+  - Description: Updates src/client/bcom/index.html
 * Update apache2 hosts file
   - API: `re init hosts`
   - Description: Updates apache2 hosts file.
@@ -301,6 +304,9 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Run NavApp
   - API: `re run navapp`
   - Description: Runs NavApp
+* Run MobileCustomerAppUI (secure-m)
+  - API: `re run secure-m`
+  - Description: Runs MobileCustomerAppUI (secure-m)
 * Run BloomiesAssets
   - API: `re run bloomies-assets`
   - Description: Runs BloomiesAssets
