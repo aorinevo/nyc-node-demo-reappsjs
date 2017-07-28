@@ -16,12 +16,12 @@ function updateIndex(path, envName){
         }
         var result = data;
 
-        result = result.replace(/\"oauth2_enabled\".+/g, "\"oauth2_enabled\" : \"on\"" );
-        result = result.replace(/\"suggesterServiceURL\".+/g, "\"suggesterServiceURL\" : \"http://www."+ envName +".fds.com/suggester\"" );
-        result = result.replace(/\"mewServerAddress\".+/g, "\"mewServerAddress\" : \"http://m."+ envName +".fds.com\"" );
-        result = result.replace(/\"oauth2_host_name\".+/g, "\"oauth2_host_name\" : \"auth."+ envName +".fds.com\"" );
-        result = result.replace(/\"mewMoreCatalogAddress\".+/g, "\"mewMoreCatalogAddress\" : \"https://macys.circularhub.com\"" );
-        result = result.replace(/\"oauth2AuthorizationServerAddress\".+/g, "\"oauth2AuthorizationServerAddress\" : \"https://auth."+ envName +".fds.com\"" );
+        result = result.replace(/\"oauth2_enabled\".+/g, "\"oauth2_enabled\" : \"off\"," );
+        result = result.replace(/\"suggesterServiceURL\".+/g, "\"suggesterServiceURL\" : \"http://www."+ envName +".fds.com/suggester\"," );
+        result = result.replace(/\"mewServerAddress\".+/g, "\"mewServerAddress\" : \"http://m."+ envName +".fds.com\"," );
+        result = result.replace(/\"oauth2_host_name\".+/g, "\"oauth2_host_name\" : \"auth."+ envName +".fds.com\"," );
+        result = result.replace(/\"mewMoreCatalogAddress\".+/g, "\"mewMoreCatalogAddress\" : \"https://macys.circularhub.com\"," );
+        result = result.replace(/\"oauth2AuthorizationServerAddress\".+/g, "\"oauth2AuthorizationServerAddress\" : \"https://auth."+ envName +".fds.com\"," );
         
 
         fs.writeFile( path, result, 'utf8', function (err) {
