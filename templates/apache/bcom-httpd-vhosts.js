@@ -53,6 +53,7 @@ Listen 443
     
     # SNS Pages
     ProxyPass /account https://${data.domainPrefix}.bloomingdales.fds.com:9443/account
+    ProxyPass /service https://${data.domainPrefix}.bloomingdales.fds.com:9443/service
     ProxyPass /creditservice https://${data.domainPrefix}.bloomingdales.fds.com:9443/creditservice
     ProxyPass /loyallist/benefits http://${data.domainPrefix}.bloomingdales.fds.com:9080/loyallist/benefits
     ProxyPass /loyallist https://${data.domainPrefix}.bloomingdales.fds.com:9443/loyallist
