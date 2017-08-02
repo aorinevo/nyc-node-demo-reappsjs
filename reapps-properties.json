@@ -1,27 +1,27 @@
 {
-  "username": "U060014",
+  "username": "UC06363",
   "branch": "17N",
   "brand": "BCOM",
-  "envName": "qa7codebloomingdales",
-  "domainPrefix": "aori",
+  "envName": "qa14codebloomingdales",
+  "domainPrefix": "kishor",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
   },
-  "paths": {
-    "shellRc": "/Users/U060014/.zshrc",
+  "paths":{
+    "shellRc": "/Users/admin/.zshrc",
     "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/U060014/Repositories/reappsjs",
-    "bloomiesCommonUi": "/Users/U060014/Repositories/BloomiesCommonUI",
-    "mobileCustomerAppUi": "/Users/U060014/Repositories/MobileCustomerAppUI",
-    "macysCommonUi": "/Users/U060014/Repositories/MacysCommonUI",
-    "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets",
-    "macysAssets": "/Users/U060014/Repositories/BloomiesAssets",
-    "macysUi": "/Users/U060014/Repositories/MacysUI",
-    "navApp": "/Users/U060014/Repositories/NavApp",
-    "shopApp": "/Users/U060014/Repositories/ShopNServe",
-    "creditGateway": "/Users/U060014/Repositories/Polaris/credit-gateway",
-    "customerPreferences": "/Users/U060014/Repositories/Polaris/customer-preferences",
+    "bloomies-ui-reapps": "/Users/admin/Repositories/reappsjs",
+    "bloomiesCommonUi": "/Users/admin/Repositories/BloomiesCommonUI",
+    "mobileCustomerAppUi": "/Users/admin/Repositories/MobileCustomerAppUI",
+    "macysCommonUi": "/Users/admin/Repositories/MacysCommonUI",
+    "bloomiesAssets": "/Users/admin/Repositories/BloomiesAssets",
+    "macysAssets": "/Users/admin/Repositories/BloomiesAssets",
+    "macysUi": "/Users/admin/Repositories/MacysUI",
+    "navApp": "/Users/admin/Repositories/NavApp",
+    "shopApp": "/Users/admin/Repositories/ShopNServe",
+    "creditGateway": "/Users/admin/Repositories/Polaris/credit-gateway",
+    "customerPreferences": "/Users/admin/Repositories/Polaris/customer-preferences",
     "authWeb": ""
   },
   "ports": {
@@ -56,7 +56,7 @@
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     }
   ],
   "shopAppProperties": [
@@ -78,11 +78,11 @@
     },
     {
       "name": "hnf_assets_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     }
   ]
 }
