@@ -63,7 +63,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
       - Under the General tab go to 'Shells open with' and select the radio option 'Command (complete path)'
       - Set path to `/bin/zsh` in the text field.
   - Install iterm2 and set preferences. Download: https://www.iterm2.com/downloads.html (download the stable release) With admin access, move app into your Applications folder
-      - Change default shell to zsh over bash and choose your theme .
+      - Change default shell to zsh over bash and choose your theme.
       - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
       - Enter your Admin password when prompted. (Note: For non BCOM Laptops this will be the admin password specific to your username)
       - (Optional)Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
