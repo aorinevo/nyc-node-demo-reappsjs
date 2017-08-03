@@ -265,9 +265,9 @@ APIs support long and short flags (i.e. `re -v` and `re --version`).
 * Update apache2 hosts file
   - API: `re init hosts`
   - Description: Updates apache2 hosts file.
-* Create/update apache2 bcom-httpd-vhosts.conf file
+* Create/update apache2 bcom-httpd-vhosts.conf and bcom-secure-m-vhosts.conf files
   - API: `re init httpd-vhosts`
-  - Description: Creates or updates apache2 httpd-vhosts.conf file in others directory.   
+  - Description: Creates or updates apache2 httpd-vhosts.conf and bcom-secure-m-vhosts.conf files in 'other' directory. 
 * Create/update nginx bcom-server-blocks.conf file
   - API: `re init server-blocks`
   - Description: Creates or updates nginx bcom-server-blocks.conf file in servers directory.

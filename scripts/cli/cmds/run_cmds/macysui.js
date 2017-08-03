@@ -1,9 +1,10 @@
 var shell = require('shelljs'),
+    macysUi = require('../../../macysui/macysui.js'),
     props = require('../../../../reapps-properties.json');
 
 exports.command = 'macysui'
 exports.desc = 'Run MacysUI grunt server'
 exports.builder = {}
 exports.handler = function (argv) {
-  shell.exec( `cd ${props.paths["bloomies-ui-reapps"]} && grunt` );
+  macysUi.run();
 }

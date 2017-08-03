@@ -1,8 +1,8 @@
 {
   "username": "U060014",
-  "branch": "17N",
+  "branch": "17O",
   "brand": "BCOM",
-  "envName": "qa7codebloomingdales",
+  "envName": "qa11codebloomingdales",
   "domainPrefix": "aori",
   "proxyServer": {
     "name": "apache24",
