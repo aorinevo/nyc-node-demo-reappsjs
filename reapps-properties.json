@@ -8,7 +8,7 @@
     "name": "apache24",
     "path": "/etc/apache2"
   },
-  "paths": {
+  "paths":{
     "shellRc": "/Users/U060014/.zshrc",
     "tmp": "/tmp",
     "bloomies-ui-reapps": "/Users/U060014/Repositories/reappsjs",
@@ -56,7 +56,7 @@
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     }
   ],
   "shopAppProperties": [
@@ -78,11 +78,11 @@
     },
     {
       "name": "hnf_assets_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     },
     {
       "name": "hnf_service_host",
-      "value": "https://www.qa7codebloomingdales.fds.com"
+      "value": "https://www.qa14codebloomingdales.fds.com"
     }
   ]
 }

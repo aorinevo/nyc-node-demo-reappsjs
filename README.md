@@ -63,7 +63,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
       - Under the General tab go to 'Shells open with' and select the radio option 'Command (complete path)'
       - Set path to `/bin/zsh` in the text field.
   - Install iterm2 and set preferences. Download: https://www.iterm2.com/downloads.html (download the stable release) With admin access, move app into your Applications folder
-      - Change default shell to zsh over bash and choose your theme .
+      - Change default shell to zsh over bash and choose your theme.
       - Change the default shell to zsh: run `sudo chsh -s /bin/zsh`
       - Enter your Admin password when prompted. (Note: For non BCOM Laptops this will be the admin password specific to your username)
       - (Optional)Set theme to Dark Background: iTerm -> preferences -> profiles -> colors -> load presets
@@ -123,8 +123,10 @@ Notes:
   ```
   - grunt-cli (npm install -g grunt-cli)
   - Optional: nginx (brew install nginx) - the default proxy server is apache.
-  - Download JAVA7 from Oracle's Website at <a  href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank">Oracle Archive Download</a>
-  - Look for <b>Java SE Development Kit 7u80</b> It is important that you download JDK7 and not 8 since all applications are using version 7.
+  - compass (gem install compass)
+  - Download JAVA7 (<b>Java SE Development Kit 7u80</b>) from Oracle's Website at <a  href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank">Oracle Archive Download</a>
+    - Note, you'll need to create an account.
+    - It is important that you download <b>Java SE Development Kit 7u80</b> and not a different version as newer versions of JDK are known to cause build failures.
   - maven (brew install maven)
 
 ## Installing ReappsJS
