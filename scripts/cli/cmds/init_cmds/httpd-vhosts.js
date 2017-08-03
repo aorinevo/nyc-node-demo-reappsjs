@@ -12,4 +12,5 @@ exports.builder = {
 }
 exports.handler = function (argv) {
   apache.update.httpdVhosts( props.domainPrefix, props.envName, props.proxyServer.path, argv.force, props.ports );
+  apache.update.secureM( props.proxyServer.path, argv.force );
 }

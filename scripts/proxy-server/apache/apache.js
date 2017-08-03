@@ -1,6 +1,7 @@
 var fs = require('fs'),
     props = require('../../../reapps-properties.json'),
     template = require('../../../templates/apache/bcom-httpd-vhosts.js'),
+    templateSecureM = require('../../../templates/apache/bcom-secure-m-httpd-vhosts.js'),
     proxyServer = require('../proxy-server.js'),
     winston = require( 'winston'),
     shell = require('shelljs'),
@@ -12,6 +13,7 @@ var fs = require('fs'),
 
 function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force, ports ){
   return new Promise(function(resolve, reject){
+    console.log('force1: ', force);
     if( !fs.existsSync(`${apacheRoot}/other/bcom-httpd-vhosts.conf`) || force ){
       fs.writeFile( './bcom-httpd-vhosts.conf', template( { domainPrefix: domainPrefix, envName: envName, apacheRoot: apacheRoot, ports: ports } ), 'utf8', function (err) {
          if (err){
@@ -24,6 +26,25 @@ function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force, ports 
       });
     } else {
       winston.log( 'info', `${apacheRoot}/other/bcom-httpd-vhosts.conf already exists. To replace this file, run with --force`);
+      reject(err);
+    }
+  });
+}
+
+function updateHttpdVhostsSecureMFile( apacheRoot, force ){
+  return new Promise(function(resolve, reject){
+    if( !fs.existsSync(`${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf`) || force ){
+      fs.writeFile( './bcom-secure-m-httpd-vhosts.conf', templateSecureM( { apacheRoot: apacheRoot } ), 'utf8', function (err) {
+         if (err){
+          winston.log('error', err); 
+          reject(err);
+         }
+         shell.exec(`sudo mv ./bcom-secure-m-httpd-vhosts.conf ${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf`);
+         winston.log( 'info', `created in ${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf` );
+         resolve(true);
+      });
+    } else {
+      winston.log( 'info', `${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf already exists. To replace this file, run with --force`);
       reject(err);
     }
   });
@@ -50,6 +71,7 @@ function initProxyServer( domainPrefix, envName, apacheRoot, force, ports ){
 module.exports = {
   update: {
     httpdVhosts: updateHttpdVhostsFile,
+    secureM: updateHttpdVhostsSecureMFile,
     certOrKey: proxyServer.updateCertOrKey
   },
   init: initProxyServer
