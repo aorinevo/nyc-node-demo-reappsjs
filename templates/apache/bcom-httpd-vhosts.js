@@ -36,6 +36,9 @@ Listen 443
     ProxyPass /account/preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/account/preferences
     ProxyPass /page/customer-preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page/customer-preferences
     
+    # Header/Footer
+    ProxyPass /wgl https://www.${data.envName}.fds.com/wgl
+
     #Ajax
     ProxyPass /creditservice/respgateway https://www.${data.envName}.fds.com/creditservice/respgateway
 
@@ -78,13 +81,13 @@ Listen 443
 
     ProxyPass /dyn_img http://www.bloomingdales.com/dyn_img
 
-    # BloomiesAssets
-    ProxyPass /js http://${data.domainPrefix}.bloomingdales.fds.com:9876/js
-    ProxyPass /javascript http://${data.domainPrefix}.bloomingdales.fds.com:9876/javascript
-    ProxyPass /templates http://${data.domainPrefix}.bloomingdales.fds.com:9876/templates
-    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:9876/styles
-    ProxyPass /img http://${data.domainPrefix}.bloomingdales.fds.com:9876/img
-    ProxyPass /web20 http://${data.domainPrefix}.bloomingdales.fds.com:9876/web20
+    # BloomiesAssets (loaded via NavApp)
+    ProxyPass /js http://${data.domainPrefix}.bloomingdales.fds.com:2202/js
+    ProxyPass /javascript http://${data.domainPrefix}.bloomingdales.fds.com:2202/javascript
+    ProxyPass /templates http://${data.domainPrefix}.bloomingdales.fds.com:2202/templates
+    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:2202/styles
+    ProxyPass /img http://${data.domainPrefix}.bloomingdales.fds.com:2202/img
+    ProxyPass /web20 http://${data.domainPrefix}.bloomingdales.fds.com:2202/web20
 
     # FOBs Redirect
     ProxyPass /catalog/index.ognc http://${data.domainPrefix}.bloomingdales.fds.com:2202/catalog/index.ognc
