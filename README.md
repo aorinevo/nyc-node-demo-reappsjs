@@ -99,6 +99,8 @@ Notes:
 * Install homebrew and git (Homebrew is a package manager/installer which installs packages to their own directory and then symlinks their files into /usr/local.)
   - [Homebrew](http://brew.sh/)
   - `brew install git`
+* Install compass.
+  - `gem install compass`
 * Clone
   - Create a 'Repositories' folder in your root directory `your-username/Repositories/`
   - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)

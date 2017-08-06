@@ -35,6 +35,7 @@ Listen 443
     ProxyPass /static http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.creditGateway}/static
     ProxyPass /account/preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/account/preferences
     ProxyPass /page/customer-preferences http://${data.domainPrefix}.bloomingdales.fds.com:${data.ports.customerPreferences}/page/customer-preferences
+    ProxyPass /myaccountassets http://${data.domainPrefix}.bloomingdales.fds.com:9999/myaccountassets
     
     # Header/Footer
     ProxyPass /wgl https://www.${data.envName}.fds.com/wgl
