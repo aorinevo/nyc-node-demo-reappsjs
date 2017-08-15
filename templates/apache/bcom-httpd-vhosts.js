@@ -83,12 +83,12 @@ Listen 443
     ProxyPass /dyn_img http://www.bloomingdales.com/dyn_img
 
     # BloomiesAssets (loaded via NavApp)
-    ProxyPass /js http://${data.domainPrefix}.bloomingdales.fds.com:2202/js
-    ProxyPass /javascript http://${data.domainPrefix}.bloomingdales.fds.com:2202/javascript
-    ProxyPass /templates http://${data.domainPrefix}.bloomingdales.fds.com:2202/templates
-    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:2202/styles
-    ProxyPass /img http://${data.domainPrefix}.bloomingdales.fds.com:2202/img
-    ProxyPass /web20 http://${data.domainPrefix}.bloomingdales.fds.com:2202/web20
+    ProxyPass /js http://${data.domainPrefix}.bloomingdales.fds.com:9876/js
+    ProxyPass /javascript http://${data.domainPrefix}.bloomingdales.fds.com:9876/javascript
+    ProxyPass /templates http://${data.domainPrefix}.bloomingdales.fds.com:9876/templates
+    ProxyPass /styles http://${data.domainPrefix}.bloomingdales.fds.com:9876/styles
+    ProxyPass /img http://${data.domainPrefix}.bloomingdales.fds.com:9876/img
+    ProxyPass /web20 http://${data.domainPrefix}.bloomingdales.fds.com:9876/web20
 
     # FOBs Redirect
     ProxyPass /catalog/index.ognc http://${data.domainPrefix}.bloomingdales.fds.com:2202/catalog/index.ognc
@@ -113,22 +113,6 @@ Listen 443
     #ProxyPassReverse /bag https://${data.domainPrefix}.bloomingdales.fds.com:2202/bag
 
     ProxyPassReverse /signin/signout.ognc http://${data.domainPrefix}.bloomingdales.fds.com:2202/signin/signout.ognc   
-</VirtualHost>  
-
-<VirtualHost *:443>    
-    SSLEngine on
-    SSLProxyEngine on 
-    SSLProxyVerify none 
-    SSLProxyCheckPeerCN off
-    SSLProxyCheckPeerName off
-    SSLProxyCheckPeerExpire off
-    ProxyPreserveHost off   
-    SSLCertificateFile "${data.apacheRoot}/cert/cert.crt"
-    SSLCertificateKeyFile "${data.apacheRoot}/cert/cert.key" 
-    ServerName local.secure-m.${data.envName}.fds.com
-    ServerAlias www.local.secure-m.${data.envName}.fds.com
-    ProxyPass /api https://secure-m.${data.envName}.fds.com/api
-    ProxyPass / https://127.0.0.1:8080/   
-</VirtualHost>                               
+</VirtualHost>                           
 `;
 };
