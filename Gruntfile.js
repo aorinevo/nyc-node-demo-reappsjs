@@ -401,6 +401,10 @@ console.log('test2');
 	                                break;
                                 }
                                 
+                                // if( url.indexOf('/styles/images/bcom/svgsprites/final') ){
+                                //   dir = dir = props.base + "macysCSS/target/classes";
+                                // }
+                                
                                 //console.log("serving", url, dir);
                                 sIndex = serveIndex( dir );
                                 sStatic = serveStatic( dir );

@@ -1,14 +1,14 @@
 {
   "username": "U060014",
-  "branch": "17O",
+  "branch": "17P",
   "brand": "BCOM",
-  "envName": "qa11codebloomingdales",
+  "envName": "qa10codebloomingdales",
   "domainPrefix": "aori",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
   },
-  "paths":{
+  "paths": {
     "shellRc": "/Users/U060014/.zshrc",
     "tmp": "/tmp",
     "bloomies-ui-reapps": "/Users/U060014/Repositories/reappsjs",
