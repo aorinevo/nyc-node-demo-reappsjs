@@ -1,5 +1,5 @@
-exports.command = 'init <command>'
-exports.desc = 'Init file, app, or machine'
+exports.command = 'init <app>'
+exports.desc = 'Initialize application'
 exports.builder = function (yargs) {
   return yargs.commandDir('init_cmds');
 }

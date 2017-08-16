@@ -1,88 +1,15 @@
 {
   "username": "U060014",
-  "branch": "17P",
-  "brand": "BCOM",
-  "envName": "qa10codebloomingdales",
   "domainPrefix": "aori",
   "proxyServer": {
     "name": "apache24",
     "path": "/etc/apache2"
   },
   "paths": {
+    "hostsFile": "/etc/hosts",
     "shellRc": "/Users/U060014/.zshrc",
-    "tmp": "/tmp",
-    "bloomies-ui-reapps": "/Users/U060014/Repositories/reappsjs",
-    "bloomiesCommonUi": "/Users/U060014/Repositories/BloomiesCommonUI",
-    "mobileCustomerAppUi": "/Users/U060014/Repositories/MobileCustomerAppUI",
-    "macysCommonUi": "/Users/U060014/Repositories/MacysCommonUI",
-    "bloomiesAssets": "/Users/U060014/Repositories/BloomiesAssets",
-    "macysAssets": "/Users/U060014/Repositories/BloomiesAssets",
-    "macysUi": "/Users/U060014/Repositories/MacysUI",
-    "navApp": "/Users/U060014/Repositories/NavApp",
-    "shopApp": "/Users/U060014/Repositories/ShopNServe",
-    "creditGateway": "/Users/U060014/Repositories/Polaris/credit-gateway",
-    "customerPreferences": "/Users/U060014/Repositories/Polaris/customer-preferences",
-    "authWeb": ""
-  },
-  "ports": {
-    "customerPreferences": 8081,
-    "creditGateway": 9999
-  },
-  "libPaths": {
-    "javaHome": "'/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home'",
-    "mavenHome": "'/usr/local/Cellar/maven/3.5.0/libexec'",
-    "mavenOpts": "'-Xmx1024m -Xms1024m -XX:MaxPermSize=1162m'"
-  },
-  "navAppProperties": [
-    {
-      "name": "lcache_enabled",
-      "value": false
-    },
-    {
-      "name": "zookeeper_enabled",
-      "value": false
-    },
-    {
-      "name": "zookeeper_killswitch_framework_enabled",
-      "value": true
-    },
-    {
-      "name": "zookeeper_local_storage_enabled",
-      "value": true
-    },
-    {
-      "name": "local_killswitch_overwrite_in_dev_mode_enabled",
-      "value": false
-    },
-    {
-      "name": "hnf_service_host",
-      "value": "https://www.qa14codebloomingdales.fds.com"
-    }
-  ],
-  "shopAppProperties": [
-    {
-      "name": "zookeeper_enabled",
-      "value": false
-    },
-    {
-      "name": "zookeeper_killswitch_framework_enabled",
-      "value": true
-    },
-    {
-      "name": "zookeeper_local_storage_enabled",
-      "value": true
-    },
-    {
-      "name": "local_killswitch_overwrite_in_dev_mode_enabled",
-      "value": false
-    },
-    {
-      "name": "hnf_assets_host",
-      "value": "https://www.qa14codebloomingdales.fds.com"
-    },
-    {
-      "name": "hnf_service_host",
-      "value": "https://www.qa14codebloomingdales.fds.com"
-    }
-  ]
+    "leftNavBackend": "/Users/U060014/Repositories/nyc-node-demo/left-nav-backend",
+    "leftNavFrontend": "/Users/U060014/Repositories/nyc-node-demo/left-nav-frontend",
+    "bloomies-ui-reapps": "/Users/U060014/Repositories/reappsjs"
+  }
 }

@@ -17,21 +17,13 @@ function updateHostsFile( pathToHostsFile ){
       
       var result;
       
-      var missingQaEnvs1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14].filter(function(value){
-        return data.indexOf("local.secure-m.qa" + value ) == -1;
+      var missingDNS = ["left-nav-backend", "left-nav-frontend"].filter(function(value){
+        return data.indexOf(`${value}.nyc-node.com` ) == -1;
+      });     
+      
+      missingDNS.forEach( function( value ){
+        newEntries += `127.0.0.1        ${value}.nyc-node.com\n`;
       });
-      
-      var missingQaEnvs2 = ["","www.","www1.", "credit-gateway.", "customer-preferences."].filter(function(value){
-        return data.indexOf( value + props.domainPrefix + ".bloomingdales.fds.com") == -1;
-      });      
-      
-      missingQaEnvs1.forEach( function( value ){
-        newEntries += "127.0.0.1        local.secure-m.qa" + value + "codebloomingdales.fds.com\n";
-      });
-      
-      missingQaEnvs2.forEach( function( value ){
-        newEntries += "127.0.0.1        " + value + props.domainPrefix + ".bloomingdales.fds.com\n";
-      }); 
       
       if( newEntries ){
         result = data.replace(/(^::1.+)/gm, "$1\n" + newEntries );
@@ -46,17 +38,8 @@ function updateHostsFile( pathToHostsFile ){
          }
          shell.exec( 'sudo cp ./hosts /etc');         
          winston.log('info', 'Updated ' + pathToHostsFile);
-         if( props.proxyServer.name === 'apache24'){
-           shell.exec( 'sudo apachectl restart');
-           winston.log('info', 'restarted apache2');
-         } else {
-           if( fs.existsSync( '/usr/local/var/run/nginx.pid' ) ){
-             shell.exec( 'sudo nginx -s stop');
-           }
-           shell.exec( 'sudo nginx');
-           winston.log('info', 'restarted nginx');
-           resolve(true);
-         }
+         shell.exec( 'sudo apachectl restart');
+         winston.log('info', 'restarted apache2');
       });
     });
   });

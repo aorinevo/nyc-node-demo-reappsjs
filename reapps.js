@@ -5,11 +5,8 @@ var jsonfile = require('jsonfile'),
     winston = require('winston'),
     prettyjson = require('prettyjson'),
     shell = require('shelljs'),
-    utils = require('./scripts/utils/utils.js'),
     argv = require('./scripts/cli/cli.js'),
-    props = require('./reapps-properties.json'),
-    navApp = require('./scripts/navapp/navapp.js'),
-    shopApp = require('./scripts/shopapp/shopapp.js'),    
+    props = require('./reapps-properties.json'),    
     SDP_HOST,
     responseBody,
     options = [];
@@ -46,14 +43,12 @@ if( argv.save ){
       winston.log('error', err.message);
     } else {
       winston.log('info', 'saved options to reapps-properties.json \n' + options);
-      props = utils.parseProperties();
       if( argv.action ){
         winston.log('error', 'ReappsJS no longer supports -a API.  See README.md for updated API.');
       }
     }
   });
 } else {
-  props = utils.parseProperties();
   if( argv.action ){
     winston.log('error', 'ReappsJS no longer supports -a API.  See README.md for updated API.');
   }

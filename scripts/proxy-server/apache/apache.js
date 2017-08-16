@@ -1,78 +1,30 @@
 var fs = require('fs'),
     props = require('../../../reapps-properties.json'),
-    template = require('../../../templates/apache/bcom-httpd-vhosts.js'),
-    templateSecureM = require('../../../templates/apache/bcom-secure-m-httpd-vhosts.js'),
-    proxyServer = require('../proxy-server.js'),
+    template = require('../../../templates/apache/nyc-node-httpd-vhosts.js'),
     winston = require( 'winston'),
-    shell = require('shelljs'),
-    secureMCrt = require('../../../templates/certificates/mobile-customer-app-ui.js')(),
-    secureMKey = require('../../../templates/keys/mobile-customer-app-ui.js')(),
-    snsNavAppCrt = require('../../../templates/certificates/sns-nav-apps.js')(),
-    snsNavAppKey = require('../../../templates/keys/sns-nav-apps.js')(),
-    pathToWrite = props.proxyServer.path + '/cert';
+    shell = require('shelljs');
 
-function updateHttpdVhostsFile( domainPrefix, envName, apacheRoot, force, ports ){
+function updateHttpdVhostsFile( domainPrefix, apacheRoot, force ){
   return new Promise(function(resolve, reject){
-    console.log('force1: ', force);
-    if( !fs.existsSync(`${apacheRoot}/other/bcom-httpd-vhosts.conf`) || force ){
-      fs.writeFile( './bcom-httpd-vhosts.conf', template( { domainPrefix: domainPrefix, envName: envName, apacheRoot: apacheRoot, ports: ports } ), 'utf8', function (err) {
+    if( !fs.existsSync(`${apacheRoot}/other/nyc-node-vhosts.conf`) || force ){
+      fs.writeFile( './nyc-node-httpd-vhosts.conf', template( { domainPrefix: domainPrefix } ), 'utf8', function (err) {
          if (err){
           winston.log('error', err); 
           reject(err);
          }
-         shell.exec(`sudo mv ./bcom-httpd-vhosts.conf ${apacheRoot}/other/bcom-httpd-vhosts.conf`);
-         winston.log( 'info', `created in ${apacheRoot}/other/bcom-httpd-vhosts.conf` );
+         shell.exec(`sudo mv ./nyc-node-httpd-vhosts.conf ${apacheRoot}/other/nyc-node-httpd-vhosts.conf`);
+         winston.log( 'info', `created in ${apacheRoot}/other/nyc-node-httpd-vhosts.conf` );
          resolve(true);
       });
     } else {
-      winston.log( 'info', `${apacheRoot}/other/bcom-httpd-vhosts.conf already exists. To replace this file, run with --force`);
+      winston.log( 'info', `${apacheRoot}/other/nyc-node-httpd-vhosts.conf already exists. To replace this file, run with --force`);
       reject(err);
     }
-  });
-}
-
-function updateHttpdVhostsSecureMFile( apacheRoot, force ){
-  return new Promise(function(resolve, reject){
-    if( !fs.existsSync(`${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf`) || force ){
-      fs.writeFile( './bcom-secure-m-httpd-vhosts.conf', templateSecureM( { apacheRoot: apacheRoot } ), 'utf8', function (err) {
-         if (err){
-          winston.log('error', err); 
-          reject(err);
-         }
-         shell.exec(`sudo mv ./bcom-secure-m-httpd-vhosts.conf ${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf`);
-         winston.log( 'info', `created in ${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf` );
-         resolve(true);
-      });
-    } else {
-      winston.log( 'info', `${apacheRoot}/other/bcom-secure-m-httpd-vhosts.conf already exists. To replace this file, run with --force`);
-      reject(err);
-    }
-  });
-}
-
-function initProxyServer( domainPrefix, envName, apacheRoot, force, ports ){
-  var update = this.update;
-  update.httpdVhosts( domainPrefix, envName, apacheRoot, force, ports ).then(function(result){
-    return update.certOrKey( secureMKey, pathToWrite, 'cert', 'key', 'apache24', force )
-  }).then(function(result){
-    return update.certOrKey( secureMCrt, pathToWrite, 'cert', 'crt', 'apache24', force );
-  }).then(function(result){
-    return update.certOrKey( snsNavAppKey, pathToWrite, 'server', 'key', 'apache24', force );
-  }).then(function(result){
-    return update.certOrKey( snsNavAppCrt, pathToWrite, 'server', 'crt', 'apache24', force );
-  }).then(function(result){
-    shell.exec('sudo apachectl restart');
-    winston.log( 'info', `restarted apache`);
-  }).catch(function(result){
-    winston.log('error', result);
   });
 }
 
 module.exports = {
   update: {
-    httpdVhosts: updateHttpdVhostsFile,
-    secureM: updateHttpdVhostsSecureMFile,
-    certOrKey: proxyServer.updateCertOrKey
-  },
-  init: initProxyServer
+    httpdVhosts: updateHttpdVhostsFile
+  }
 };

@@ -1,5 +1,5 @@
 exports.command = 'run <app>'
-exports.desc = 'Run <app>'
+exports.desc = 'run app'
 exports.builder = function (yargs) {
   return yargs.commandDir('run_cmds');
 }
