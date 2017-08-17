@@ -4,7 +4,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 | Automation      | Status   |
 |-----------------|----------|
 | left-nav-backend         | Complete  |
-| left-nav-frontend          | Complete |
+| left-nav-frontend        | Complete |
 
 ### What does it actually do?
 
