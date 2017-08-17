@@ -3,8 +3,8 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 
 | Automation      | Status   |
 |-----------------|----------|
-| [left-nav-frontend](https://code.devops.fds.com/CAP/left-nav-frontend)        | Complete  |
-| [left-nav-backend](https://code.devops.fds.com/CAP/left-nav-backend)        | Complete |
+| [left-nav-frontend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-frontend)        | Complete  |
+| [left-nav-backend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-backend)        | Complete |
 
 ### What does it actually do?
 
@@ -21,9 +21,9 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
   - `brew install git`
 * Clone
   - Create a 'Repositories' folder in your root directory `your-username/Repositories/`
-  - [reappsjs](https://code.devops.fds.com/CAP/reappsjs) (that's this repo!)
-  - [left-nav-frontend](https://code.devops.fds.com/CAP/left-nav-frontend)
-  - [left-nav-backend](https://code.devops.fds.com/CAP/left-nav-backend)
+  - [reappsjs](https://github.com/aorinevo/nyc-node-demo-reappsjs) (that's this repo!)
+  - [left-nav-frontend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-frontend)
+  - [left-nav-backend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-backend)
 * Install system dependencies in the given order.
   - nvm installation instructions can be found here: https://github.com/creationix/nvm/ and run the following
     - `nvm install 6.9.4`
