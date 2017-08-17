@@ -38,7 +38,7 @@ ReappsJS is an NPM module that exposes a set of command-line utilities for insta
 
 ## Installing ReappsJS
 Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere onto your computer, preferably to a directory called reappsjs.
-* Update reapps-properties.json with the correct paths to your proxy server (either apache24 or nginx), reappsjs, NavApp, ShopApp, BloomiesCommonUI, MacysUI, and BloomiesAssets repos. <b>Remember:</b> These folder and file paths are relative to your laptop and you may not have the same folder structure. The goal here is to point all target paths to the correct folders. See example below from `reapps-properties.json`
+* Update reapps-properties.json with the correct paths to your proxy server (either apache24 or nginx), [left-nav-frontend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-frontend) and [left-nav-backend](https://github.com/aorinevo/nyc-node-demo-apps/tree/master/left-nav-backend) repos. <b>Remember:</b> These folder and file paths are relative to your laptop and you may not have the same folder structure. The goal here is to point all target paths to the correct folders. See example below from `reapps-properties.json`
 
 ```
     "paths": {
@@ -50,20 +50,7 @@ Clone the ReappsJS repo `https://code.devops.fds.com/CAP/reappsjs.git` anywhere 
     }
 ```
 
-* Set the defaults for branch and brand in reapps-properties.json. See example below.
-
-```
-  {
-    "username": "your-username",
-    "proxyServer": {
-      "name": "apache24",
-      "path": "/etc/apache2" //Paths relative to your laptop for apache installations.
-      }
-  }
-```
-
-* Now that we have cloned and configured Reapps, it is time to install and link it globally.
-* In reappsjs/ root directory, run `npm link`.
+* Now that we have cloned and configured Reapps, it is time to install and link it globally. In `reappsjs/` root directory, run `npm link`.
 * That's it!
 
 ## Basic Usage
